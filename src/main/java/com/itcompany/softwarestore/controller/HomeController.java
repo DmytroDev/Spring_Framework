@@ -3,6 +3,7 @@ package com.itcompany.softwarestore.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * HomeController.
@@ -19,13 +20,7 @@ public class HomeController {
      * @return model and view
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String home() {
-        return "home";
+    public ModelAndView home() {
+        return new ModelAndView("jsp/index");
     }
-
-/*    public ModelAndView indexPage() {
-        ModelAndView homeMV = new ModelAndView("index");
-        return homeMV;
-    }*/
-
 }

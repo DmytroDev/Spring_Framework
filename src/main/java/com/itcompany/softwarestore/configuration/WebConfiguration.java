@@ -4,8 +4,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.JstlView;
 
 /**
  * WebContextConfiguration.
@@ -14,36 +16,27 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
  * @version 1.0
  * @since 1.0
  */
-/*@Import({
-        ConfClassName.class,
-        ...
-})*/
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.itcompany.softwarestore")
-        //, includeFilters = @ComponentScan.Filter(Controller.class), useDefaultFilters = false)
+@ComponentScan(basePackages = "com.itcompany.softwarestore.controller")
 public class WebConfiguration extends WebMvcConfigurerAdapter {
-    private static final String VIEWS_LOCATION = "/WEB_INF/views/";
+    private static final String VIEWS_LOCATION = "/WEB-INF/views/";
     private static final String SUFFIX = ".jsp";
-    private static final String RESOURCES_LOCATION = "/resources";
+    private static final String RESOURCES_LOCATION = "/resources/";
     private static final String RESOURCES_HANDLER = RESOURCES_LOCATION + "**";
 
-    @Bean
-    public InternalResourceViewResolver getInternalResourceViewResolver() {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        //resolver.setPrefix(VIEWS_LOCATION);
-        resolver.setPrefix("/");
-        resolver.setSuffix(SUFFIX);
-        return resolver;
-    }
-
-/*    @Override
+    @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler(RESOURCES_HANDLER).addResourceLocations(RESOURCES_LOCATION);
     }
 
-    @Override
-    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-        configurer.enable();
-    }*/
+    @Bean
+    public InternalResourceViewResolver viewResolver() {
+        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+        viewResolver.setViewClass(JstlView.class);
+        viewResolver.setPrefix(VIEWS_LOCATION);
+        viewResolver.setSuffix(SUFFIX);
+        return viewResolver;
+    }
+
 }

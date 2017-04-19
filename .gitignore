@@ -2,6 +2,7 @@
 .project
 target/
 bin/
+out/
 node_modules/
 src/main/webapp/resources/css
 .settings/
