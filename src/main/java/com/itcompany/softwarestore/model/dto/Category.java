@@ -7,15 +7,12 @@ package com.itcompany.softwarestore.model.dto;
  * @version 1.0
  * @since 1.0
  */
-public enum Category {
+public class Category {
 
-    GAMES("Games"), MULTIMEDIA("Multimedia"), PRODUCTIVITY("Productivity"), TOOLS("Tools"), HEALS("Health"), LIFESTYLE("Lifestyle");
-
-    private String categoryName;
-
-    Category(String name) {
-        this.categoryName = name;
-    }
-
-
+    public static final String GAMES = "Games";
+    public static final String MULTIMEDIA = "Multimedia";
+    public static final String PRODUCTIVITY = "Productivity";
+    public static final String TOOLS = "Tools";
+    public static final String HEALTS = "Health";
+    public static final String LIFESTYLE = "Lifestyle";
 }

@@ -26,6 +26,8 @@ import java.util.Properties;
 public class DatabaseConfiguration {
 
     private static final String PROP_HIBERNATE_DIALECT = "hibernate.dialect";
+    private static final String PROP_HIBERNATE_MULTIPLE_LINES_SQL_COMMAND_EXTRACTOR = "hibernate.hbm2ddl.import_files_sql_extractor";
+
     private static final String PROP_HIBERNATE_SHOW_SQL = "hibernate.show_sql";
     private static final String PROP_HIBERNATE_FORMAT_SQL = "hibernate.format_sql";
     private static final String PROP_HIBERNATE_USE_SQL_COMMENTS = "hibernate.useSqlComments";
@@ -51,6 +53,9 @@ public class DatabaseConfiguration {
     @Value("${hibernate.dialect}")
     private String hibernateDialect;
 
+    @Value("${hibernate.multipleLinesSqlCommandExtractor}")
+    private String hibernateMultipleLinesSqlCommandExtractor;
+
     @Value("${hibernate.show_sql}")
     private String hibernateShowSql;
 
@@ -60,8 +65,8 @@ public class DatabaseConfiguration {
     @Value("${hibernate.useSqlComments}")
     private String hibernateUseSqlComments;
 
-/*    @Value("${hibernate.hbm2ddl.auto}")
-    private String hibernateHbm2ddlAuto;*/
+    @Value("${hibernate.hbm2ddl.auto}")
+    private String hibernateHbm2ddlAuto;
 
     // DataSource bean
     @Bean
@@ -102,7 +107,8 @@ public class DatabaseConfiguration {
         properties.put(PROP_HIBERNATE_SHOW_SQL, hibernateShowSql);
         properties.put(PROP_HIBERNATE_FORMAT_SQL, hibernateFormatSql);
         properties.put(PROP_HIBERNATE_USE_SQL_COMMENTS, hibernateUseSqlComments);
-        //properties.put(PROP_HIBERNATE_HBM2DDL_AUTO, hibernateHbm2ddlAuto);
+        properties.put(PROP_HIBERNATE_HBM2DDL_AUTO, hibernateHbm2ddlAuto);
+        properties.put(PROP_HIBERNATE_MULTIPLE_LINES_SQL_COMMAND_EXTRACTOR, hibernateMultipleLinesSqlCommandExtractor);
 
         return properties;
     }

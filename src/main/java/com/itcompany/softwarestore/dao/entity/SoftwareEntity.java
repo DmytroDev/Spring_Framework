@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * @author Dmitriy Nadolenko
@@ -12,12 +13,12 @@ import javax.persistence.Id;
  * @since 1.0
  */
 @Entity
+@Table(name = "SOFTWARE")
 public class SoftwareEntity {
 
-    // TODO: fix Generated value for H2  http://stackoverflow.com/questions/11299675/how-to-set-h2-primary-key-id-to-auto-increment
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Long id;
 
     @Column(name = "APP_NAME", nullable = false)
     private String name;
@@ -34,11 +35,15 @@ public class SoftwareEntity {
     @Column(name = "DESCRIPTION")
     private String description;
 
-    public long getId() {
+    @Column(name = "CATEGORY")
+    private String category;
+    //private Category category;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -82,6 +87,14 @@ public class SoftwareEntity {
         this.description = description;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     @Override
     public String toString() {
         return "SoftwareEntity{" +
@@ -91,6 +104,7 @@ public class SoftwareEntity {
                 ", picturePath128='" + picturePath128 + '\'' +
                 ", picturePath512='" + picturePath512 + '\'' +
                 ", description='" + description + '\'' +
+                ", category=" + category +
                 '}';
     }
 }
