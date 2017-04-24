@@ -1,3 +1,7 @@
+Steps:
+1/ Install nodeJS
+2/ Run "npm i"
+3/ npm install jquery
 
 
 H2 url masks:

@@ -4,47 +4,55 @@ var gulp = require("gulp"),//http://gulpjs.com/
     autoprefixer = require('gulp-autoprefixer'),//https://www.npmjs.org/package/gulp-autoprefixer
     minifycss = require('gulp-minify-css'),//https://www.npmjs.org/package/gulp-minify-css
     rename = require('gulp-rename'),//https://www.npmjs.org/package/gulp-rename
-    babel = require('gulp-babel'), // added
+    babel = require('gulp-babel'),
+    concat = require('gulp-concat'),
+    uglify = require('gulp-uglify'),
     log = util.log;
+/*require = launch concrete js-plugin (f.e.: gulp-minify-css, gulp-rename, etc).*/
 
-/* require = launch concrete js-plugin (f.e.: gulp-minify-css, gulp-rename, etc).
-* */
+var ngSRC = "node_modules/angular/angular.min.js",
+    ngRouteSRC = "node_modules/angular-route/angular-route.min.js",
+    jQuerySRC = "node_modules/jquery/dist/jquery.min.js",
+    ngDEST = "src/main/resources/static/vendor/",
+    jsSRC = "src/main/resources/js/",
+    jsDEST = "src/main/resources/static/js",
+    jsES6SRC = "src/main/resources/jsES6/**",
+    cssSRC = "src/main/resources/css/**",
+    cssDEST = "src/main/resources/static/css";
 
-var cssTarget = "src/main/webapp/resources/css/",
-    jsSRC = "src/main/resources/js/main.js",
-    jsDEST = "src/main/webapp/resources/js/";
+gulp.task("default", ["transfromFromES6", "compressJS", "copyCssFiles"]);
 
-gulp.task("default", ["sass"]);
-
-gulp.task("sass", function () {
-    log("Generating CSS files " + (new Date()).toString());
-    gulp.src("src/main/resources/scss/all.scss")
-        .pipe(sass({style: 'expanded'}))
-        .pipe(autoprefixer("last 3 version", "safari 5", "ie 9"))
-        .pipe(gulp.dest(cssTarget))
-        .pipe(rename({suffix: '.min'}))
-        .pipe(minifycss())
-        .pipe(gulp.dest(cssTarget));
+gulp.task('copyJSLibs', function () {
+    log('Copying js files (vendor) ');
+    gulp.src([ngSRC, ngRouteSRC, jQuerySRC])
+        .pipe(gulp.dest(ngDEST));
 });
 
-gulp.task("watch", function () {
-    log("Watching scss files for modifications");
-    gulp.watch(sassFiles, ["sass"]);
+gulp.task('copyCssFiles', function () {
+    log('copy css-files to folder static');
+    gulp.src(cssSRC)
+        .pipe(gulp.dest(cssDEST));
 });
 
-gulp.task('transform', () => {
-    return gulp.src(jsSRC)
-        .pipe(babel({
-            presets: ['es2015']
-        }))
+gulp.task('compressJS', function () {
+    log('Compessing JavaSript files');
+    gulp.src([jsSRC + "**/*module.js", jsSRC + "**/*.js"])
+        .pipe(concat('all.js'))
+        .pipe(gulp.dest(jsDEST))
+        .pipe(rename('all.min.js'))
+        .pipe(uglify())
         .pipe(gulp.dest(jsDEST));
 });
 
+gulp.task("watch", function () {
+    log("Watching js files for modifications");
+    gulp.watch(jsSRC + "**/*.js", ["compressJS"]);
+});
 
-/*gulp.task("copyResources", function () {
-    log("copyResources (icons)");
-    gulp.src("node_modules/material-design-icons/action/1x_web/ic_youtube_searched_for_black_48dp.png")
-        .pipe(gulp.dest(cssTargetImages))
-});*/
-
-
+gulp.task('transfromFromES6', () => {
+    return gulp.src(jsES6SRC)
+        .pipe(babel({
+            presets: ['es2015']
+        }))
+        .pipe(gulp.dest(jsSRC));
+});
