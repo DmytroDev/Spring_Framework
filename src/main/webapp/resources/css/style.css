@@ -1,5 +1,4 @@
 body {
-    display: block;
     min-height: 100vh;
     flex-direction: column;
 }
@@ -13,6 +12,36 @@ body {
     background: #333;
     color: #d1dbbd;
     height: 50px;
+}
+
+.navigation-div {
+    position: relative;
+    float: right;
+    right: 100px;
+    font-weight: bold;
+    color: #d1dbbd;
+}
+
+.main-menu {
+    margin: 0;
+    line-height: 50px;
+    list-style: none;
+    background:  inherit;
+}
+
+.main-menu li {
+    display: inline;
+    margin-right: 5px;
+}
+
+.main-menu a {
+    color: inherit;
+    padding: 0 40px 0 20px;
+    text-decoration: none;
+}
+
+.main-menu a:hover {
+    color: darkred;
 }
 
 .header-right-part {
@@ -36,13 +65,15 @@ body {
 .header-bottom {
     background: rgb(229, 229, 229);
     border-radius: 4px;
+    padding-left: 50px;
 }
 
 .header-title {
     font-size: 28px;
     font-weight: bold;
-    margin-left: 6%;
+    text-shadow: 2px 2px 2px grey;
     padding-top: 2%;
+
 }
 
 .img-ribbon {
@@ -50,7 +81,7 @@ body {
     height: 160px;
     border-radius: 4px;
     overflow: hidden;
-    margin: 0px 2px 0px 5%;
+    margin: 0px 2px 0px;
 }
 
 .img-ribbon img {
@@ -74,7 +105,6 @@ body {
 .nav {
     padding-right: 30px;
 }
-
 
 .navbar-title h4 {
     font-size: 28px;
@@ -109,6 +139,80 @@ body {
 
 hr {
     border-top: 1px solid #333;
+}
+
+.details-page-div {
+    display: flex;
+    flex-direction: row;
+    margin: 50px 30px 50px 50px;
+}
+
+.element-title-img p, .upload-title p {
+    font-size: 28px;
+    font-weight: bold;
+    padding-top: 2%;
+}
+
+.element-title-img {
+    flex-direction: column;
+}
+
+.element-description {
+    flex-direction: column;
+    margin: 70px 0 10px 70px;
+}
+
+.element-description p {
+    margin-bottom: 50px;
+    font-size: 20px;
+}
+
+.download-btn, .btn-default {
+    font-family: 'Roboto Condensed', sans-serif;
+    text-align: center;
+    background: linear-gradient(to bottom, #49ae52, #306428);
+    font-weight: 300;
+    padding: .5em 1.25em;
+    margin: auto;
+    width: 300px;
+    height: 50px;
+    border-radius: 5px;
+    float: right;
+}
+
+.download-btn:hover, .btn-default:hover {
+    background: #306428;
+    cursor: pointer; /* change cursor to hand */
+}
+
+.download-btn-href {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+}
+
+.upload-title {
+    text-align: center;
+}
+
+.upload-form {
+    margin: auto;
+    padding-bottom: 50px;
+}
+
+.form-group {
+    font-size: 16px;
+}
+
+.btn-default {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+#exampleInputFile {
+    margin-bottom: 30px;
 }
 
 .site-footer {

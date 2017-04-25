@@ -37,7 +37,9 @@ public class SoftwareEntity {
 
     @Column(name = "CATEGORY")
     private String category;
-    //private Category category;
+
+    @Column(name = "DOWNLOADS_NUM")
+    private Integer downloadsNumber;
 
     public Long getId() {
         return id;
@@ -95,6 +97,14 @@ public class SoftwareEntity {
         this.category = category;
     }
 
+    public Integer getDownloadsNumber() {
+        return downloadsNumber;
+    }
+
+    public void setDownloadsNumber(Integer downloadsNumber) {
+        this.downloadsNumber = downloadsNumber;
+    }
+
     @Override
     public String toString() {
         return "SoftwareEntity{" +
@@ -104,7 +114,8 @@ public class SoftwareEntity {
                 ", picturePath128='" + picturePath128 + '\'' +
                 ", picturePath512='" + picturePath512 + '\'' +
                 ", description='" + description + '\'' +
-                ", category=" + category +
+                ", category='" + category + '\'' +
+                ", downloadsNumber=" + downloadsNumber +
                 '}';
     }
 }

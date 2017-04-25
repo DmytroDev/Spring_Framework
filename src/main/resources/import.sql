@@ -1,12 +1,17 @@
-INSERT INTO SOFTWARE(PACKAGE, CATEGORY, DESCRIPTION, APP_NAME, PICTURE_128, PICTURE_512)
-VALUES('com', 'Games', 'First Game', 'Alladin', null, 'http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-15/512/Amazon-icon.png'),
-('com', 'Games', 'Second Game', 'Zeus', null, 'http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-15/512/Downie-icon.png'),
-('net', 'Multimedia', 'First Show', 'Ukraine got talent', null, 'http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-15/512/Lego-Starwars-icon.png'),
-('net', 'Productivity', 'First Debugger', 'JDebugger', null, 'http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-15/512/Filehippo-icon.png'),
-('io', 'Tools', 'SQL IDE', 'SQL DEVELOPER', null, 'http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-15/512/FirefoxBeta-icon.png'),
-('io', 'Tools', 'Java IDE', 'Intellij IDEA', null, 'http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-15/512/Lego-Starwars-icon.png'),
-('io', 'Health', 'Health practice', 'Yoga', null, 'http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-15/512/YNAB-icon.png'),
-('com', 'Lifestyle', 'Style', 'Casual', null, 'http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-15/512/Lossless-Decoder-icon.png'),
-('net', 'Multimedia', 'Virtual reality', '3D Glasses', null, 'http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-15/512/Panorama-Sticher-icon.png'),
-('io', 'Health', 'Sport', 'Swimming teacher', null, 'http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-15/512/WJoy-icon.png');
+INSERT INTO SOFTWARE(PACKAGE, CATEGORY, DESCRIPTION, APP_NAME, PICTURE_128, PICTURE_512, DOWNLOADS_NUM)
+VALUES('com', 'Games', 'First Game', 'Alladin', 'http://icons.iconarchive.com/icons/sicons/basic-round-social/128/9gag-icon.png', 'http://icons.iconarchive.com/icons/sicons/basic-round-social/512/9gag-icon.png', 1),
+('com', 'Games', 'Second Game', 'Zeus', 'http://icons.iconarchive.com/icons/sicons/basic-round-social/128/aim-icon.png', 'http://icons.iconarchive.com/icons/sicons/basic-round-social/512/aim-icon.png', 2),
+('net', 'Multimedia', 'First Show', 'Ukraine got talent', 'http://icons.iconarchive.com/icons/sicons/basic-round-social/128/ask-icon.png', 'http://icons.iconarchive.com/icons/sicons/basic-round-social/512/ask-icon.png', 3),
+('net', 'Productivity', 'First Debugger', 'JDebugger', 'http://icons.iconarchive.com/icons/sicons/basic-round-social/128/blogger-icon.png', 'http://icons.iconarchive.com/icons/sicons/basic-round-social/512/blogger-icon.png', 4),
+('io', 'Tools', 'SQL IDE', 'SQL DEVELOPER', 'http://icons.iconarchive.com/icons/sicons/basic-round-social/128/dailyme-icon.png', 'http://icons.iconarchive.com/icons/sicons/basic-round-social/512/dailyme-icon.png', 5),
+('io', 'Tools', 'Java IDE', 'Intellij IDEA', 'http://icons.iconarchive.com/icons/sicons/basic-round-social/128/facebook-icon.png', 'http://icons.iconarchive.com/icons/sicons/basic-round-social/512/facebook-icon.png', 15),
+('io', 'Health', 'Health practice', 'Yoga', 'http://icons.iconarchive.com/icons/sicons/basic-round-social/128/evernote-icon.png', 'http://icons.iconarchive.com/icons/sicons/basic-round-social/512/evernote-icon.png', 5),
+('com', 'Lifestyle', 'Style', 'Casual', 'http://icons.iconarchive.com/icons/sicons/basic-round-social/128/ebay-icon.png', 'http://icons.iconarchive.com/icons/sicons/basic-round-social/512/ebay-icon.png', 25),
+('net', 'Multimedia', 'Virtual reality', '3D Glasses', 'http://icons.iconarchive.com/icons/sicons/basic-round-social/128/dzone-icon.png', 'http://icons.iconarchive.com/icons/sicons/basic-round-social/512/dzone-icon.png', 25),
+('io', 'Health', 'Sport', 'Swimming teacher', 'http://icons.iconarchive.com/icons/sicons/basic-round-social/128/freshbump-icon.png', 'http://icons.iconarchive.com/icons/sicons/basic-round-social/512/freshbump-icon.png', 2),
+('com', 'Tools', 'Service', 'Google search', 'http://icons.iconarchive.com/icons/sicons/basic-round-social/128/google-icon.png', 'http://icons.iconarchive.com/icons/sicons/basic-round-social/512/google-icon.png', 20),
+('io', 'Health', 'Sport', 'Swimming teacher', 'http://icons.iconarchive.com/icons/sicons/basic-round-social/128/linkedin-icon.png', 'http://icons.iconarchive.com/icons/sicons/basic-round-social/512/linkedin-icon.png', 15),
+('net', 'Lifestyle', 'Social Network', 'Odnoklassniki', 'http://icons.iconarchive.com/icons/sicons/basic-round-social/128/odnoklassniki-icon.png', 'http://icons.iconarchive.com/icons/sicons/basic-round-social/512/odnoklassniki-icon.png', 8),
+('io', 'Lifestyle', 'Social Network', 'Twitter', 'http://icons.iconarchive.com/icons/sicons/basic-round-social/128/twitter-icon.png', 'http://icons.iconarchive.com/icons/sicons/basic-round-social/512/twitter-icon.png', 10),
+('com', 'Tools', 'Messager', 'Skype', 'http://icons.iconarchive.com/icons/sicons/basic-round-social/128/skype-icon.png', 'http://icons.iconarchive.com/icons/sicons/basic-round-social/512/skype-icon.png', 15);
 COMMIT;

@@ -1,11 +1,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="site-header">
     <div class="header-top">
-        <div class="header-msg">SoftwareStore</div>
+        <div class="header-msg">SoftwareStore
+        </div>
         <div class="header-right-part">
-            Welcome, <span>User!</span>!
+            Welcome, <span>User!</span>
+        </div>
+        <div class="navigation-div">
+            <ul class="main-menu">
+                <li><a href="/upload">Upload</a></li>
+                <li><a href="/">Home</a></li>
+            </ul>
         </div>
     </div>
     <div class="header-bottom">
