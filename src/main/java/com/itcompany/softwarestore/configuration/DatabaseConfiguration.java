@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -19,10 +20,12 @@ import java.util.Properties;
  * @version 1.0
  * @since 1.0
  */
+/*@ComponentScan(basePackages = "com.itcompany.softwarestore")*/
 @Configuration
-@PropertySource("classpath:application.properties")
-@ComponentScan(basePackages = "com.itcompany.softwarestore")
 @EnableTransactionManagement
+@PropertySource("classpath:application.properties")
+@ComponentScan("com.itcompany.softwarestore")
+@EnableJpaRepositories(basePackages = "com.itcompany.softwarestore.dao.repository")
 public class DatabaseConfiguration {
 
     private static final String PROP_HIBERNATE_DIALECT = "hibernate.dialect";
@@ -33,7 +36,8 @@ public class DatabaseConfiguration {
     private static final String PROP_HIBERNATE_USE_SQL_COMMENTS = "hibernate.useSqlComments";
     private static final String PROP_HIBERNATE_HBM2DDL_AUTO = "hibernate.hbm2ddl.auto";
 
-    private static final String PROP_PACKAGE_WITH_DB_ENTITIES = "com.itcompany.softwarestore.dao.entity";
+    //private static final String PROP_PACKAGE_WITH_DB_ENTITIES = "com.itcompany.softwarestore.dao.entity";
+    private static final String PROP_ENTITYMANAGER_PACKAGES_TO_SCAN = "db.entitymanager.packages.to.scan";
 
     @Value("${db.driver}")
     private String dbDriver;
@@ -68,9 +72,12 @@ public class DatabaseConfiguration {
     @Value("${hibernate.hbm2ddl.auto}")
     private String hibernateHbm2ddlAuto;
 
+    @Value("${db.entitymanager.packages.to.scan}")
+    private String packagesToScan;
+
     // DataSource bean
     @Bean
-    public DataSource getDataSource() {
+    public DataSource dataSource() {
         final DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(dbDriver);
         dataSource.setUrl(dbUrl);
@@ -82,11 +89,11 @@ public class DatabaseConfiguration {
 
     // EntityManager/SessionFactory bean
     @Bean
-    public LocalContainerEntityManagerFactoryBean getEntityManagerFactory() {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-        entityManagerFactoryBean.setDataSource(getDataSource());
+        entityManagerFactoryBean.setDataSource(dataSource());
         entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
-        entityManagerFactoryBean.setPackagesToScan(PROP_PACKAGE_WITH_DB_ENTITIES);
+        entityManagerFactoryBean.setPackagesToScan(packagesToScan);
         entityManagerFactoryBean.setJpaProperties(getHibernateProperties());
 
         return entityManagerFactoryBean;
@@ -94,9 +101,9 @@ public class DatabaseConfiguration {
 
     // TransactionManager bean
     @Bean
-    public JpaTransactionManager getTransactionManager() {
+    public JpaTransactionManager transactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(getEntityManagerFactory().getObject());
+        transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
 
         return transactionManager;
     }
