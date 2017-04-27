@@ -36,9 +36,6 @@ public class DatabaseConfiguration {
     private static final String PROP_HIBERNATE_USE_SQL_COMMENTS = "hibernate.useSqlComments";
     private static final String PROP_HIBERNATE_HBM2DDL_AUTO = "hibernate.hbm2ddl.auto";
 
-    //private static final String PROP_PACKAGE_WITH_DB_ENTITIES = "com.itcompany.softwarestore.dao.entity";
-    private static final String PROP_ENTITYMANAGER_PACKAGES_TO_SCAN = "db.entitymanager.packages.to.scan";
-
     @Value("${db.driver}")
     private String dbDriver;
 

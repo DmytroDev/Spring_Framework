@@ -27,10 +27,10 @@ public class SoftwareEntity {
     private String appPackage;
 
     @Column(name = "PICTURE_128")
-    private String picturePath128;
+    private byte[] pictureContent128;
 
     @Column(name = "PICTURE_512")
-    private String picturePath512;
+    private byte[] pictureContent512;
 
     @Column(name = "DESCRIPTION")
     private String description;
@@ -65,20 +65,20 @@ public class SoftwareEntity {
         this.appPackage = appPackage;
     }
 
-    public String getPicturePath128() {
-        return picturePath128;
+    public byte[] getPictureContent128() {
+        return pictureContent128;
     }
 
-    public void setPicturePath128(String picturePath128) {
-        this.picturePath128 = picturePath128;
+    public void setPictureContent128(byte[] pictureContent128) {
+        this.pictureContent128 = pictureContent128;
     }
 
-    public String getPicturePath512() {
-        return picturePath512;
+    public byte[] getPictureContent512() {
+        return pictureContent512;
     }
 
-    public void setPicturePath512(String picturePath512) {
-        this.picturePath512 = picturePath512;
+    public void setPictureContent512(byte[] pictureContent512) {
+        this.pictureContent512 = pictureContent512;
     }
 
     public String getDescription() {
@@ -111,8 +111,6 @@ public class SoftwareEntity {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", appPackage='" + appPackage + '\'' +
-                ", picturePath128='" + picturePath128 + '\'' +
-                ", picturePath512='" + picturePath512 + '\'' +
                 ", description='" + description + '\'' +
                 ", category='" + category + '\'' +
                 ", downloadsNumber=" + downloadsNumber +

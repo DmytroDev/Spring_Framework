@@ -18,8 +18,16 @@ public interface SoftwareEntityRepository extends JpaRepository<SoftwareEntity, 
     @Modifying
     @Transactional
     @Query("update SoftwareEntity s "
-            + "set s.picturePath128 =:path "
+            + "set s.pictureContent128 =:content "
             + "where s.id =:applicationId")
-    void updateImages(@Param("path") String path,
+    void updatePictureContent128(@Param("content") byte[] content,
                       @Param("applicationId") Long applicationId);
+
+    @Modifying
+    @Transactional
+    @Query("update SoftwareEntity s "
+            + "set s.pictureContent512 =:content "
+            + "where s.id =:applicationId")
+    void updatePictureContent512(@Param("content") byte[] content,
+                                 @Param("applicationId") Long applicationId);
 }

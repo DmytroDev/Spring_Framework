@@ -7,5 +7,5 @@ package com.itcompany.softwarestore.service;
  */
 public interface InitService {
 
-    void saveImageToDB();
+    void scanFilesAndSaveToDB(String path, int pictureSize);
 }
