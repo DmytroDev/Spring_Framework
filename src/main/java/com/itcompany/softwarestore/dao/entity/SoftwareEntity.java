@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -35,10 +37,9 @@ public class SoftwareEntity {
     @Column(name = "DESCRIPTION")
     private String description;
 
-    //@ManyToOne
-    //@JoinColumn()
-    @Column(name = "CATEGORY")
-    private String category;
+    @ManyToOne
+    @JoinColumn(name = "CATEGORY")
+    private CategoryEntity category;
 
     @Column(name = "DOWNLOADS_NUM")
     private Integer downloadsNumber;
@@ -91,11 +92,11 @@ public class SoftwareEntity {
         this.description = description;
     }
 
-    public String getCategory() {
+    public CategoryEntity getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(CategoryEntity category) {
         this.category = category;
     }
 
@@ -114,7 +115,7 @@ public class SoftwareEntity {
                 ", name='" + name + '\'' +
                 ", appPackage='" + appPackage + '\'' +
                 ", description='" + description + '\'' +
-                ", category='" + category + '\'' +
+                ", category=" + category.getName() +
                 ", downloadsNumber=" + downloadsNumber +
                 '}';
     }
