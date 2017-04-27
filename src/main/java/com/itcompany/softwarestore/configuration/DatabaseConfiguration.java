@@ -7,6 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -20,7 +21,6 @@ import java.util.Properties;
  * @version 1.0
  * @since 1.0
  */
-/*@ComponentScan(basePackages = "com.itcompany.softwarestore")*/
 @Configuration
 @EnableTransactionManagement
 @PropertySource("classpath:application.properties")
@@ -103,6 +103,11 @@ public class DatabaseConfiguration {
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
 
         return transactionManager;
+    }
+
+    @Bean
+    public JdbcTemplate getJbdcTemplate() {
+        return new JdbcTemplate(dataSource());
     }
 
     private Properties getHibernateProperties() {
