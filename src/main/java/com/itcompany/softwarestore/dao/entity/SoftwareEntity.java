@@ -26,15 +26,17 @@ public class SoftwareEntity {
     @Column(name = "PACKAGE")
     private String appPackage;
 
-    @Column(name = "PICTURE_128")
+    @Column(name = "PICTURE_128", length = 40000)
     private byte[] pictureContent128;
 
-    @Column(name = "PICTURE_512")
+    @Column(name = "PICTURE_512", length = 40000)
     private byte[] pictureContent512;
 
     @Column(name = "DESCRIPTION")
     private String description;
 
+    //@ManyToOne
+    //@JoinColumn()
     @Column(name = "CATEGORY")
     private String category;
 

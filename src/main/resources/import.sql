@@ -1,5 +1,3 @@
-ALTER TABLE SOFTWARE ALTER COLUMN PICTURE_128 VARBINARY(40000);
-ALTER TABLE SOFTWARE ALTER COLUMN PICTURE_512 VARBINARY(40000);
 INSERT INTO SOFTWARE(PACKAGE, CATEGORY, DESCRIPTION, APP_NAME, PICTURE_128, PICTURE_512, DOWNLOADS_NUM)
 VALUES('com', 'Games', 'First Game', 'Alladin', NULL, NULL, 1),
 ('com', 'Games', 'Second Game', 'Zeus', NULL, NULL, 2),
@@ -16,4 +14,11 @@ VALUES('com', 'Games', 'First Game', 'Alladin', NULL, NULL, 1),
 ('net', 'Lifestyle', 'Social Network', 'Odnoklassniki', NULL, NULL, 8),
 ('io', 'Lifestyle', 'Social Network', 'Twitter', NULL, NULL, 10),
 ('com', 'Tools', 'Messager', 'Skype', NULL, NULL, 15);
+INSERT INTO CATEGORY(CATEGORY_NAME, DESCRIPTION)
+VALUES('Games', 'Games'),
+('Multimedia', 'Multimedia'),
+('Productivity', 'Productivity'),
+('Tools', NULL),
+('Health', 'Health'),
+('Lifestyle', 'Lifestyle');
 COMMIT;

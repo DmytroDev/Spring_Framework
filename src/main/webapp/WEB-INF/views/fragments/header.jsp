@@ -20,7 +20,13 @@
             <p class="header-title">Most Popular</p>
         </div>
         <div class="img-ribbon">
-            <img src="http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-15/512/Amazon-icon.png"
+            <c:forEach items="${softwares}" var="soft">
+                <p>${soft.name}</p>
+
+                <%--<img src="${soft.pictureContent128}"
+                     alt="Logo">--%>
+            </c:forEach>
+<%--            <img src="http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-15/512/Amazon-icon.png"
                  alt="Logo">
             <img src="http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-15/512/Amazon-Kindle-icon.png"
                  alt="Logo">
@@ -39,7 +45,7 @@
             <img src="http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-15/512/Panorama-Sticher-icon.png"
                  alt="Logo">
             <img src="http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-15/512/WJoy-icon.png"
-                 alt="Logo">
+                 alt="Logo">--%>
         </div>
     </div>
 </div>
