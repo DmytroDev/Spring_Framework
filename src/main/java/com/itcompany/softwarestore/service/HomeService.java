@@ -12,4 +12,6 @@ import java.util.List;
 public interface HomeService {
 
     List<SoftwareEntity> getAllSoftware();
+
+    SoftwareEntity getSoftwareById(long id);
 }

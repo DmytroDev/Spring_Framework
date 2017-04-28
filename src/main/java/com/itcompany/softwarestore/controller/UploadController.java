@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class UploadController {
 
-    @RequestMapping(value = "/upload", method = RequestMethod.GET)
+    @RequestMapping(value = "/view/upload", method = RequestMethod.GET)
     //@RequestMapping(value = "/upload", method = RequestMethod.POST)
     public String doUpload() {
-        return "fragments/upload-form";
+        return "pages/upload-form";
     }
 }

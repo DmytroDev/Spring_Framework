@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -28,9 +29,11 @@ public class SoftwareEntity {
     @Column(name = "PACKAGE")
     private String appPackage;
 
+    @Lob
     @Column(name = "PICTURE_128", length = 40000)
     private byte[] pictureContent128;
 
+    @Lob
     @Column(name = "PICTURE_512", length = 40000)
     private byte[] pictureContent512;
 

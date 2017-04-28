@@ -10,8 +10,8 @@
         </div>
         <div class="navigation-div">
             <ul class="main-menu">
-                <li><a href="/upload">Upload</a></li>
-                <li><a href="/">Home</a></li>
+                <li><a id="upload-link" href="/upload">Upload</a></li>
+                <li><a id="all-software-link" href="/index">Home</a></li>
             </ul>
         </div>
     </div>
@@ -20,32 +20,11 @@
             <p class="header-title">Most Popular</p>
         </div>
         <div class="img-ribbon">
-            <c:forEach items="${softwares}" var="soft">
-                <p>${soft.name}</p>
-
-                <%--<img src="${soft.pictureContent128}"
-                     alt="Logo">--%>
-            </c:forEach>
-<%--            <img src="http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-15/512/Amazon-icon.png"
-                 alt="Logo">
-            <img src="http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-15/512/Amazon-Kindle-icon.png"
-                 alt="Logo">
-            <img src="http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-15/512/Downie-icon.png"
-                 alt="Logo">
-            <img src="http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-15/512/Filehippo-icon.png"
-                 alt="Logo">
-            <img src="http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-15/512/FirefoxBeta-icon.png"
-                 alt="Logo">
-            <img src="http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-15/512/Lego-Starwars-icon.png"
-                 alt="Logo">
-            <img src="http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-15/512/YNAB-icon.png"
-                 alt="Logo">
-            <img src="http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-15/512/Lossless-Decoder-icon.png"
-                 alt="Logo">
-            <img src="http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-15/512/Panorama-Sticher-icon.png"
-                 alt="Logo">
-            <img src="http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-15/512/WJoy-icon.png"
-                 alt="Logo">--%>
+            <c:if test="${!empty softwareList}">
+                <c:forEach items="${softwareList}" var="software">
+                    <img src="/imgController128/getImg${software.id}"/>
+                </c:forEach>
+            </c:if>
         </div>
     </div>
 </div>

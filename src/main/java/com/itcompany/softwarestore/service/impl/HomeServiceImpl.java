@@ -27,8 +27,12 @@ public class HomeServiceImpl implements HomeService {
     public List<SoftwareEntity> getAllSoftware() {
         List<SoftwareEntity> softwareEntities = softwareEntityRepository.findAll();
         LOGGER.info("Information about the Software has been successfully extracted from the database");
-        // TODO: remove line bellow later
-        System.out.println(softwareEntities);
         return softwareEntities;
     }
+
+    @Override
+    public SoftwareEntity getSoftwareById(long id) {
+        return softwareEntityRepository.findOne(id);
+    }
+
 }

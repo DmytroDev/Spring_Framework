@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class DetailsController {
 
-    @RequestMapping(value = "/details", method = RequestMethod.GET)
+    @RequestMapping(value = "/view/details", method = RequestMethod.GET)
     public String getDetails() {
-        return "fragments/details-page";
+        return "pages/details-page";
     }
 
 }
