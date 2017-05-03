@@ -114,8 +114,7 @@ public class SoftwareEntity {
     @Override
     public String toString() {
         return "SoftwareEntity{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                " name='" + name + '\'' +
                 ", appPackage='" + appPackage + '\'' +
                 ", description='" + description + '\'' +
                 ", category=" + category.getName() +
