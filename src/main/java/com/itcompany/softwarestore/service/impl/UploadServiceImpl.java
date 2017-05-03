@@ -10,8 +10,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -46,10 +48,11 @@ public class UploadServiceImpl implements UploadService {
     private final String TXT_FILE_MASK = ".txt";
 
     @Override
-    public FileInfo parseZipFile(String packageName, String description, String fileName) {
-        LOGGER.info("Start parsing ZIP-file '{}' ...", fileName);
+    public FileInfo parseZipFile(String packageName, String description, MultipartFile multipartFile) {
+        LOGGER.info("Start parsing ZIP-file '{}' ...", multipartFile.getOriginalFilename());
         FileInfo fileInfo = null;
         List<ZipEntry> zipEntries = new ArrayList<>();
+        File fileName = multipartToFile(multipartFile);
 
         try (ZipFile file = new ZipFile(fileName)) {
             Enumeration<? extends ZipEntry> entries = file.entries();
@@ -71,9 +74,9 @@ public class UploadServiceImpl implements UploadService {
             }
             fileInfo.setPkgName(packageName);
             fileInfo.setDescription(description);
-            LOGGER.info("'{}' successfully parsed", fileName);
+            LOGGER.info("'{}' successfully parsed", multipartFile.getOriginalFilename());
         } catch (IOException e) {
-            LOGGER.error("Unable to read ZIP-file '{}'", fileName);
+            LOGGER.error("Unable to read ZIP-file '{}'", multipartFile.getOriginalFilename());
         }
         return fileInfo;
     }
@@ -82,6 +85,16 @@ public class UploadServiceImpl implements UploadService {
         SoftwareEntity softwareEntity = softwareEntityBuilder.build(fileInfo);
         softwareRepository.saveAndFlush(softwareEntity);
         LOGGER.info("Software '{}' successfully saved into database", fileInfo.getFileName());
+    }
+
+    private File multipartToFile(MultipartFile multipart) {
+        File convFile = new File(multipart.getOriginalFilename());
+        try {
+            multipart.transferTo(convFile);
+        } catch (IOException e) {
+            LOGGER.error("Unable convert file '{}' from MultipartFile to File", multipart.getOriginalFilename());
+        }
+        return convFile;
     }
 
     private byte[] extractImgContent(InputStream is) throws IOException {

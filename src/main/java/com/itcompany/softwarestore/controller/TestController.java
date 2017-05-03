@@ -1,6 +1,5 @@
 package com.itcompany.softwarestore.controller;
 
-import com.itcompany.softwarestore.model.dto.FileInfo;
 import com.itcompany.softwarestore.service.DownloadService;
 import com.itcompany.softwarestore.service.UploadService;
 import org.slf4j.Logger;
@@ -21,19 +20,8 @@ public class TestController {
     @Autowired
     private DownloadService downloadService;
 
-    private final String zipArchiveName = "testarchive.zip";
-    private final String FILE_NAME = "D:\\for_test\\test.zip";
-
-    // Temporary stub. TODO: remove it later
+    // Temporary stub. TODO: need remove it later
     Long softwareId = 1L;
-
-    @GetMapping("/test")
-    public HttpStatus testUpload() {
-        LOGGER.info("Running readZipFile method ...");
-        FileInfo fileInfo = uploadService.parseZipFile("com", "free description ... ", FILE_NAME);
-        uploadService.saveSoftware(fileInfo);
-        return HttpStatus.OK;
-    }
 
     @GetMapping("/testDownload")
     public HttpStatus testDownload() {

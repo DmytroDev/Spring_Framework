@@ -1,6 +1,7 @@
 package com.itcompany.softwarestore.service;
 
 import com.itcompany.softwarestore.model.dto.FileInfo;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author Dmitriy Nadolenko
@@ -9,7 +10,7 @@ import com.itcompany.softwarestore.model.dto.FileInfo;
  */
 public interface UploadService {
 
-    FileInfo parseZipFile(String packageName, String description, String fileName);
+    FileInfo parseZipFile(String packageName, String description, MultipartFile multipartFile);
 
     void saveSoftware(FileInfo fileInfo);
 }

@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>--%>
 
 <div id="content">
     <div class="upload-title">
@@ -15,6 +14,10 @@
             <div class="form-group">
                 <label for="description">Description</label>
                 <input type="text" name="description" class="form-control" id="description" placeholder="Description">
+            </div>
+            <div class="form-group">
+                <label for="packageName">Package</label>
+                <input type="text" name="packageName" class="form-control" id="packageName" placeholder="Package">
             </div>
             <div class="form-group">
                 <label for="file">File input (ZIP-archive)</label>
