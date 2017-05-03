@@ -1,8 +1,7 @@
 package com.itcompany.softwarestore.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * @author Dmitriy Nadolenko
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class DetailsController {
 
-    @RequestMapping(value = "/view/details", method = RequestMethod.GET)
+    @GetMapping("/view/details")
     public String getDetails() {
         return "pages/details-page";
     }

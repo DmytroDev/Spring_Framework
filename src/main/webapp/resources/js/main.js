@@ -1,5 +1,5 @@
 $(function () {
-    $('a#all-software-link, a#upload-link').click(function (event) {
+    $('a#all-software-link, a#upload-link, a#ribbon-img-link').click(function (event) {
         event.preventDefault();
         $.ajax({
             url: $(this).attr('href'), success: function (result) {

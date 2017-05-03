@@ -19,10 +19,12 @@
         <div>
             <p class="header-title">Most Popular</p>
         </div>
-        <div class="img-ribbon">
+        <div class="header-ribbon">
             <c:if test="${!empty softwareList}">
                 <c:forEach items="${softwareList}" var="software">
-                    <img src="/imgController128/getImg${software.id}"/>
+                    <a id="ribbon-img-link" href="/view/details">
+                        <img src="/imgController128/getImg${software.id}"/>
+                    </a>
                 </c:forEach>
             </c:if>
         </div>
