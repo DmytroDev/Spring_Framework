@@ -167,7 +167,7 @@ hr {
     font-size: 20px;
 }
 
-.download-btn, .btn-default {
+.download-btn, .btn-default, .back-to-index-page-btn {
     font-family: 'Roboto Condensed', sans-serif;
     text-align: center;
     background: linear-gradient(to bottom, #49ae52, #306428);
@@ -180,7 +180,12 @@ hr {
     float: right;
 }
 
-.download-btn:hover, .btn-default:hover {
+.back-to-index-page-btn {
+    margin-top: 20px;
+    color: white;
+}
+
+.download-btn:hover, .btn-default:hover, .back-to-index-page-btn:hover {
     background: #306428;
     cursor: pointer; /* change cursor to hand */
 }
@@ -213,6 +218,25 @@ hr {
 
 #exampleInputFile {
     margin-bottom: 30px;
+}
+
+.upload-status-page-div {
+    display: grid;
+    margin: 30px auto 30px auto;
+}
+
+.upload-status-title {
+    text-shadow: 2px 2px 2px grey;
+    text-align: center;
+}
+
+.upload-status-msg {
+    text-align: center;
+    margin: 20px;
+}
+
+.back-to-index-div {
+    margin: auto;
 }
 
 .site-footer {

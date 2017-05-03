@@ -1,23 +1,24 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>--%>
 
 <div id="content">
     <div class="upload-title">
         <p>Upload</p>
     </div>
     <div class="container">
-        <form class="upload-form">
+        <form method="post" action="/view/upload" class="upload-form" id="upload-form" enctype="multipart/form-data">
             <div class="form-group">
-                <label for="exampleInputEmail1">Application name</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Name">
+                <label for="name">Application name</label>
+                <input type="text" name="name" class="form-control" id="name" placeholder="Name">
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Description</label>
-                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Description">
+                <label for="description">Description</label>
+                <input type="text" name="description" class="form-control" id="description" placeholder="Description">
             </div>
             <div class="form-group">
-                <label for="exampleInputFile">File input (ZIP-archive)</label>
-                <input type="file" id="exampleInputFile">
+                <label for="file">File input (ZIP-archive)</label>
+                <input type="file" name="file" id="file">
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
         </form>

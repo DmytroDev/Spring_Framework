@@ -33,7 +33,7 @@ public class HomeController {
      *
      * @return model and view
      */
-    @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/index", "/upload"}, method = RequestMethod.GET)
     public ModelAndView home() {
         ModelAndView view = new ModelAndView("home/index");
         List<SoftwareEntity> softwares = homeService.getAllSoftware();

@@ -10,8 +10,8 @@
         </div>
         <div class="navigation-div">
             <ul class="main-menu">
-                <li><a id="upload-link" href="/upload">Upload</a></li>
-                <li><a id="all-software-link" href="/index">Home</a></li>
+                <li><a id="upload-link" href="/view/upload">Upload</a></li>
+                <li><a id="all-software-link" href="/view/index">Home</a></li>
             </ul>
         </div>
     </div>

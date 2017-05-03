@@ -3,6 +3,10 @@ package com.itcompany.softwarestore.configuration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletRegistration;
+import java.io.File;
+
 /**
  * @author Dmitriy Nadolenko
  * @version 1.0
@@ -10,6 +14,9 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
  */
 @Configuration
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer{
+
+
+    private int maxUploadSizeInMb = 5 * 1024 * 1024; // 5 MB
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
@@ -26,6 +33,18 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
         return new String[]{"/"};
     }
 
+    @Override
+    protected void customizeRegistration(ServletRegistration.Dynamic registration) {
+        // upload temp file will put here
+        File uploadDirectory = new File(System.getProperty("java.io.tmpdir"));
+        // register a MultipartConfigElement
+        MultipartConfigElement multipartConfigElement =
+                new MultipartConfigElement(uploadDirectory.getAbsolutePath(),
+                        maxUploadSizeInMb, maxUploadSizeInMb * 2, maxUploadSizeInMb / 2);
+        registration.setMultipartConfig(multipartConfigElement);
+        //registration.setInitParameter("spring.profiles.active", "default");
+    }
+
 /*    @Override
     protected Filter[] getServletFilters() {
         CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
@@ -34,11 +53,6 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 
         return new Filter[] {characterEncodingFilter};
     }
-
-    @Override
-    protected void customizeRegistration(ServletRegistration.Dynamic registration) {
-        registration.setInitParameter("defaultHtmlEscape", "true");
-        registration.setInitParameter("spring.profiles.active", "default");
     }*/
 
 }
