@@ -1,5 +1,7 @@
 package com.itcompany.softwarestore.dao.entity;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,9 +22,11 @@ public class UserEntity {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
 
+    @NotEmpty(message = "Please enter login")
     @Column(name = "LOGIN", nullable = false)
     private String login;
 
+    @NotEmpty(message = "Please enter password")
     @Column(name = "PASSWORD", nullable = false)
     private String password;
 

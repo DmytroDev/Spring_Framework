@@ -3,6 +3,10 @@ How to build and deploy:
 2/ Run "npm i"
 
 n/ initial URL -  http://localhost:8080/index
+use as credentials:
+login: admin
+password: admin
+
 
 
 Programming and Markup Languages:

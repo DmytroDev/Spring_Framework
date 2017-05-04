@@ -1,12 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div class="site-header">
+<div id="site-header" class="site-header">
     <div class="header-top">
         <div class="header-msg">SoftwareStore
         </div>
         <div class="header-right-part">
-            Welcome, <span>User!</span>
+            Welcome, <span>${sessionScope.username}</span>
         </div>
         <div class="navigation-div">
             <ul class="main-menu">

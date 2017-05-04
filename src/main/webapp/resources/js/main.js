@@ -9,21 +9,26 @@ $(function () {
         });
     });
 
-    $(document).on("click", "input#back-to-index-page-btn", function (event) {
+    $(document).on("click", "input#back-to-index-page-btn, #cancel-btn", function () {
         $.get("/view/index", function (data) {
             console.log(this);
             $("#content").html(data);
         });
     });
-
-    /*  */
-    $(document).on("click", ".login-btn, .cancel-btn", function (event) {
+    
+    $(document).on("click", "#login-btn", function (event) {
         event.preventDefault();
-        $.post("/view/login", function (data) {
+        var formData = {
+            'username': $('input[name=username]').val(),
+            'password': $('input[name=password]').val()
+        };
+        $.post("/view/login", formData, function (data) {
             console.log(this);
             $("#content").html(data);
         });
     });
+
+
 
     $(document).on("submit", "#upload-form", function (event) {
         var formData = new FormData($('form')[0]);

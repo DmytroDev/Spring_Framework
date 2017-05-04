@@ -10,9 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -34,19 +34,12 @@ public class HomeController {
      * @return model and view
      */
     @GetMapping(value = {"/", "/index"})
-    public ModelAndView home() {
+    public ModelAndView home(HttpSession session) {
         ModelAndView view = new ModelAndView("home/index");
         List<SoftwareEntity> softwares = homeService.getAllSoftware();
         // TODO: temporary STUB. Need modify later
         view.addObject("softwareList", softwares.subList(0, 10));
-        return view;
-    }
-
-    @PostMapping(value= "/view/login")
-    public ModelAndView doLogin() {
-        ModelAndView view = new ModelAndView("pages/all-software");
-        List<String> categories = homeService.getAllCategoryNames();
-        view.addObject("categories", categories);
+        session.setAttribute("username", "guest");
         return view;
     }
 

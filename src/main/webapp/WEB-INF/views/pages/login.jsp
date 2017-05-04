@@ -9,10 +9,10 @@
         </div>
         <div class="login-container">
             <label><b>Username</b></label>
-            <input class="form-field" type="text" placeholder="Enter Username" name="uname" required>
+            <input class="form-field" type="text" placeholder="Enter Username" name="username" required>
 
             <label><b>Password</b></label>
-            <input class="form-field" type="password" placeholder="Enter Password" name="psw" required>
+            <input class="form-field" type="password" placeholder="Enter Password" name="password" required>
 
             <button id="login-btn" class="login-btn" type="submit">Login</button>
             <button id="cancel-btn" class="cancel-btn" type="button" >Skip</button>
