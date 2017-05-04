@@ -94,6 +94,7 @@ body {
 .header-ribbon img:hover {
     cursor: pointer;
     border: ridge;
+    color: lightgrey;
 }
 
 .container {
@@ -250,5 +251,60 @@ hr {
     text-align: center;
     display: flex;
     justify-content: center; /* centered by vertically */
+    flex-direction: column;
+}
+
+/* css for login form */
+.login-form {
+    border: 3px solid #f1f1f1;
+    margin: 0 35% 1% 35%;
+}
+
+/* Center the avatar image inside this container */
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+}
+
+img.avatar {
+    width: 40%;
+    border-radius: 50%;
+}
+
+.form-field {
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.login-btn, .cancel-btn {
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.login-btn:hover, .cancel-btn:hover {
+    opacity: 0.8;
+}
+
+.login-btn {
+    background: linear-gradient(to bottom, #49ae52, #306428);
+}
+
+/* Extra style for the cancel button (red) */
+.cancel-btn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+}
+
+.login-container {
+    padding: 16px;
+    display: flex;
     flex-direction: column;
 }

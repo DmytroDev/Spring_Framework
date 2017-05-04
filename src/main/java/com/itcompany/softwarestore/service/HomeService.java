@@ -14,4 +14,6 @@ public interface HomeService {
     List<SoftwareEntity> getAllSoftware();
 
     SoftwareEntity getSoftwareById(long id);
+
+    List<String> getAllCategoryNames();
 }

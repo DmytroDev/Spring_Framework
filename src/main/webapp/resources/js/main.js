@@ -11,6 +11,16 @@ $(function () {
 
     $(document).on("click", "input#back-to-index-page-btn", function (event) {
         $.get("/view/index", function (data) {
+            console.log(this);
+            $("#content").html(data);
+        });
+    });
+
+    /*  */
+    $(document).on("click", ".login-btn, .cancel-btn", function (event) {
+        event.preventDefault();
+        $.post("/view/login", function (data) {
+            console.log(this);
             $("#content").html(data);
         });
     });

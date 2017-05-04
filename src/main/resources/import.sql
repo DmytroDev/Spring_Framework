@@ -22,4 +22,9 @@ VALUES ('com', 'Games', 'First Game', 'Alladin', NULL, NULL, 1),
   ('io', 'Lifestyle', 'Social Network', 'Twitter', NULL, NULL, 10),
   ('com', 'Tools', 'Messager', 'Skype', NULL, NULL, 15),
   ('net', 'Tools', 'WithoutImage', 'WithoutImage', NULL, NULL, 1);
+INSERT INTO USERS (LOGIN, PASSWORD, ROLE, DESCRIPTION)
+VALUES ('admin', 'admin', 'ROLE_ADMIN', 'admin desc'),
+ ('user', 'user', 'ROLE_USER', 'user desc'),
+ ('1', '1', 'ROLE_ANONYMOUS', 'anonymous desc'),
+ ('anonymous', 'anonymous', 'ROLE_ANONYMOUS', 'anonymous desc');
 COMMIT;

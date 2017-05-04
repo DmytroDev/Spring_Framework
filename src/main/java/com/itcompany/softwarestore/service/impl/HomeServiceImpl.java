@@ -1,6 +1,7 @@
 package com.itcompany.softwarestore.service.impl;
 
 import com.itcompany.softwarestore.dao.entity.SoftwareEntity;
+import com.itcompany.softwarestore.dao.repository.CategoryEntityRepository;
 import com.itcompany.softwarestore.dao.repository.SoftwareEntityRepository;
 import com.itcompany.softwarestore.service.HomeService;
 import org.slf4j.Logger;
@@ -23,16 +24,26 @@ public class HomeServiceImpl implements HomeService {
     @Autowired
     private SoftwareEntityRepository softwareEntityRepository;
 
+    @Autowired
+    private CategoryEntityRepository categoryEntityRepository;
+
     @Override
     public List<SoftwareEntity> getAllSoftware() {
         List<SoftwareEntity> softwareEntities = softwareEntityRepository.findAll();
-        LOGGER.info("Information about the Software has been successfully extracted from the database");
+        LOGGER.info("Information about the Software has been successfully extracted from the database. List size '{}'", softwareEntities.size());
         return softwareEntities;
     }
 
     @Override
     public SoftwareEntity getSoftwareById(long id) {
         return softwareEntityRepository.findOne(id);
+    }
+
+    @Override
+    public List<String> getAllCategoryNames() {
+        List<String> categoryNames = categoryEntityRepository.getAllCategories();
+        LOGGER.info("All Category names has been successfully extracted from the database. List size '{}'", categoryNames.size());
+        return categoryNames;
     }
 
 }
