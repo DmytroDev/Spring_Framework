@@ -3,6 +3,7 @@ package com.itcompany.softwarestore.service.impl;
 import com.itcompany.softwarestore.dao.entity.SoftwareEntity;
 import com.itcompany.softwarestore.dao.repository.SoftwareEntityRepository;
 import com.itcompany.softwarestore.model.dto.FileInfo;
+import com.itcompany.softwarestore.model.dto.TxtFileFields;
 import com.itcompany.softwarestore.service.SoftwareEntityBuilder;
 import com.itcompany.softwarestore.service.UploadService;
 import org.apache.commons.io.IOUtils;
@@ -40,13 +41,6 @@ public class UploadServiceImpl implements UploadService {
     @Autowired
     private SoftwareEntityBuilder softwareEntityBuilder;
 
-    private final String NAME_FIELD = "name";
-    private final String PACKAGE_FIELD = "package";
-    private final String PICTURE_128_FIELD = "picture_128";
-    private final String PICTURE_512_FIELD = "picture_512";
-    private final String DELIMITER = ":";
-    private final String TXT_FILE_MASK = ".txt";
-
     @Override
     public FileInfo parseZipFile(String packageName, String description, MultipartFile multipartFile) {
         LOGGER.info("Start parsing ZIP-file '{}' ...", multipartFile.getOriginalFilename());
@@ -59,7 +53,7 @@ public class UploadServiceImpl implements UploadService {
             while (entries.hasMoreElements()) {
                 ZipEntry entry = entries.nextElement();
                 InputStream is = file.getInputStream(entry);
-                if (entry.getName().endsWith(TXT_FILE_MASK)) {
+                if (entry.getName().endsWith(TxtFileFields.TXT_FILE_SUFFIX)) {
                     fileInfo = getInfoFromTxtFile(entry, is);
                 } else {
                     zipEntries.add(entry);
@@ -106,18 +100,18 @@ public class UploadServiceImpl implements UploadService {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
         String line;
         while ((line = reader.readLine()) != null) {
-            String[] row = line.split(DELIMITER);
+            String[] row = line.split(TxtFileFields.DELIMITER);
             switch (row[0]) {
-                case NAME_FIELD:
+                case TxtFileFields.NAME_FIELD:
                     fileInfo.setFileName(row[1].trim());
                     break;
-                case PACKAGE_FIELD:
+                case TxtFileFields.PACKAGE_FIELD:
                     fileInfo.setPkgName(row[1].trim());
                     break;
-                case PICTURE_128_FIELD:
+                case TxtFileFields.PICTURE_128_FIELD:
                     fileInfo.setImg128FileName(row[1].trim());
                     break;
-                case PICTURE_512_FIELD:
+                case TxtFileFields.PICTURE_512_FIELD:
                     fileInfo.setImg512FileName(row[1].trim());
                     break;
                 default:

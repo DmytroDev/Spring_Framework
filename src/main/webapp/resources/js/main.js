@@ -28,8 +28,6 @@ $(function () {
         });
     });
 
-
-
     $(document).on("submit", "#upload-form", function (event) {
         var formData = new FormData($('form')[0]);
         event.preventDefault();

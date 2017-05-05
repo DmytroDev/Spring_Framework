@@ -3,24 +3,22 @@
 
 <div id="content">
     <div class="container">
-
         <ul class="nav nav-pills nav-stacked">
             <div class="navbar-title">
                 <h4>Games Education</h4>
             </div>
-
             <c:if test="${!empty categories}">
-                <c:forEach items="${categories}" var="category">
-                    <li><a href="#">${category}</a></li>
-                    <%--                    <a id="ribbon-img-link" href="/view/details">
-                                            <img src="/imgController128/getImg${software.id}"/>
-                                        </a>--%>
+                <c:forEach items="${categories}" var="category" varStatus="myIndex">
+                    <c:choose>
+                        <c:when test="${myIndex.index=='0'}">
+                            <li class="active"><a href="#">${category}</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li><a href="#">${category}</a></li>
+                        </c:otherwise>
+                    </c:choose>
                 </c:forEach>
             </c:if>
-            <%--            <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#">Menu 1</a></li>
-                        <li><a href="#">Menu 2</a></li>
-                        <li><a href="#">Menu 3</a></li>--%>
         </ul>
 
         <div class="titles-list">
