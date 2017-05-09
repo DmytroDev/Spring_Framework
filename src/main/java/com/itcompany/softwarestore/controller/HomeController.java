@@ -36,9 +36,8 @@ public class HomeController {
     @GetMapping(value = {"/", "/index"})
     public ModelAndView home(HttpSession session) {
         ModelAndView view = new ModelAndView("home/index");
-        List<SoftwareEntity> softwares = homeService.getAllSoftware();
-        // TODO: temporary STUB. Need modify later
-        view.addObject("softwareList", softwares.subList(0, 10));
+        List<SoftwareEntity> softwaresTop10 = homeService.getTop10SoftwareByDesc();
+        view.addObject("softwareList", softwaresTop10);
         session.setAttribute("username", "guest");
         return view;
     }

@@ -47,6 +47,9 @@ public class SoftwareEntity {
     @Column(name = "DOWNLOADS_NUM")
     private Integer downloadsNumber;
 
+    @Column(name = "TIME_UPLOADED")
+    private Long timeUploaded;
+
     public Long getId() {
         return id;
     }
@@ -111,6 +114,14 @@ public class SoftwareEntity {
         this.downloadsNumber = downloadsNumber;
     }
 
+    public Long getTimeUploaded() {
+        return timeUploaded;
+    }
+
+    public void setTimeUploaded(Long timeUploaded) {
+        this.timeUploaded = timeUploaded;
+    }
+
     @Override
     public String toString() {
         return "SoftwareEntity{" +
@@ -119,6 +130,7 @@ public class SoftwareEntity {
                 ", description='" + description + '\'' +
                 ", category=" + category.getName() +
                 ", downloadsNumber=" + downloadsNumber +
+                ", timeUploaded=" + timeUploaded +
                 '}';
     }
 }

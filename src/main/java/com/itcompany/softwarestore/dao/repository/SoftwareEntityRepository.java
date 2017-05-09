@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 /**
  * @author Dmitriy Nadolenko
@@ -30,4 +32,10 @@ public interface SoftwareEntityRepository extends JpaRepository<SoftwareEntity, 
             + "where s.id =:applicationId")
     void updatePictureContent512(@Param("content") byte[] content,
                                  @Param("applicationId") Long applicationId);
+
+    @Transactional
+    List<SoftwareEntity> findTop5ByOrderByDownloadsNumberDesc();
+
+    @Transactional
+    List<SoftwareEntity> findTop5ByOrderByTimeUploadedDesc();
 }

@@ -27,6 +27,7 @@ public class HomeServiceImpl implements HomeService {
     @Autowired
     private CategoryEntityRepository categoryEntityRepository;
 
+
     @Override
     public List<SoftwareEntity> getAllSoftware() {
         List<SoftwareEntity> softwareEntities = softwareEntityRepository.findAll();
@@ -44,6 +45,14 @@ public class HomeServiceImpl implements HomeService {
         List<String> categoryNames = categoryEntityRepository.getAllCategories();
         LOGGER.info("All Category names has been successfully extracted from the database. List size '{}'", categoryNames.size());
         return categoryNames;
+    }
+
+    @Override
+    public List<SoftwareEntity> getTop10SoftwareByDesc() {
+        List<SoftwareEntity> softwareEntities = softwareEntityRepository.findTop5ByOrderByDownloadsNumberDesc();
+        softwareEntities.addAll(softwareEntityRepository.findTop5ByOrderByTimeUploadedDesc());
+        LOGGER.info("Successfully got Top 10 Software '{}'", softwareEntities);
+        return softwareEntities;
     }
 
 }
