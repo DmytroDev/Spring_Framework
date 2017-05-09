@@ -1,5 +1,6 @@
 package com.itcompany.softwarestore.dao.repository;
 
+import com.itcompany.softwarestore.dao.entity.CategoryEntity;
 import com.itcompany.softwarestore.dao.entity.SoftwareEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -38,4 +39,7 @@ public interface SoftwareEntityRepository extends JpaRepository<SoftwareEntity, 
 
     @Transactional
     List<SoftwareEntity> findTop5ByOrderByTimeUploadedDesc();
+
+    @Transactional
+    List<SoftwareEntity> findByCategory(CategoryEntity category);
 }

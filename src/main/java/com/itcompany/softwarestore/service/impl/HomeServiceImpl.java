@@ -1,5 +1,6 @@
 package com.itcompany.softwarestore.service.impl;
 
+import com.itcompany.softwarestore.dao.entity.CategoryEntity;
 import com.itcompany.softwarestore.dao.entity.SoftwareEntity;
 import com.itcompany.softwarestore.dao.repository.CategoryEntityRepository;
 import com.itcompany.softwarestore.dao.repository.SoftwareEntityRepository;
@@ -52,6 +53,16 @@ public class HomeServiceImpl implements HomeService {
         List<SoftwareEntity> softwareEntities = softwareEntityRepository.findTop5ByOrderByDownloadsNumberDesc();
         softwareEntities.addAll(softwareEntityRepository.findTop5ByOrderByTimeUploadedDesc());
         LOGGER.info("Successfully got Top 10 Software '{}'", softwareEntities);
+        return softwareEntities;
+    }
+
+    @Override
+    public List<SoftwareEntity> getSoftwareByCategory(String categoryName) {
+        CategoryEntity categoryEntity = new CategoryEntity();
+        categoryEntity.setName(categoryName);
+
+        List<SoftwareEntity> softwareEntities = softwareEntityRepository.findByCategory(categoryEntity);
+        LOGGER.info("Successfully got Software's by name '{}'", softwareEntities);
         return softwareEntities;
     }
 

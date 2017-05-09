@@ -18,4 +18,6 @@ public interface HomeService {
     List<String> getAllCategoryNames();
 
     List<SoftwareEntity> getTop10SoftwareByDesc();
+
+    List<SoftwareEntity> getSoftwareByCategory(String categoryName);
 }

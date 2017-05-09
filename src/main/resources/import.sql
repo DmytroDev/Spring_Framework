@@ -1,11 +1,11 @@
-INSERT INTO CATEGORY (CATEGORY, DESCRIPTION)
+INSERT INTO CATEGORY (CATEGORY_NAME, DESCRIPTION)
 VALUES ('Games', 'Games description'),
   ('Multimedia', 'Multimedia  description'),
   ('Productivity', 'Productivity  description'),
   ('Tools', NULL),
   ('Health', 'Health  description'),
   ('Lifestyle', 'Lifestyle  description');
-INSERT INTO SOFTWARE (PACKAGE, CATEGORY, DESCRIPTION, APP_NAME, PICTURE_128, PICTURE_512, DOWNLOADS_NUM, TIME_UPLOADED)
+INSERT INTO SOFTWARE (PACKAGE, CATEGORY_NAME, DESCRIPTION, APP_NAME, PICTURE_128, PICTURE_512, DOWNLOADS_NUM, TIME_UPLOADED)
 VALUES ('com', 'Games', 'First Game', 'Alladin', NULL, NULL, 1, 130),
   ('com', 'Games', 'Second Game', 'Zeus', NULL, NULL, 2, 200),
   ('net', 'Multimedia', 'First Show', 'Ukraine got talent', NULL, NULL, 3, 400),

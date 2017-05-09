@@ -41,7 +41,7 @@ public class SoftwareEntity {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "CATEGORY")
+    @JoinColumn(name = "CATEGORY_NAME")
     private CategoryEntity category;
 
     @Column(name = "DOWNLOADS_NUM")

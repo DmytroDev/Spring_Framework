@@ -15,7 +15,7 @@ import javax.persistence.Table;
 public class CategoryEntity {
 
     @Id
-    @Column(name = "CATEGORY")
+    @Column(name = "CATEGORY_NAME")
     private String name;
 
     @Column(name = "DESCRIPTION", length = 500)
@@ -43,5 +43,21 @@ public class CategoryEntity {
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CategoryEntity that = (CategoryEntity) o;
+
+        return name.equals(that.name);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode();
     }
 }
