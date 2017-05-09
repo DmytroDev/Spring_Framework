@@ -1,10 +1,11 @@
 $(function () {
-    $('a#all-software-link, a#upload-link, a#ribbon-img-link').click(function (event) {
+    $('a#all-software-link, a#upload-link, a#ribbon-img-link, a#download-archive-link').click(function (event) {
         event.preventDefault();
         $.ajax({
             url: $(this).attr('href'), success: function (result) {
                 console.log(this);
-                document.getElementById("content").innerHTML = result;
+                $("#content").html(result);
+                /*document.getElementById("content").innerHTML = result;*/  // alternative syntax for line above
             }
         });
     });
@@ -28,6 +29,7 @@ $(function () {
         });
     });
 
+    /* upload form with Zip-archive */
     $(document).on("submit", "#upload-form", function (event) {
         var formData = new FormData($('form')[0]);
         event.preventDefault();

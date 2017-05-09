@@ -16,7 +16,7 @@
                 or waste time to start a heavyweight database to just test a few lines of code.
                 P.S This embedded database feature has been available since Spring 3.</p>
             <button class="download-btn">
-                <a class="download-btn-href" href="/download">Download</a>
+                <a id="download-archive-link" class="download-btn-href" href="/download/archive1">Download</a>
             </button>
         </div>
     </div>
