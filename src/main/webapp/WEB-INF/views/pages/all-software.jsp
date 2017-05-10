@@ -9,60 +9,13 @@
             </div>
             <c:if test="${!empty categories}">
                 <c:forEach items="${categories}" var="category" varStatus="myIndex">
-                    <c:choose>
-                        <c:when test="${myIndex.index=='0'}">
-                            <li class="active"><a href="#">${category}</a></li>
-                        </c:when>
-                        <c:otherwise>
-                            <li><a href="#">${category}</a></li>
-                        </c:otherwise>
-                    </c:choose>
+                    <li><a id="category-link" href="/view/category/${category}">${category}</a></li>
                 </c:forEach>
             </c:if>
         </ul>
 
-        <div class="titles-list">
-            <ul class="media-list">
-                <li class="media">
-                    <div class="media-left">
-                        <a href="#">
-                            <img class="media-object"
-                                 src="http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-15/512/Downie-icon.png"
-                                 alt="Logo">
-                        </a>
-                    </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">Title 1</h4>
-                    </div>
-                </li>
-                <hr>
-                <li class="media">
-                    <div class="media-left">
-                        <a href="#">
-                            <img class="media-object"
-                                 src="http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-15/512/WJoy-icon.png"
-                                 alt="Logo">
-                        </a>
-                    </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">Title 2</h4>
-                    </div>
-                </li>
-                <hr>
-                <li class="media">
-                    <div class="media-left">
-                        <a href="#">
-                            <img class="media-object"
-                                 src="http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-15/512/Panorama-Sticher-icon.png"
-                                 alt="Logo">
-                        </a>
-                    </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">Title 3</h4>
-                    </div>
-                </li>
-                <hr>
-            </ul>
+        <div id="categories-content" class="titles-list">
+            <div class="categories-initial-title">Please select a category from the section <span>Games Education</span></div>
         </div>
     </div>
 </div>

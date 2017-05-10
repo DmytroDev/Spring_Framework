@@ -104,18 +104,19 @@ body {
     margin-top: 3%;
 }
 
-.nav {
-    padding-right: 30px;
-}
-
 .navbar-title h4 {
     font-size: 28px;
     font-weight: bold;
+    display: table-caption;
 }
 
 .titles-list {
-    border-left: 1px solid #333;
-    margin-left: 60px;
+    margin-left: 50px;
+}
+
+ul.nav.nav-pills.nav-stacked {
+    border-right: 1px solid #333;
+    padding-right: 50px;
 }
 
 .navbar-element a {
@@ -307,4 +308,20 @@ img.avatar {
     padding: 16px;
     display: flex;
     flex-direction: column;
+}
+
+.categories-initial-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #8c8c8c;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: inherit;
+    padding-top: 10px;
+}
+
+.categories-initial-title span{
+    color: #555555;
 }
