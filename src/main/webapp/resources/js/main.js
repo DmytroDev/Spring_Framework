@@ -19,6 +19,16 @@ $(function () {
             }
         });
     });
+
+    $(document).on("click", "a#details-link", function () {
+        event.preventDefault();
+        $.ajax({
+            url: $(this).attr('href'), success: function (result) {
+                console.log(this);
+                $("#content").html(result);
+            }
+        });
+    });
     
     $(document).on("click", "input#back-to-index-page-btn, #cancel-btn", function () {
         $.get("/view/index", function (data) {

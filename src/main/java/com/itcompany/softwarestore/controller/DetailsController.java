@@ -21,9 +21,12 @@ public class DetailsController {
     @Autowired
     private HomeService homeService;
 
-    @GetMapping("/view/details")
-    public String getDetails() {
-        return "pages/details-page";
+    @GetMapping("/view/details/{id}")
+    public ModelAndView getDetails(@PathVariable long id) {
+        ModelAndView mav = new ModelAndView("pages/details-page");
+        SoftwareEntity software = homeService.getSoftwareById(id);
+        mav.addObject("software", software);
+        return mav;
     }
 
     @GetMapping(value = "/view/category/{categoryName}")

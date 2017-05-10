@@ -43,12 +43,21 @@ public class HomeController {
     }
 
     @GetMapping(value = "/imgController128/getImg{id}", produces = MediaType.IMAGE_PNG_VALUE)
-    public ResponseEntity<byte[]> getImage(@PathVariable long id) {
+    public ResponseEntity<byte[]> getImage128(@PathVariable long id) {
         SoftwareEntity softwareEntity = homeService.getSoftwareById(id);
         byte[] image128 = softwareEntity.getPictureContent128();
         final HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_PNG);
         return new ResponseEntity<>(image128, headers, HttpStatus.CREATED);
+    }
+
+    @GetMapping(value = "/imgController512/getImg{id}", produces = MediaType.IMAGE_PNG_VALUE)
+    public ResponseEntity<byte[]> getImage512(@PathVariable long id) {
+        SoftwareEntity softwareEntity = homeService.getSoftwareById(id);
+        byte[] image512 = softwareEntity.getPictureContent512();
+        final HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_PNG);
+        return new ResponseEntity<>(image512, headers, HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/catController/getAllNames")
@@ -66,4 +75,6 @@ public class HomeController {
         view.addObject("categories", categories);
         return view;
     }
+
+
 }

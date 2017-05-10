@@ -22,7 +22,7 @@
         <div class="header-ribbon">
             <c:if test="${!empty softwareList}">
                 <c:forEach items="${softwareList}" var="software">
-                    <a id="ribbon-img-link" href="/view/details">
+                    <a id="ribbon-img-link" href="/view/details/${software.id}">
                         <img src="/imgController128/getImg${software.id}"/>
                     </a>
                 </c:forEach>

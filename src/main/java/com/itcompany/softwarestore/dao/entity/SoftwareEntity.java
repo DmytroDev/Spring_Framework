@@ -37,7 +37,7 @@ public class SoftwareEntity {
     @Column(name = "PICTURE_512", length = 40000)
     private byte[] pictureContent512;
 
-    @Column(name = "DESCRIPTION")
+    @Column(name = "DESCRIPTION", length = 1500)
     private String description;
 
     @ManyToOne

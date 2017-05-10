@@ -9,7 +9,7 @@
 
                 <li class="media">
                     <div class="media-left">
-                        <a href="#">
+                        <a id="details-link" href="/view/details/${software.id}">
                             <img class="media-object" src="/imgController128/getImg${software.id}" alt="Logo">
                         </a>
                     </div>

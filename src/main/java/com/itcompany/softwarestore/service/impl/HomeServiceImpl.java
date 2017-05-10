@@ -38,7 +38,9 @@ public class HomeServiceImpl implements HomeService {
 
     @Override
     public SoftwareEntity getSoftwareById(long id) {
-        return softwareEntityRepository.findOne(id);
+        SoftwareEntity softwareEntity = softwareEntityRepository.findOne(id);
+        LOGGER.info("Successfully got Software '{}'", softwareEntity);
+        return softwareEntity;
     }
 
     @Override
