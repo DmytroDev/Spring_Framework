@@ -9,9 +9,10 @@
         </div>
         <div class="element-description">
             <p>${software.description}</p>
-            <button class="download-btn">
-                <a id="download-archive-link" class="download-btn-href" href="/download/archive1">Download</a>
+            <button id="download-btn" class="download-btn">
+                <a id="download-archive-link" class="download-btn-href" href="/download/archive/${software.id}">Download</a>
             </button>
+            <button id="back-to-index-from-details-btn" class="back-to-index-from-details-btn">Back</button>
         </div>
     </div>
 </div>

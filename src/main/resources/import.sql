@@ -9,7 +9,7 @@ VALUES ('Games', 'Games description'),
 INSERT INTO SOFTWARE (PACKAGE, CATEGORY_NAME, DESCRIPTION, APP_NAME, PICTURE_128, PICTURE_512, DOWNLOADS_NUM, TIME_UPLOADED)
 VALUES ('com', 'Games', @SoftwareDesc, 'Alladin', NULL, NULL, 1, 130),
   ('com', 'Games', @SoftwareDesc, 'Zeus', NULL, NULL, 2, 200),
-  ('net', 'Multimedia', @SoftwareDesc, 'Amazon', NULL, NULL, 3, 400),
+  ('net', 'Multimedia', @SoftwareDesc, 'Amazon1', NULL, NULL, 3, 400),
   ('net', 'Productivity', @SoftwareDesc, 'JDebugger', NULL, NULL, 4, 1000),
   ('io', 'Tools', @SoftwareDesc, 'Ebay', NULL, NULL, 5, 320),
   ('io', 'Tools', @SoftwareDesc, 'Intellij IDEA', NULL, NULL, 15, 500),

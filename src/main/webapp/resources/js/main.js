@@ -29,8 +29,8 @@ $(function () {
             }
         });
     });
-    
-    $(document).on("click", "input#back-to-index-page-btn, #cancel-btn", function () {
+
+    $(document).on("click", "input#back-to-index-page-btn, #cancel-btn, #back-to-index-from-details-btn", function () {
         $.get("/view/index", function (data) {
             console.log(this);
             $("#content").html(data);

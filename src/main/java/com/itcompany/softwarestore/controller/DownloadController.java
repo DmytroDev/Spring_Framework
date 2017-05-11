@@ -30,7 +30,7 @@ public class DownloadController {
     @Autowired
     private DownloadService downloadService;
 
-    @GetMapping(value= "/download/archive{softwareId}")
+    @GetMapping(value= "/download/archive/{softwareId}")
     public ResponseEntity<InputStreamResource> doUpload(@PathVariable long softwareId) throws FileNotFoundException {
         LOGGER.info("Start upload software. Id = '{}'", softwareId);
         File file = downloadService.createZipArchive(softwareId);
