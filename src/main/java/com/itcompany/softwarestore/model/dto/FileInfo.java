@@ -8,6 +8,7 @@ public class FileInfo {
     private byte[] img128Content;
     private byte[] img512Content;
     private String description;
+    private String category;
 
     public String getFileName() {
         return fileName;
@@ -63,5 +64,13 @@ public class FileInfo {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

@@ -42,7 +42,7 @@ public class UploadServiceImpl implements UploadService {
     private SoftwareEntityBuilder softwareEntityBuilder;
 
     @Override
-    public FileInfo parseZipFile(String packageName, String description, MultipartFile multipartFile) {
+    public FileInfo parseZipFile(String packageName, String description, MultipartFile multipartFile, String categoryName) {
         LOGGER.info("Start parsing ZIP-file '{}' ...", multipartFile.getOriginalFilename());
         FileInfo fileInfo = null;
         List<ZipEntry> zipEntries = new ArrayList<>();
@@ -68,6 +68,7 @@ public class UploadServiceImpl implements UploadService {
             }
             fileInfo.setPkgName(packageName);
             fileInfo.setDescription(description);
+            fileInfo.setCategory(categoryName);
             LOGGER.info("'{}' successfully parsed", multipartFile.getOriginalFilename());
         } catch (IOException e) {
             LOGGER.error("Unable to read ZIP-file '{}'", multipartFile.getOriginalFilename());

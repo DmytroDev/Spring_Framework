@@ -35,6 +35,7 @@ public class UploadController {
     public ModelAndView doUpload(@RequestParam(value = "name") String name,
                                  @RequestParam(value = "description", required = false) String description,
                                  @RequestParam(value = "packageName", required = false) String packageName,
+                                 @RequestParam(value = "categoryName", required = false) String categoryName,
                                  @RequestParam(value = "file") MultipartFile file) {
 
         LOGGER.info("Running download file '{}'", file.getName());
@@ -44,7 +45,7 @@ public class UploadController {
         if (file == null || file.isEmpty()) {
             msg = "Please select a file to upload";
         } else {
-            FileInfo fileInfo = uploadService.parseZipFile(packageName, description, file);
+            FileInfo fileInfo = uploadService.parseZipFile(packageName, description, file, categoryName);
             uploadService.saveSoftware(fileInfo, startTime);
             msg = "You successfully uploaded file: " + file.getOriginalFilename();
         }

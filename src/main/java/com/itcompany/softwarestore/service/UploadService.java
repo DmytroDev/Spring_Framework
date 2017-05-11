@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public interface UploadService {
 
-    FileInfo parseZipFile(String packageName, String description, MultipartFile multipartFile);
+    FileInfo parseZipFile(String packageName, String description, MultipartFile multipartFile, String categoryName);
 
     void saveSoftware(FileInfo fileInfo, long startTime);
 }

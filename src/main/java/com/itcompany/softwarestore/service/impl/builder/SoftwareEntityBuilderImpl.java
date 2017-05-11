@@ -2,7 +2,6 @@ package com.itcompany.softwarestore.service.impl.builder;
 
 import com.itcompany.softwarestore.dao.entity.CategoryEntity;
 import com.itcompany.softwarestore.dao.entity.SoftwareEntity;
-import com.itcompany.softwarestore.model.dto.Category;
 import com.itcompany.softwarestore.model.dto.FileInfo;
 import com.itcompany.softwarestore.service.SoftwareEntityBuilder;
 import org.springframework.stereotype.Service;
@@ -20,8 +19,7 @@ public class SoftwareEntityBuilderImpl implements SoftwareEntityBuilder {
         softwareEntity.setDescription(fileInfo.getDescription());
 
         CategoryEntity categoryEntity = new CategoryEntity();
-        // temporary stub TODO: need modify later
-        categoryEntity.setName(Category.GAMES);
+        categoryEntity.setName(fileInfo.getCategory());
         softwareEntity.setCategory(categoryEntity);
         softwareEntity.setDownloadsNumber(0);
         softwareEntity.setTimeUploaded(System.currentTimeMillis() - startTime);
