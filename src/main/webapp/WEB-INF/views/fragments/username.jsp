@@ -1,0 +1,1 @@
+Welcome, <span>${sessionScope.username}</span>

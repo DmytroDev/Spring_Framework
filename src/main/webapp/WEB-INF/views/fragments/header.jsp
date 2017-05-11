@@ -5,7 +5,7 @@
     <div class="header-top">
         <div class="header-msg">SoftwareStore
         </div>
-        <div class="header-right-part">
+        <div id="username-div" class="header-right-part">
             Welcome, <span>${sessionScope.username}</span>
         </div>
         <div class="navigation-div">

@@ -47,6 +47,11 @@ $(function () {
             console.log(this);
             $("#content").html(data);
         });
+
+        $.get("/view/updateUser", function (data) {
+            console.log(this);
+            $("#username-div").html(data);
+        });
     });
 
     /* upload form with Zip-archive */
