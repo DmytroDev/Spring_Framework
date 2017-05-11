@@ -34,6 +34,13 @@ public interface SoftwareEntityRepository extends JpaRepository<SoftwareEntity, 
     void updatePictureContent512(@Param("content") byte[] content,
                                  @Param("applicationId") Long applicationId);
 
+    @Modifying
+    @Transactional
+    @Query("update SoftwareEntity s "
+            + "set s.downloadsNumber = s.downloadsNumber + 1 "
+            + "where s.id =:applicationId")
+    void increaseDownloadNum(@Param("applicationId") Long applicationId);
+
     @Transactional
     List<SoftwareEntity> findTop5ByOrderByDownloadsNumberDesc();
 

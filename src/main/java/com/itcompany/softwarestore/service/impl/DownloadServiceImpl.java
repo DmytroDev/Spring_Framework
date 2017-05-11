@@ -53,12 +53,17 @@ public class DownloadServiceImpl implements DownloadService {
             String txtFileContent = writeContentToTxtFile(softwareEntity);
             out.write(txtFileContent.getBytes());
             out.closeEntry();
-
+            LOGGER.info("ZIP archive was successfully created for software with id '{}'", softwareId);
             return zipfile;
         } catch (IOException ex) {
-            LOGGER.error("Unable upload software '{}'", softwareEntity.getName());
+            LOGGER.error("Unable create ZIP archive for software with id '{}'", softwareId);
         }
         return null;
+    }
+
+    public void increaseDownloadNum(Long id) {
+        repository.increaseDownloadNum(id);
+        LOGGER.info("Download number was successfully increased for Software with id  '{}' ", id);
     }
 
     private String writeContentToTxtFile(SoftwareEntity softwareEntity) throws IOException {

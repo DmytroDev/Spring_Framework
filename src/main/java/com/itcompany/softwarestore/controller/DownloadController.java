@@ -31,15 +31,16 @@ public class DownloadController {
     private DownloadService downloadService;
 
     @GetMapping(value= "/download/archive/{softwareId}")
-    public ResponseEntity<InputStreamResource> doUpload(@PathVariable long softwareId) throws FileNotFoundException {
-        LOGGER.info("Start upload software. Id = '{}'", softwareId);
+    public ResponseEntity<InputStreamResource> doDownload(@PathVariable long softwareId) throws FileNotFoundException {
+        LOGGER.info("Start download software. Id = '{}'", softwareId);
         File file = downloadService.createZipArchive(softwareId);
         final HttpHeaders header = new HttpHeaders();
         header.setContentType(MediaType.APPLICATION_OCTET_STREAM);
         header.setContentDispositionFormData("attachment", file.getName());
         header.setContentLength(file.length());
         InputStreamResource body = new InputStreamResource(new FileInputStream(file));
-        LOGGER.info("Archive with '{}' successfully uploaded", file.getName());
+        downloadService.increaseDownloadNum(softwareId);
+        LOGGER.info("Archive with '{}' successfully downloaded", file.getName());
 
         return new ResponseEntity<>(body, header, HttpStatus.OK);
     }
