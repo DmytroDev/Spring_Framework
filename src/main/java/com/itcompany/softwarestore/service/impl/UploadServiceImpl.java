@@ -75,8 +75,8 @@ public class UploadServiceImpl implements UploadService {
         return fileInfo;
     }
 
-    public void saveSoftware(FileInfo fileInfo) {
-        SoftwareEntity softwareEntity = softwareEntityBuilder.build(fileInfo);
+    public void saveSoftware(FileInfo fileInfo, long startTime) {
+        SoftwareEntity softwareEntity = softwareEntityBuilder.build(fileInfo, startTime);
         softwareRepository.saveAndFlush(softwareEntity);
         LOGGER.info("Software '{}' successfully saved into database", fileInfo.getFileName());
     }

@@ -5,5 +5,5 @@ import com.itcompany.softwarestore.model.dto.FileInfo;
 
 public interface SoftwareEntityBuilder {
 
-    SoftwareEntity build(FileInfo fileInfo);
+    SoftwareEntity build(FileInfo fileInfo, long startTime);
 }

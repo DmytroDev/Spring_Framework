@@ -12,5 +12,5 @@ public interface UploadService {
 
     FileInfo parseZipFile(String packageName, String description, MultipartFile multipartFile);
 
-    void saveSoftware(FileInfo fileInfo);
+    void saveSoftware(FileInfo fileInfo, long startTime);
 }

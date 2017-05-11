@@ -38,13 +38,14 @@ public class UploadController {
                                  @RequestParam(value = "file") MultipartFile file) {
 
         LOGGER.info("Running download file '{}'", file.getName());
+        long startTime = System.currentTimeMillis();
         ModelAndView mav = new ModelAndView("pages/uploadStatus");
         String msg = null;
         if (file == null || file.isEmpty()) {
             msg = "Please select a file to upload";
         } else {
             FileInfo fileInfo = uploadService.parseZipFile(packageName, description, file);
-            uploadService.saveSoftware(fileInfo);
+            uploadService.saveSoftware(fileInfo, startTime);
             msg = "You successfully uploaded file: " + file.getOriginalFilename();
         }
         LOGGER.info("File '{}' successfully uploaded", name);

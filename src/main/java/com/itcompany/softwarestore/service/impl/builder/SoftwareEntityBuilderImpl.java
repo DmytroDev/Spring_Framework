@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class SoftwareEntityBuilderImpl implements SoftwareEntityBuilder {
 
     @Override
-    public SoftwareEntity build(FileInfo fileInfo) {
+    public SoftwareEntity build(FileInfo fileInfo, long startTime) {
         SoftwareEntity softwareEntity = new SoftwareEntity();
         softwareEntity.setName(fileInfo.getFileName());
         softwareEntity.setAppPackage(fileInfo.getPkgName());
@@ -24,6 +24,7 @@ public class SoftwareEntityBuilderImpl implements SoftwareEntityBuilder {
         categoryEntity.setName(Category.GAMES);
         softwareEntity.setCategory(categoryEntity);
         softwareEntity.setDownloadsNumber(0);
+        softwareEntity.setTimeUploaded(System.currentTimeMillis() - startTime);
 
         return softwareEntity;
     }
