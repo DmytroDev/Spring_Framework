@@ -10,6 +10,20 @@ $(function () {
         });
     });
 
+    $('a#logout-link').click(function (event) {
+        event.preventDefault();
+        $.ajax({
+            url: $(this).attr('href'), success: function (result) {
+                console.log(this);
+                $("#content").html(result);
+            }
+        });
+        $.get("/view/updateUser/guest", function (data) {
+            console.log(this);
+            $("#username-div").html(data);
+        });
+    });
+
     $(document).on("click", "a#category-active-link, a#category-link", function () {
         event.preventDefault();
         $.ajax({

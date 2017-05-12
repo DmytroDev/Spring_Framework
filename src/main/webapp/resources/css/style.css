@@ -280,7 +280,7 @@ hr {
 /* css for login form */
 .login-form {
     border: 3px solid #f1f1f1;
-    margin: 0 35% 1% 35%;
+    margin: 1% 35% 1% 35%;
 }
 
 /* Center the avatar image inside this container */
@@ -355,4 +355,12 @@ img.avatar {
     margin: auto;
     display: block;
     padding-top: 30px;
+}
+
+.error-div {
+    color: #f44336;
+    text-align: center;
+    font-weight: 700;
+    font-size: 28px;
+    margin: 20px;
 }

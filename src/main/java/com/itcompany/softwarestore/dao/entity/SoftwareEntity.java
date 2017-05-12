@@ -127,7 +127,6 @@ public class SoftwareEntity {
         return "SoftwareEntity{" +
                 " name='" + name + '\'' +
                 ", appPackage='" + appPackage + '\'' +
-                ", description='" + description + '\'' +
                 ", category=" + category.getName() +
                 ", downloadsNumber=" + downloadsNumber +
                 ", timeUploaded=" + timeUploaded +

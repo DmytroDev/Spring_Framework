@@ -1,17 +1,22 @@
 package com.itcompany.softwarestore.controller;
 
+import com.itcompany.softwarestore.dao.entity.SoftwareEntity;
 import com.itcompany.softwarestore.service.HomeService;
 import com.itcompany.softwarestore.service.LoginService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -23,6 +28,7 @@ import java.util.List;
 public class LoginController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
+    private final String defaultName = "guest";
 
     @Autowired
     private HomeService homeService;
@@ -32,23 +38,52 @@ public class LoginController {
 
     @PostMapping(value= "/view/login")
     public ModelAndView doLogin(@RequestParam(value = "username") String username,
-                                @RequestParam(value = "password") String password,
-                                HttpSession session) {
-        ModelAndView view = new ModelAndView("pages/all-software");
-        List<String> categories = homeService.getAllCategoryNames();
-        view.addObject("categories", categories);
+                                @RequestParam(value = "password") String password) {
+        ModelAndView view;
         if (loginService.isCredentialsValid(username, password)) {
+            view = new ModelAndView("pages/all-software");
+            List<String> categories = homeService.getAllCategoryNames();
+            view.addObject("categories", categories);
             LOGGER.info("User '{}' successfully logged in", username);
-            session.setAttribute("username", username);
+            view.addObject("username", username);
         } else {
             LOGGER.warn("User '{}' unsuccessfully try logged in", username);
+            view = new ModelAndView("pages/login");
+            view.addObject("error", "Invalid username and password!");
         }
         return view;
     }
 
-    @GetMapping(value = "/view/updateUser")
-    public ModelAndView updateUser() {
+    @GetMapping(value = "/view/updateUser/{username}")
+    public ModelAndView updateUser(@PathVariable(value = "username", required = false) String username) {
         ModelAndView view = new ModelAndView("fragments/username");
+
+        if (username == null || username.isEmpty()) {
+            view.addObject("username", defaultName);
+        } else {
+            view.addObject("username", username);
+        }
+        return view;
+    }
+
+    @GetMapping(value = "view/logout")
+    public ModelAndView doLogout() {
+        ModelAndView view = new ModelAndView("pages/login");
+        List<SoftwareEntity> softwaresTop10 = homeService.getTop10SoftwareByDesc();
+        view.addObject("softwareList", softwaresTop10);
+        view.addObject("username", "guest");
+        return view;
+    }
+
+    //for 403 access denied page
+    @GetMapping(value = "/view/403")
+    public ModelAndView accesssDenied() {
+        ModelAndView view = new ModelAndView("pages/403");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (!(auth instanceof AnonymousAuthenticationToken)) {
+            UserDetails userDetails = (UserDetails) auth.getPrincipal();
+            view.addObject("username", userDetails.getUsername());
+        }
         return view;
     }
 }

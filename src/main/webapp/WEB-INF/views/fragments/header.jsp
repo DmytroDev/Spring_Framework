@@ -6,12 +6,19 @@
         <div class="header-msg">SoftwareStore
         </div>
         <div id="username-div" class="header-right-part">
-            Welcome, <span>${sessionScope.username}</span>
+            Welcome,
+            <span>
+                <c:choose>
+                    <c:when test="${empty username}">guest!</c:when>
+                    <c:otherwise>${username}</c:otherwise>
+                </c:choose>
+            </span>
         </div>
         <div class="navigation-div">
             <ul class="main-menu">
                 <li><a id="upload-link" href="/view/upload">Upload</a></li>
                 <li><a id="all-software-link" href="/view/index">Home</a></li>
+                <li><a id="logout-link" href="/view/logout">Logout</a></li>
             </ul>
         </div>
     </div>
@@ -23,7 +30,8 @@
             <c:if test="${!empty softwareList}">
                 <c:forEach items="${softwareList}" var="software">
                     <a id="ribbon-img-link" href="/view/details/${software.id}">
-                        <img src="/imgController128/getImg${software.id}" onerror="this.src='../../../resources/images/no_image_available.png'"/>
+                        <img src="/imgController128/getImg${software.id}"
+                             onerror="this.src='../../../resources/images/no_image_available.png'"/>
                     </a>
                 </c:forEach>
             </c:if>

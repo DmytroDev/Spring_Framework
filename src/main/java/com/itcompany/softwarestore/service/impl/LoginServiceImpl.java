@@ -32,8 +32,9 @@ public class LoginServiceImpl implements LoginService {
         }
         List<UserEntity> userEntitiesAll = userEntityRepositiry.findAll();
         List<UserEntity> userEntities = userEntitiesAll.stream()
-                .filter(userEntity -> userEntity.getLogin().equalsIgnoreCase(login))
+                .filter(userEntity -> userEntity.getUsername().equalsIgnoreCase(login))
                 .collect(Collectors.toList());
+
         if (userEntities == null || userEntities.isEmpty()) {
             return false;
         } else {

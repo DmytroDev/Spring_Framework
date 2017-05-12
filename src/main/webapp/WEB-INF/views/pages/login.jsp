@@ -2,6 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div id="content">
+    <c:if test="${not empty error}">
+        <div class="error-div">${error}</div>
+    </c:if>
 
     <form method="post" class="login-form" action="/view/login">
         <div class="imgcontainer">

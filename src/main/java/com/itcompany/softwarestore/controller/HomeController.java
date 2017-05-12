@@ -38,7 +38,6 @@ public class HomeController {
         ModelAndView view = new ModelAndView("home/index");
         List<SoftwareEntity> softwaresTop10 = homeService.getTop10SoftwareByDesc();
         view.addObject("softwareList", softwaresTop10);
-        session.setAttribute("username", "guest");
         return view;
     }
 

@@ -1,4 +1,4 @@
-SET @SoftwareDesc='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+SET @SoftwareDesc = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 INSERT INTO CATEGORY (CATEGORY_NAME, DESCRIPTION)
 VALUES ('Games', 'Games description'),
   ('Multimedia', 'Multimedia  description'),
@@ -23,9 +23,15 @@ VALUES ('com', 'Games', @SoftwareDesc, 'Alladin', NULL, NULL, 1, 130),
   ('io', 'Lifestyle', @SoftwareDesc, '3D glasses', NULL, NULL, 10, 700),
   ('com', 'Tools', @SoftwareDesc, 'Twitter', NULL, NULL, 15, 400),
   ('net', 'Tools', @SoftwareDesc, 'WithoutImage', NULL, NULL, 1, 300);
-INSERT INTO USERS (LOGIN, PASSWORD, ROLE, DESCRIPTION)
-VALUES ('admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'ROLE_ADMIN', 'admin desc'),
- ('user', '04f8996da763b7a969b1028ee3007569eaf3a635486ddab211d512c85b9df8fb', 'ROLE_USER', 'user desc'),
- ('1', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'ROLE_ANONYMOUS', 'anonymous desc'),
- ('anonymous', '2f183a4e64493af3f377f745eda502363cd3e7ef6e4d266d444758de0a85fcc8', 'ROLE_ANONYMOUS', 'anonymous desc');
+INSERT INTO USERS (USERNAME, ENABLED, PASSWORD)
+VALUES ('admin', 'true', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'),
+  ('user', 'true', '04f8996da763b7a969b1028ee3007569eaf3a635486ddab211d512c85b9df8fb'),
+  ('1', 'true', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b'),
+  ('anonymous', 'true', '2f183a4e64493af3f377f745eda502363cd3e7ef6e4d266d444758de0a85fcc8');
+INSERT INTO USER_ROLES (ROLE, USERNAME)
+VALUES ('ROLE_ADMIN', 'admin'),
+  ('ROLE_USER', 'user'),
+  ('ROLE_ADMIN', '1'),
+  ('ROLE_USER', '1'),
+  ('ROLE_USER', 'anonymous');
 COMMIT;

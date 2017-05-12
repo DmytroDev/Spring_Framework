@@ -12,7 +12,7 @@
 </head>
 
 <body>
-<c:import url="../fragments/header.jsp"/>;
+<c:import url="../fragments/header.jsp"/>
 
 <div id="content">
     <c:import url="../pages/login.jsp"/>
