@@ -9,22 +9,7 @@ $(function () {
      }
      });
      });*/
-
-    // TODO: for check
-/*    $('a#logout-link').click(function (event) {
-        event.preventDefault();
-        $.ajax({
-            url: $(this).attr('href'), success: function (result) {
-                console.log(this);
-                $("#content").html(result);
-            }
-        });
-        $.get("/view/updateUser/guest", function (data) {
-            console.log(this);
-            $("#header-top").html(data);
-            /!*$("#username-div").html(data);*!/
-        });
-    });*/
+    
 
     $(document).on("click", "a#category-active-link, a#category-link", function () {
         event.preventDefault();
@@ -53,30 +38,16 @@ $(function () {
         });
     });
 
-/*    $(document).on("click", "#login-btn", function (event) {
-        event.preventDefault();
-        var formData = {
-            /!*'username': $('input[name=username]').val(),*!/
-            'j_username': $('input[name=j_username]').val(),
-            /!*'password': $('input[name=password]').val()*!/
-            'j_password': $('input[name=j_password]').val()
-        };
-        //$.post("/view/login", formData, function (data) {
-        //$.get("/view/login", formData, function (data) {
-        $.post("/j_spring_security_check", formData, function (data) {
-            console.log(this);
-            $("#content").html(data);
-
-            $.get("/view/updateUser/" + formData.j_username, function (data) {
-                console.log(this);
-                $("#header-top").html(data);
-                /!*$("#username-div").html(data);*!/
-            });
-        });
-    });*/
-
     /* upload form with Zip-archive */
     $(document).on("submit", "#upload-form", function (event) {
+
+        var csrfParameter = $("meta[name='_csrf_parameter']").attr("content");
+        var csrfHeader = $("meta[name='_csrf_header']").attr("content");
+        var csrfToken = $("meta[name='_csrf']").attr("content");
+        var headers = {};
+        headers[csrfHeader] = csrfToken;
+        console.log(csrfParameter, csrfHeader, csrfToken, headers[0]);
+
         var formData = new FormData($('form')[0]);
         event.preventDefault();
         $.ajax({
@@ -84,6 +55,7 @@ $(function () {
             processData: false,
             contentType: false,
             url: "/view/upload",
+            headers: headers,
             data: formData
         }).done(function (data) {
             console.log(this);

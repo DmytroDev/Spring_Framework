@@ -35,25 +35,6 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
-/*    @PostMapping(value= "/view/login")
-    public ModelAndView doLogin(@RequestParam(value = "j_username") String username,
-                                @RequestParam(value = "j_password") String password) {
-        ModelAndView view;
-        if (loginService.isCredentialsValid(username, password)) {
-            view = new ModelAndView("pages/all-software");
-            List<String> categories = homeService.getAllCategoryNames();
-            view.addObject("categories", categories);
-            LOGGER.info("User '{}' successfully logged in", username);
-            view.addObject("username", username);
-        } else {
-            LOGGER.warn("User '{}' unsuccessfully try logged in", username);
-            view = new ModelAndView("pages/login");
-            view.addObject("error", "Invalid username and password!");
-        }
-        return view;
-    }*/
-
-
     @GetMapping("/view/login")
     public ModelAndView login(@RequestParam(value = "error", required = false) String error,
                               @RequestParam(value = "logout", required = false) String logout) {

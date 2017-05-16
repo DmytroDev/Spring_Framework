@@ -1,10 +1,10 @@
 package com.itcompany.softwarestore.service;
 
-import java.io.File;
+import com.itcompany.softwarestore.model.dto.ZipArchiveInfo;
 
 public interface DownloadService {
 
-    File createZipArchive(Long softwareId);
+    ZipArchiveInfo createZipArchive(Long softwareId);
 
     void increaseDownloadNum(Long id);
 }

@@ -8,4 +8,10 @@ import org.springframework.security.web.context.AbstractSecurityWebApplicationIn
  * @since 1.0
  */
 public class SpringSecurityInitializer extends AbstractSecurityWebApplicationInitializer {
+
+    // Need for Multipart (file upload)
+/*    @Override
+    protected void beforeSpringSecurityFilterChain(ServletContext servletContext) {
+        insertFilters(servletContext, new MultipartFilter());
+    }*/
 }

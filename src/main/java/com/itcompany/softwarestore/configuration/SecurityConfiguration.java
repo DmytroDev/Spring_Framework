@@ -33,32 +33,42 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.csrf()
-                .disable()
+        http
                 .authorizeRequests()
                 //.antMatchers("/view/upload").access("hasRole('ROLE_DEVELOPER')")
-                .antMatchers("/resources/**", "/**").permitAll()
-                .anyRequest().permitAll()
-                .and();
 
-        http.formLogin()
+/*                .antMatchers("/resources*//**", "*//**").permitAll()
+                .antMatchers("/", "/index", "/view*//**").permitAll()
+                .antMatchers("/download*//**", "/download/archive*//**").permitAll()
+                .antMatchers("/imgController128*//**", "/imgController512").permitAll()
+                .antMatchers("/catController*//**", "/view/upload*//**").permitAll()
+                .antMatchers("/view/details*//**", "/view/category*//**").permitAll()*/
+
+                .anyRequest().permitAll()
+                .and()
+
+                .formLogin()
                 .loginPage("/index")
                 .loginProcessingUrl("/j_spring_security_check")
                 .failureUrl("/index?error")
                 .usernameParameter("j_username")
                 .passwordParameter("j_password")
-                .permitAll();
+                .permitAll()
+                .and()
 
-        http.logout()
+                .logout()
                 .logoutUrl("/view/logout")
                 .logoutSuccessUrl("/index")
                 .invalidateHttpSession(true)
                 .and()
-                .exceptionHandling().accessDeniedPage("/view/403");
+                .exceptionHandling().accessDeniedPage("/view/403")
+                .and()
+                .csrf()
+                .disable();
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         PasswordEncoder encoder = new BCryptPasswordEncoder();
         return encoder;
     }

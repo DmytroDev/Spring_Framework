@@ -2,14 +2,14 @@ package com.itcompany.softwarestore.service.impl;
 
 import com.itcompany.softwarestore.dao.entity.Software;
 import com.itcompany.softwarestore.dao.repository.SoftwareRepository;
+import com.itcompany.softwarestore.model.dto.ZipArchiveInfo;
 import com.itcompany.softwarestore.service.DownloadService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.StringJoiner;
 import java.util.zip.ZipEntry;
@@ -35,11 +35,11 @@ public class DownloadServiceImpl implements DownloadService {
     private final String IMG_512_NAME = "512.png";
 
     @Override
-    public File createZipArchive(Long softwareId) {
+    public ZipArchiveInfo createZipArchive(Long softwareId) {
         Software software = repository.findOne(softwareId);
-        File zipfile = new File(software.getName() + SUFFIX);
 
-        try(ZipOutputStream out = new ZipOutputStream(new FileOutputStream(zipfile))) {
+        try(ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                ZipOutputStream out = new ZipOutputStream(byteArrayOutputStream)) {
 
             out.putNextEntry(new ZipEntry(IMG_128_NAME));
             out.write(software.getPictureContent128());
@@ -54,7 +54,8 @@ public class DownloadServiceImpl implements DownloadService {
             out.write(txtFileContent.getBytes());
             out.closeEntry();
             LOGGER.info("ZIP archive was successfully created for software with id '{}'", softwareId);
-            return zipfile;
+
+            return new ZipArchiveInfo(software.getName() + SUFFIX, byteArrayOutputStream);
         } catch (IOException ex) {
             LOGGER.error("Unable create ZIP archive for software with id '{}'", softwareId);
         }

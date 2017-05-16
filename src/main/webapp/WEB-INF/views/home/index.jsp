@@ -11,6 +11,11 @@
     <title>SoftwareStore</title>
     <link href="../../../resources/vendor/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../../../resources/css/style.css">
+
+    <%--  TODO: investigate it later --%>
+    <%-- tags for Spring Security--%>
+    <meta name="_csrf" content="${_csrf.token}"/>
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
 </head>
 
 <body>

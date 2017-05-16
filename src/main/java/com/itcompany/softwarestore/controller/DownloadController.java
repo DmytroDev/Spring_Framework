@@ -1,5 +1,6 @@
 package com.itcompany.softwarestore.controller;
 
+import com.itcompany.softwarestore.model.dto.ZipArchiveInfo;
 import com.itcompany.softwarestore.service.DownloadService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,8 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.io.File;
-import java.io.FileInputStream;
+import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
 
 /**
@@ -33,14 +33,16 @@ public class DownloadController {
     @GetMapping(value= "/download/archive/{softwareId}")
     public ResponseEntity<InputStreamResource> doDownload(@PathVariable long softwareId) throws FileNotFoundException {
         LOGGER.info("Start download software. Id = '{}'", softwareId);
-        File file = downloadService.createZipArchive(softwareId);
+        ZipArchiveInfo zipArchiveInfo = downloadService.createZipArchive(softwareId);
+        byte[] file = zipArchiveInfo.getOutputStream().toByteArray();
+
         final HttpHeaders header = new HttpHeaders();
         header.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-        header.setContentDispositionFormData("attachment", file.getName());
-        header.setContentLength(file.length());
-        InputStreamResource body = new InputStreamResource(new FileInputStream(file));
+        header.setContentDispositionFormData("attachment", zipArchiveInfo.getFileName());
+        header.setContentLength(file.length);
+        InputStreamResource body = new InputStreamResource(new ByteArrayInputStream(file));
         downloadService.increaseDownloadNum(softwareId);
-        LOGGER.info("Archive with '{}' successfully downloaded", file.getName());
+        LOGGER.info("Archive with '{}' successfully downloaded", zipArchiveInfo.getFileName());
 
         return new ResponseEntity<>(body, header, HttpStatus.OK);
     }
