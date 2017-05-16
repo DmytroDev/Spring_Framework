@@ -1,6 +1,6 @@
 package com.itcompany.softwarestore.controller;
 
-import com.itcompany.softwarestore.dao.entity.SoftwareEntity;
+import com.itcompany.softwarestore.dao.entity.Software;
 import com.itcompany.softwarestore.service.HomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +24,7 @@ public class DetailsController {
     @GetMapping("/view/details/{id}")
     public ModelAndView getDetails(@PathVariable long id) {
         ModelAndView mav = new ModelAndView("pages/details-page");
-        SoftwareEntity software = homeService.getSoftwareById(id);
+        Software software = homeService.getSoftwareById(id);
         mav.addObject("software", software);
         return mav;
     }
@@ -32,7 +32,7 @@ public class DetailsController {
     @GetMapping(value = "/view/category/{categoryName}")
     public ModelAndView getSoftwareByCategory(@PathVariable String categoryName) {
         ModelAndView mav = new ModelAndView("fragments/software-by-category");
-        List<SoftwareEntity> softwareList = homeService.getSoftwareByCategory(categoryName);
+        List<Software> softwareList = homeService.getSoftwareByCategory(categoryName);
         mav.addObject("softwareList", softwareList);
         return mav;
     }

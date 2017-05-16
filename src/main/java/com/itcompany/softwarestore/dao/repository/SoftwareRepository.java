@@ -1,7 +1,7 @@
 package com.itcompany.softwarestore.dao.repository;
 
-import com.itcompany.softwarestore.dao.entity.CategoryEntity;
-import com.itcompany.softwarestore.dao.entity.SoftwareEntity;
+import com.itcompany.softwarestore.dao.entity.Category;
+import com.itcompany.softwarestore.dao.entity.Software;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -15,11 +15,11 @@ import java.util.List;
  * @version 1.0
  * @since 1.0
  */
-public interface SoftwareEntityRepository extends JpaRepository<SoftwareEntity, Long> {
+public interface SoftwareRepository extends JpaRepository<Software, Long> {
 
     @Modifying
     @Transactional
-    @Query("update SoftwareEntity s "
+    @Query("update Software s "
             + "set s.pictureContent128 =:content "
             + "where s.id =:applicationId")
     void updatePictureContent128(@Param("content") byte[] content,
@@ -27,7 +27,7 @@ public interface SoftwareEntityRepository extends JpaRepository<SoftwareEntity, 
 
     @Modifying
     @Transactional
-    @Query("update SoftwareEntity s "
+    @Query("update Software s "
             + "set s.pictureContent512 =:content "
             + "where s.id =:applicationId")
     void updatePictureContent512(@Param("content") byte[] content,
@@ -35,17 +35,17 @@ public interface SoftwareEntityRepository extends JpaRepository<SoftwareEntity, 
 
     @Modifying
     @Transactional
-    @Query("update SoftwareEntity s "
+    @Query("update Software s "
             + "set s.downloadsNumber = s.downloadsNumber + 1 "
             + "where s.id =:applicationId")
     void increaseDownloadNum(@Param("applicationId") Long applicationId);
 
     @Transactional
-    List<SoftwareEntity> findTop5ByOrderByDownloadsNumberDesc();
+    List<Software> findTop5ByOrderByDownloadsNumberDesc();
 
     @Transactional
-    List<SoftwareEntity> findTop5ByOrderByTimeUploadedDesc();
+    List<Software> findTop5ByOrderByTimeUploadedDesc();
 
     @Transactional
-    List<SoftwareEntity> findByCategory(CategoryEntity category);
+    List<Software> findByCategory(Category category);
 }

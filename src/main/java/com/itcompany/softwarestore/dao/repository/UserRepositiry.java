@@ -1,6 +1,6 @@
 package com.itcompany.softwarestore.dao.repository;
 
-import com.itcompany.softwarestore.dao.entity.UserEntity;
+import com.itcompany.softwarestore.dao.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 1.0
  * @since 1.0
  */
-public interface UserEntityRepositiry extends JpaRepository<UserEntity, Long> {
+public interface UserRepositiry extends JpaRepository<User, String> {
 }

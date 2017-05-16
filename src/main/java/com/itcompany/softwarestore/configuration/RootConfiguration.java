@@ -4,8 +4,8 @@ import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ClassPathResource;
-
 
 /**
  * @author Dmitriy Nadolenko
@@ -13,14 +13,15 @@ import org.springframework.core.io.ClassPathResource;
  * @since 1.0
  */
 @Configuration
-@ComponentScan({"com.itcompany.softwarestore" })
+@ComponentScan({"com.itcompany.softwarestore"})
+@Import({SecurityConfiguration.class})
 public class RootConfiguration {
 
     @Bean
-	public static PropertyPlaceholderConfigurer propertyPlaceholderConfigurer() {
-		PropertyPlaceholderConfigurer ppc = new PropertyPlaceholderConfigurer();
-		ppc.setLocation(new ClassPathResource("/application.properties"));
-		return ppc;
-	}
+    public static PropertyPlaceholderConfigurer propertyPlaceholderConfigurer() {
+        PropertyPlaceholderConfigurer ppc = new PropertyPlaceholderConfigurer();
+        ppc.setLocation(new ClassPathResource("/application.properties"));
+        return ppc;
+    }
 
 }

@@ -17,7 +17,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "SOFTWARE")
-public class SoftwareEntity {
+public class Software {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -42,7 +42,7 @@ public class SoftwareEntity {
 
     @ManyToOne
     @JoinColumn(name = "CATEGORY_NAME")
-    private CategoryEntity category;
+    private Category category;
 
     @Column(name = "DOWNLOADS_NUM")
     private Integer downloadsNumber;
@@ -98,11 +98,11 @@ public class SoftwareEntity {
         this.description = description;
     }
 
-    public CategoryEntity getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(CategoryEntity category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
@@ -124,7 +124,7 @@ public class SoftwareEntity {
 
     @Override
     public String toString() {
-        return "SoftwareEntity{" +
+        return "Software{" +
                 " name='" + name + '\'' +
                 ", appPackage='" + appPackage + '\'' +
                 ", category=" + category.getName() +

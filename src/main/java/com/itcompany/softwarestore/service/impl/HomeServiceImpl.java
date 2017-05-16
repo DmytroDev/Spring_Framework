@@ -1,9 +1,9 @@
 package com.itcompany.softwarestore.service.impl;
 
-import com.itcompany.softwarestore.dao.entity.CategoryEntity;
-import com.itcompany.softwarestore.dao.entity.SoftwareEntity;
-import com.itcompany.softwarestore.dao.repository.CategoryEntityRepository;
-import com.itcompany.softwarestore.dao.repository.SoftwareEntityRepository;
+import com.itcompany.softwarestore.dao.entity.Category;
+import com.itcompany.softwarestore.dao.entity.Software;
+import com.itcompany.softwarestore.dao.repository.CategoryRepository;
+import com.itcompany.softwarestore.dao.repository.SoftwareRepository;
 import com.itcompany.softwarestore.service.HomeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,47 +23,47 @@ public class HomeServiceImpl implements HomeService {
     private final static Logger LOGGER = LoggerFactory.getLogger(HomeServiceImpl.class);
 
     @Autowired
-    private SoftwareEntityRepository softwareEntityRepository;
+    private SoftwareRepository softwareRepository;
 
     @Autowired
-    private CategoryEntityRepository categoryEntityRepository;
+    private CategoryRepository categoryRepository;
 
 
     @Override
-    public List<SoftwareEntity> getAllSoftware() {
-        List<SoftwareEntity> softwareEntities = softwareEntityRepository.findAll();
+    public List<Software> getAllSoftware() {
+        List<Software> softwareEntities = softwareRepository.findAll();
         LOGGER.info("Information about the Software has been successfully extracted from the database. List size '{}'", softwareEntities.size());
         return softwareEntities;
     }
 
     @Override
-    public SoftwareEntity getSoftwareById(long id) {
-        SoftwareEntity softwareEntity = softwareEntityRepository.findOne(id);
-        LOGGER.info("Successfully got Software '{}'", softwareEntity);
-        return softwareEntity;
+    public Software getSoftwareById(long id) {
+        Software software = softwareRepository.findOne(id);
+        LOGGER.info("Successfully got Software '{}'", software);
+        return software;
     }
 
     @Override
     public List<String> getAllCategoryNames() {
-        List<String> categoryNames = categoryEntityRepository.getAllCategories();
+        List<String> categoryNames = categoryRepository.getAllCategories();
         LOGGER.info("All Category names has been successfully extracted from the database. List size '{}'", categoryNames.size());
         return categoryNames;
     }
 
     @Override
-    public List<SoftwareEntity> getTop10SoftwareByDesc() {
-        List<SoftwareEntity> softwareEntities = softwareEntityRepository.findTop5ByOrderByDownloadsNumberDesc();
-        softwareEntities.addAll(softwareEntityRepository.findTop5ByOrderByTimeUploadedDesc());
+    public List<Software> getTop10SoftwareByDesc() {
+        List<Software> softwareEntities = softwareRepository.findTop5ByOrderByDownloadsNumberDesc();
+        softwareEntities.addAll(softwareRepository.findTop5ByOrderByTimeUploadedDesc());
         LOGGER.info("Successfully got Top 10 Software '{}'", softwareEntities);
         return softwareEntities;
     }
 
     @Override
-    public List<SoftwareEntity> getSoftwareByCategory(String categoryName) {
-        CategoryEntity categoryEntity = new CategoryEntity();
-        categoryEntity.setName(categoryName);
+    public List<Software> getSoftwareByCategory(String categoryName) {
+        Category category = new Category();
+        category.setName(categoryName);
 
-        List<SoftwareEntity> softwareEntities = softwareEntityRepository.findByCategory(categoryEntity);
+        List<Software> softwareEntities = softwareRepository.findByCategory(category);
         LOGGER.info("Successfully got Software's by name '{}'", softwareEntities);
         return softwareEntities;
     }

@@ -1,8 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <div id="site-header" class="site-header">
-    <div class="header-top">
+    <div id="header-top" class="header-top">
         <div class="header-msg">SoftwareStore
         </div>
         <div id="username-div" class="header-right-part">
@@ -11,6 +12,8 @@
                 <c:choose>
                     <c:when test="${empty username}">guest!</c:when>
                     <c:otherwise>${username}</c:otherwise>
+                    <%-- Try use constuction bellow bit later --%>
+                    <%--<sec:authentication property="principal.username"/>--%>
                 </c:choose>
             </span>
         </div>
@@ -18,7 +21,11 @@
             <ul class="main-menu">
                 <li><a id="upload-link" href="/view/upload">Upload</a></li>
                 <li><a id="all-software-link" href="/view/index">Home</a></li>
-                <li><a id="logout-link" href="/view/logout">Logout</a></li>
+
+                <sec:authorize access="isAuthenticated()">
+                    <li><a id="logout-link" href="/view/logout">Logout</a></li>
+                </sec:authorize>
+
             </ul>
         </div>
     </div>

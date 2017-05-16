@@ -1,89 +1,62 @@
 package com.itcompany.softwarestore.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.stereotype.Controller;
-
-import javax.sql.DataSource;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * @author Dmitriy Nadolenko
  * @version 1.0
  * @since 1.0
  */
-@Controller
+@Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private DataSource dataSource;
+    @Qualifier("userDetailsService")
+    private UserDetailsService userDetailsService;
 
     @Autowired
-    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-
-        auth.jdbcAuthentication().dataSource(dataSource)
-                .usersByUsernameQuery(
-                        "select username, password, enabled from users where username=?")
-                .authoritiesByUsernameQuery(
-                        "select username, role from user_roles where username=?");
-        System.out.println("for check");
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf()
-                .disable()
-                .authorizeRequests()
-                .antMatchers("/resources/**", "/**").permitAll()
-                .anyRequest().permitAll()
-                .and();
 
         http.authorizeRequests()
-                //.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
-                .antMatchers("/view/upload").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/view/upload").access("hasRole('ROLE_DEVELOPER')")
+                .antMatchers("/j_spring_security_check/**").permitAll()
                 .and()
-                .formLogin().loginPage("/view/login").failureUrl("/index")
-                .usernameParameter("username").passwordParameter("password")
-                //.usernameParameter("j_username").passwordParameter("j_password") // Указываем параметры логина и пароля с формы логина
+                .formLogin()
+                .loginPage("/view/login")
+                .loginProcessingUrl("/j_spring_security_check").permitAll()
+                .successForwardUrl("/view/index")
+                .failureUrl("/view/login?error")
+                .usernameParameter("j_username")
+                .passwordParameter("j_password")
                 .and()
-                .logout().logoutSuccessUrl("/index")
+                //.logout().logoutUrl("/j_spring_security_logout").logoutSuccessUrl("/view/logout").invalidateHttpSession(true)
+                .logout().logoutUrl("/view/logout").logoutSuccessUrl("/index").invalidateHttpSession(true)
                 .and()
                 .exceptionHandling().accessDeniedPage("/view/403")
                 .and()
-                .csrf();
+                .csrf().disable();
     }
 
-/*        http.formLogin()
-                // указываем страницу с формой логина
-                .loginPage("/login")
-                // указываем action с формы логина
-                .loginProcessingUrl("/j_spring_security_check")
-                // указываем URL при неудачном логине
-                .failureUrl("/login?error")
-                // Указываем параметры логина и пароля с формы логина
-                .usernameParameter("j_username")
-                .passwordParameter("j_password")
-                // даем доступ к форме логина всем
-                .permitAll();*/
-
-/*    The most basic example is to configure all URLs to require the role "ROLE_USER". The configuration below requires authentication to every URL and will grant access to both the user "admin" and "user".
-    @Configuration
-    @EnableWebSecurity
-    public class AuthorizeUrlsSecurityConfig extends WebSecurityConfigurerAdapter {
-
-        @Override
-        protected void configure(HttpSecurity http) throws Exception {
-            http.authorizeRequests().antMatchers("*//**").hasRole("USER").and().formLogin();
-        }
-
-        @Override
-        protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-            auth.inMemoryAuthentication().withUser("user").password("password").roles("USER")
-                    .and().withUser("adminr").password("password").roles("ADMIN", "USER");
-        }
-    }*/
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        PasswordEncoder encoder = new BCryptPasswordEncoder();
+        return encoder;
+    }
 
 }

@@ -1,7 +1,7 @@
 package com.itcompany.softwarestore.service.impl;
 
-import com.itcompany.softwarestore.dao.entity.SoftwareEntity;
-import com.itcompany.softwarestore.dao.repository.SoftwareEntityRepository;
+import com.itcompany.softwarestore.dao.entity.Software;
+import com.itcompany.softwarestore.dao.repository.SoftwareRepository;
 import com.itcompany.softwarestore.service.DownloadService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +28,7 @@ public class DownloadServiceImpl implements DownloadService {
     private final static Logger LOGGER = LoggerFactory.getLogger(DownloadServiceImpl.class);
 
     @Autowired
-    private SoftwareEntityRepository repository;
+    private SoftwareRepository repository;
 
     private final String SUFFIX = ".zip";
     private final String IMG_128_NAME = "128.png";
@@ -36,21 +36,21 @@ public class DownloadServiceImpl implements DownloadService {
 
     @Override
     public File createZipArchive(Long softwareId) {
-        SoftwareEntity softwareEntity = repository.findOne(softwareId);
-        File zipfile = new File(softwareEntity.getName() + SUFFIX);
+        Software software = repository.findOne(softwareId);
+        File zipfile = new File(software.getName() + SUFFIX);
 
         try(ZipOutputStream out = new ZipOutputStream(new FileOutputStream(zipfile))) {
 
             out.putNextEntry(new ZipEntry(IMG_128_NAME));
-            out.write(softwareEntity.getPictureContent128());
+            out.write(software.getPictureContent128());
             out.closeEntry();
 
             out.putNextEntry(new ZipEntry(IMG_512_NAME));
-            out.write(softwareEntity.getPictureContent128());
+            out.write(software.getPictureContent128());
             out.closeEntry();
 
-            out.putNextEntry(new ZipEntry(softwareEntity.getName() + ".txt"));
-            String txtFileContent = writeContentToTxtFile(softwareEntity);
+            out.putNextEntry(new ZipEntry(software.getName() + ".txt"));
+            String txtFileContent = writeContentToTxtFile(software);
             out.write(txtFileContent.getBytes());
             out.closeEntry();
             LOGGER.info("ZIP archive was successfully created for software with id '{}'", softwareId);
@@ -66,10 +66,10 @@ public class DownloadServiceImpl implements DownloadService {
         LOGGER.info("Download number was successfully increased for Software with id  '{}' ", id);
     }
 
-    private String writeContentToTxtFile(SoftwareEntity softwareEntity) throws IOException {
+    private String writeContentToTxtFile(Software software) throws IOException {
         StringJoiner stringJoiner = new StringJoiner(LINE_SEPARATOR);
-        stringJoiner.add(NAME_FIELD + DELIMITER + softwareEntity.getName());
-        stringJoiner.add(PACKAGE_FIELD + DELIMITER + softwareEntity.getAppPackage());
+        stringJoiner.add(NAME_FIELD + DELIMITER + software.getName());
+        stringJoiner.add(PACKAGE_FIELD + DELIMITER + software.getAppPackage());
         stringJoiner.add(PICTURE_128_FIELD + DELIMITER + IMG_128_NAME);
         stringJoiner.add(PICTURE_512_FIELD + DELIMITER + IMG_512_NAME);
         return stringJoiner.toString();

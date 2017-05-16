@@ -1,6 +1,6 @@
 package com.itcompany.softwarestore.service;
 
-import com.itcompany.softwarestore.dao.entity.SoftwareEntity;
+import com.itcompany.softwarestore.dao.entity.Software;
 
 import java.util.List;
 
@@ -11,13 +11,13 @@ import java.util.List;
  */
 public interface HomeService {
 
-    List<SoftwareEntity> getAllSoftware();
+    List<Software> getAllSoftware();
 
-    SoftwareEntity getSoftwareById(long id);
+    Software getSoftwareById(long id);
 
     List<String> getAllCategoryNames();
 
-    List<SoftwareEntity> getTop10SoftwareByDesc();
+    List<Software> getTop10SoftwareByDesc();
 
-    List<SoftwareEntity> getSoftwareByCategory(String categoryName);
+    List<Software> getSoftwareByCategory(String categoryName);
 }

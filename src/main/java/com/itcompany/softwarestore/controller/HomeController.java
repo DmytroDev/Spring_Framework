@@ -1,6 +1,6 @@
 package com.itcompany.softwarestore.controller;
 
-import com.itcompany.softwarestore.dao.entity.SoftwareEntity;
+import com.itcompany.softwarestore.dao.entity.Software;
 import com.itcompany.softwarestore.service.HomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -36,15 +36,15 @@ public class HomeController {
     @GetMapping(value = {"/", "/index"})
     public ModelAndView home(HttpSession session) {
         ModelAndView view = new ModelAndView("home/index");
-        List<SoftwareEntity> softwaresTop10 = homeService.getTop10SoftwareByDesc();
+        List<Software> softwaresTop10 = homeService.getTop10SoftwareByDesc();
         view.addObject("softwareList", softwaresTop10);
         return view;
     }
 
     @GetMapping(value = "/imgController128/getImg{id}", produces = MediaType.IMAGE_PNG_VALUE)
     public ResponseEntity<byte[]> getImage128(@PathVariable long id) {
-        SoftwareEntity softwareEntity = homeService.getSoftwareById(id);
-        byte[] image128 = softwareEntity.getPictureContent128();
+        Software software = homeService.getSoftwareById(id);
+        byte[] image128 = software.getPictureContent128();
         final HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_PNG);
         return new ResponseEntity<>(image128, headers, HttpStatus.CREATED);
@@ -52,8 +52,8 @@ public class HomeController {
 
     @GetMapping(value = "/imgController512/getImg{id}", produces = MediaType.IMAGE_PNG_VALUE)
     public ResponseEntity<byte[]> getImage512(@PathVariable long id) {
-        SoftwareEntity softwareEntity = homeService.getSoftwareById(id);
-        byte[] image512 = softwareEntity.getPictureContent512();
+        Software software = homeService.getSoftwareById(id);
+        byte[] image512 = software.getPictureContent512();
         final HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_PNG);
         return new ResponseEntity<>(image512, headers, HttpStatus.CREATED);

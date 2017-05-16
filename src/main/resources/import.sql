@@ -24,14 +24,14 @@ VALUES ('com', 'Games', @SoftwareDesc, 'Alladin', NULL, NULL, 1, 130),
   ('com', 'Tools', @SoftwareDesc, 'Twitter', NULL, NULL, 15, 400),
   ('net', 'Tools', @SoftwareDesc, 'WithoutImage', NULL, NULL, 1, 300);
 INSERT INTO USERS (USERNAME, ENABLED, PASSWORD)
-VALUES ('admin', 'true', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'),
-  ('user', 'true', '04f8996da763b7a969b1028ee3007569eaf3a635486ddab211d512c85b9df8fb'),
-  ('1', 'true', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b'),
-  ('anonymous', 'true', '2f183a4e64493af3f377f745eda502363cd3e7ef6e4d266d444758de0a85fcc8');
+VALUES ('admin', 'true', '$2a$04$cXktm6Zp4TARn4W3RKOe4OxqK.JgL.XA0pMYhaOH95Kr3yq066xZi'),
+  ('user', 'true', '$2a$04$uUMAaPmzaSRhu2.QfXrFceEWWpjD06vyTVVZJv0FOJp0a4Ctjl1Eq'),
+  ('1', 'true', '$2a$04$/Z67djSA5Me14HJPyNosAOMRtEAChckSvj1RN5hI2iNuSwh7bC.fi'),
+  ('anonymous', 'true', '$2a$04$J0eVo4zAX1YvN0ab3FHPzerY0WmNyiq7HL8daT5m4/6EfpChfkUUC');
 INSERT INTO USER_ROLES (ROLE, USERNAME)
-VALUES ('ROLE_ADMIN', 'admin'),
+VALUES ('ROLE_DEVELOPER', 'admin'),
   ('ROLE_USER', 'user'),
-  ('ROLE_ADMIN', '1'),
+  ('ROLE_DEVELOPER', '1'),
   ('ROLE_USER', '1'),
   ('ROLE_USER', 'anonymous');
 COMMIT;

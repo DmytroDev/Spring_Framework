@@ -1,6 +1,6 @@
 package com.itcompany.softwarestore.controller;
 
-import com.itcompany.softwarestore.dao.entity.SoftwareEntity;
+import com.itcompany.softwarestore.dao.entity.Software;
 import com.itcompany.softwarestore.service.HomeService;
 import com.itcompany.softwarestore.service.LoginService;
 import org.slf4j.Logger;
@@ -13,7 +13,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -36,9 +35,9 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
-    @PostMapping(value= "/view/login")
-    public ModelAndView doLogin(@RequestParam(value = "username") String username,
-                                @RequestParam(value = "password") String password) {
+/*    @PostMapping(value= "/view/login")
+    public ModelAndView doLogin(@RequestParam(value = "j_username") String username,
+                                @RequestParam(value = "j_password") String password) {
         ModelAndView view;
         if (loginService.isCredentialsValid(username, password)) {
             view = new ModelAndView("pages/all-software");
@@ -52,11 +51,28 @@ public class LoginController {
             view.addObject("error", "Invalid username and password!");
         }
         return view;
+    }*/
+
+
+    @GetMapping("/view/login")
+    public ModelAndView login(@RequestParam(value = "error", required = false) String error,
+                              @RequestParam(value = "logout", required = false) String logout) {
+        ModelAndView model = new ModelAndView();
+        if (error != null) {
+            model.addObject("error", "Invalid username and password!");
+            model.setViewName("pages/login");
+        } else if (logout != null) {
+            model.addObject("msg", "You've been logged out successfully.");
+            model.setViewName("/pages/login");
+        } else {
+            model.setViewName("pages/all-software");
+        }
+        return model;
     }
 
     @GetMapping(value = "/view/updateUser/{username}")
     public ModelAndView updateUser(@PathVariable(value = "username", required = false) String username) {
-        ModelAndView view = new ModelAndView("fragments/username");
+        ModelAndView view = new ModelAndView("fragments/header-top");
 
         if (username == null || username.isEmpty()) {
             view.addObject("username", defaultName);
@@ -66,10 +82,10 @@ public class LoginController {
         return view;
     }
 
-    @GetMapping(value = "view/logout")
+    @GetMapping(value = "/view/logout")
     public ModelAndView doLogout() {
         ModelAndView view = new ModelAndView("pages/login");
-        List<SoftwareEntity> softwaresTop10 = homeService.getTop10SoftwareByDesc();
+        List<Software> softwaresTop10 = homeService.getTop10SoftwareByDesc();
         view.addObject("softwareList", softwaresTop10);
         view.addObject("username", "guest");
         return view;

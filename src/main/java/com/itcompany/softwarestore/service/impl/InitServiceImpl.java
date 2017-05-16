@@ -1,6 +1,6 @@
 package com.itcompany.softwarestore.service.impl;
 
-import com.itcompany.softwarestore.dao.repository.SoftwareEntityRepository;
+import com.itcompany.softwarestore.dao.repository.SoftwareRepository;
 import com.itcompany.softwarestore.service.InitService;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -27,7 +27,7 @@ public class InitServiceImpl implements InitService {
     private static final String MASK = "**/*.png";
 
     @Autowired
-    private SoftwareEntityRepository softwareEntityRepository;
+    private SoftwareRepository softwareRepository;
 
     public void scanFilesAndSaveToDB(String directoryPath, int pictureSize) {
         List<String> files = scanFolder(directoryPath + MASK);
@@ -52,9 +52,9 @@ public class InitServiceImpl implements InitService {
     private void saveImageToDB(String fileName, Long rowId, int pictureSize) {
         byte[] content = readData(fileName);
         if (pictureSize == 128) {
-            softwareEntityRepository.updatePictureContent128(content, rowId);
+            softwareRepository.updatePictureContent128(content, rowId);
         } else if (pictureSize == 512) {
-            softwareEntityRepository.updatePictureContent512(content, rowId);
+            softwareRepository.updatePictureContent512(content, rowId);
         } else throw new IllegalStateException("Unsupported picture size. Size: " + pictureSize);
     }
 

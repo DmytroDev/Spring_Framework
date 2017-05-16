@@ -1,7 +1,7 @@
 package com.itcompany.softwarestore.service.impl;
 
-import com.itcompany.softwarestore.dao.entity.SoftwareEntity;
-import com.itcompany.softwarestore.dao.repository.SoftwareEntityRepository;
+import com.itcompany.softwarestore.dao.entity.Software;
+import com.itcompany.softwarestore.dao.repository.SoftwareRepository;
 import com.itcompany.softwarestore.model.dto.FileInfo;
 import com.itcompany.softwarestore.model.dto.TxtFileFields;
 import com.itcompany.softwarestore.service.SoftwareEntityBuilder;
@@ -36,7 +36,7 @@ public class UploadServiceImpl implements UploadService {
     private static final Logger LOGGER = LoggerFactory.getLogger(UploadServiceImpl.class);
 
     @Autowired
-    private SoftwareEntityRepository softwareRepository;
+    private SoftwareRepository softwareRepository;
 
     @Autowired
     private SoftwareEntityBuilder softwareEntityBuilder;
@@ -77,8 +77,8 @@ public class UploadServiceImpl implements UploadService {
     }
 
     public void saveSoftware(FileInfo fileInfo, long startTime) {
-        SoftwareEntity softwareEntity = softwareEntityBuilder.build(fileInfo, startTime);
-        softwareRepository.saveAndFlush(softwareEntity);
+        Software software = softwareEntityBuilder.build(fileInfo, startTime);
+        softwareRepository.saveAndFlush(software);
         LOGGER.info("Software '{}' successfully saved into database", fileInfo.getFileName());
     }
 

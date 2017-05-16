@@ -12,7 +12,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "CATEGORY")
-public class CategoryEntity {
+public class Category {
 
     @Id
     @Column(name = "CATEGORY_NAME")
@@ -39,7 +39,7 @@ public class CategoryEntity {
 
     @Override
     public String toString() {
-        return "CategoryEntity{" +
+        return "Category{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 '}';
@@ -50,7 +50,7 @@ public class CategoryEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        CategoryEntity that = (CategoryEntity) o;
+        Category that = (Category) o;
 
         return name.equals(that.name);
 
