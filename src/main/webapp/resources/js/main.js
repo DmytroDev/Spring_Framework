@@ -40,7 +40,7 @@ $(function () {
         event.preventDefault();
         $.ajax({
             url: $(this).attr('href'), success: function (result) {
-                console.log(this);
+                //console.log(this);
                 $("#content").html(result);
             }
         });
@@ -53,12 +53,12 @@ $(function () {
         });
     });
 
-    $(document).on("click", "#login-btn", function (event) {
+/*    $(document).on("click", "#login-btn", function (event) {
         event.preventDefault();
         var formData = {
-            /*'username': $('input[name=username]').val(),*/
+            /!*'username': $('input[name=username]').val(),*!/
             'j_username': $('input[name=j_username]').val(),
-            /*'password': $('input[name=password]').val()*/
+            /!*'password': $('input[name=password]').val()*!/
             'j_password': $('input[name=j_password]').val()
         };
         //$.post("/view/login", formData, function (data) {
@@ -70,10 +70,10 @@ $(function () {
             $.get("/view/updateUser/" + formData.j_username, function (data) {
                 console.log(this);
                 $("#header-top").html(data);
-                /*$("#username-div").html(data);*/
+                /!*$("#username-div").html(data);*!/
             });
         });
-    });
+    });*/
 
     /* upload form with Zip-archive */
     $(document).on("submit", "#upload-form", function (event) {

@@ -33,24 +33,28 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.authorizeRequests()
-                .antMatchers("/view/upload").access("hasRole('ROLE_DEVELOPER')")
-                .antMatchers("/j_spring_security_check/**").permitAll()
-                .and()
-                .formLogin()
-                .loginPage("/view/login")
-                .loginProcessingUrl("/j_spring_security_check").permitAll()
-                .successForwardUrl("/view/index")
-                .failureUrl("/view/login?error")
+        http.csrf()
+                .disable()
+                .authorizeRequests()
+                //.antMatchers("/view/upload").access("hasRole('ROLE_DEVELOPER')")
+                .antMatchers("/resources/**", "/**").permitAll()
+                .anyRequest().permitAll()
+                .and();
+
+        http.formLogin()
+                .loginPage("/index")
+                .loginProcessingUrl("/j_spring_security_check")
+                .failureUrl("/index?error")
                 .usernameParameter("j_username")
                 .passwordParameter("j_password")
+                .permitAll();
+
+        http.logout()
+                .logoutUrl("/view/logout")
+                .logoutSuccessUrl("/index")
+                .invalidateHttpSession(true)
                 .and()
-                //.logout().logoutUrl("/j_spring_security_logout").logoutSuccessUrl("/view/logout").invalidateHttpSession(true)
-                .logout().logoutUrl("/view/logout").logoutSuccessUrl("/index").invalidateHttpSession(true)
-                .and()
-                .exceptionHandling().accessDeniedPage("/view/403")
-                .and()
-                .csrf().disable();
+                .exceptionHandling().accessDeniedPage("/view/403");
     }
 
     @Bean

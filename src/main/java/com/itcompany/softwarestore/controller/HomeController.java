@@ -10,9 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -34,10 +34,17 @@ public class HomeController {
      * @return model and view
      */
     @GetMapping(value = {"/", "/index"})
-    public ModelAndView home(HttpSession session) {
+    public ModelAndView home(@RequestParam(value = "error", required = false) String error) {
+
         ModelAndView view = new ModelAndView("home/index");
-        List<Software> softwaresTop10 = homeService.getTop10SoftwareByDesc();
-        view.addObject("softwareList", softwaresTop10);
+        if (error != null) {
+            view.addObject("error", "Invalid username or password!");
+        } else {
+            List<Software> softwareTop10 = homeService.getTop10SoftwareByDesc();
+            view.addObject("softwareList", softwareTop10);
+            List<String> categories = homeService.getAllCategoryNames();
+            view.addObject("categories", categories);
+        }
         return view;
     }
 
@@ -74,6 +81,5 @@ public class HomeController {
         view.addObject("categories", categories);
         return view;
     }
-
 
 }
