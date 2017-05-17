@@ -25,7 +25,6 @@
             <input class="form-field" type="password" placeholder="Enter Password" name="j_password" required>
 
             <button id="login-btn" class="login-btn" type="submit">Login</button>
-            <button id="cancel-btn" class="cancel-btn" type="button">Skip</button>
 
             <input type="hidden" name="${_csrf.parameterName}"
                    value="${_csrf.token}"/>

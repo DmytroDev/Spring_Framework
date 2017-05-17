@@ -46,7 +46,7 @@ public class DownloadServiceImpl implements DownloadService {
             out.closeEntry();
 
             out.putNextEntry(new ZipEntry(IMG_512_NAME));
-            out.write(software.getPictureContent128());
+            out.write(software.getPictureContent512());
             out.closeEntry();
 
             out.putNextEntry(new ZipEntry(software.getName() + ".txt"));

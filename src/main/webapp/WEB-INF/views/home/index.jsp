@@ -32,7 +32,7 @@
 
 <c:import url="../fragments/footer.jsp"/>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="../../../resources/vendor/js/bootstrap.min.js"></script>
 <script src="../../../resources/js/main.js"></script>
 

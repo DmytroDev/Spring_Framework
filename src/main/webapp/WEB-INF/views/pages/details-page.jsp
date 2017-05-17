@@ -5,7 +5,7 @@
     <div class="details-page-div">
         <div class="element-title-img">
             <p class="software-title">${software.name}</p>
-            <img class="media-object" src="/imgController512/getImg${software.id}" alt="Logo">
+            <img class="media-object" src="/imgController512/getImg${software.id}" onerror="this.src='../../../resources/images/no_image_available.png'">
         </div>
         <div class="element-description">
             <p>${software.description}</p>

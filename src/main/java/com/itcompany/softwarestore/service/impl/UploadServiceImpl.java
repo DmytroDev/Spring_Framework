@@ -14,15 +14,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.BufferedReader;
-import java.io.File;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
+import java.util.zip.ZipInputStream;
 
 
 /**
@@ -45,27 +44,22 @@ public class UploadServiceImpl implements UploadService {
     public FileInfo parseZipFile(String packageName, String description, MultipartFile multipartFile, String categoryName) {
         LOGGER.info("Start parsing ZIP-file '{}' ...", multipartFile.getOriginalFilename());
         FileInfo fileInfo = null;
-        List<ZipEntry> zipEntries = new ArrayList<>();
-        File fileName = multipartToFile(multipartFile);
 
-        try (ZipFile file = new ZipFile(fileName)) {
-            Enumeration<? extends ZipEntry> entries = file.entries();
-            while (entries.hasMoreElements()) {
-                ZipEntry entry = entries.nextElement();
-                InputStream is = file.getInputStream(entry);
-                if (entry.getName().endsWith(TxtFileFields.TXT_FILE_SUFFIX)) {
-                    fileInfo = getInfoFromTxtFile(entry, is);
+        try (ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(multipartFile.getBytes());
+             ZipInputStream zipInputStream = new ZipInputStream(byteArrayInputStream)) {
+            ZipEntry zipEntry;
+            Map<String, byte[]> imgContentMap = new HashMap();
+
+            while ((zipEntry = zipInputStream.getNextEntry()) != null) {
+                if (zipEntry.getName().endsWith(TxtFileFields.TXT_FILE_SUFFIX)) {
+                    fileInfo = getInfoFromTxtFile(zipEntry, zipInputStream);
                 } else {
-                    zipEntries.add(entry);
+                    imgContentMap.put(zipEntry.getName(), IOUtils.toByteArray(zipInputStream));
                 }
             }
-            for (ZipEntry zipEntry : zipEntries) {
-                if (zipEntry.getName().equalsIgnoreCase(fileInfo.getImg128FileName())) {
-                    fileInfo.setImg128Content(extractImgContent(file.getInputStream(zipEntry)));
-                } else if (zipEntry.getName().equalsIgnoreCase(fileInfo.getImg512FileName())) {
-                    fileInfo.setImg512Content(extractImgContent(file.getInputStream(zipEntry)));
-                }
-            }
+
+            fileInfo.setImg128Content(imgContentMap.get(fileInfo.getImg128FileName()));
+            fileInfo.setImg512Content(imgContentMap.get(fileInfo.getImg512FileName()));
             fileInfo.setPkgName(packageName);
             fileInfo.setDescription(description);
             fileInfo.setCategory(categoryName);
@@ -73,6 +67,10 @@ public class UploadServiceImpl implements UploadService {
         } catch (IOException e) {
             LOGGER.error("Unable to read ZIP-file '{}'", multipartFile.getOriginalFilename());
         }
+        fileInfo.setPkgName(packageName);
+        fileInfo.setDescription(description);
+        fileInfo.setCategory(categoryName);
+
         return fileInfo;
     }
 
@@ -80,20 +78,6 @@ public class UploadServiceImpl implements UploadService {
         Software software = softwareEntityBuilder.build(fileInfo, startTime);
         softwareRepository.saveAndFlush(software);
         LOGGER.info("Software '{}' successfully saved into database", fileInfo.getFileName());
-    }
-
-    private File multipartToFile(MultipartFile multipart) {
-        File convFile = new File(multipart.getOriginalFilename());
-        try {
-            multipart.transferTo(convFile);
-        } catch (IOException e) {
-            LOGGER.error("Unable convert file '{}' from MultipartFile to File", multipart.getOriginalFilename());
-        }
-        return convFile;
-    }
-
-    private byte[] extractImgContent(InputStream is) throws IOException {
-        return IOUtils.toByteArray(is);
     }
 
     private FileInfo getInfoFromTxtFile(final ZipEntry entry, InputStream is) throws IOException {

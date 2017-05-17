@@ -302,7 +302,7 @@ img.avatar {
     box-sizing: border-box;
 }
 
-.login-btn, .cancel-btn {
+.login-btn {
     color: white;
     font-weight: bold;
     padding: 14px 20px;
@@ -312,19 +312,12 @@ img.avatar {
     width: 100%;
 }
 
-.login-btn:hover, .cancel-btn:hover {
+.login-btn:hover {
     opacity: 0.8;
 }
 
 .login-btn {
     background: linear-gradient(to bottom, #49ae52, #306428);
-}
-
-/* Extra style for the cancel button (red) */
-.cancel-btn {
-    width: auto;
-    padding: 10px 18px;
-    background-color: #f44336;
 }
 
 .login-container {

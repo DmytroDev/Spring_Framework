@@ -42,17 +42,6 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
                 new MultipartConfigElement(uploadDirectory.getAbsolutePath(),
                         maxUploadSizeInMb, maxUploadSizeInMb * 2, maxUploadSizeInMb / 2);
         registration.setMultipartConfig(multipartConfigElement);
-        //registration.setInitParameter("spring.profiles.active", "default");
     }
-
-/*    @Override
-    protected Filter[] getServletFilters() {
-        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
-        characterEncodingFilter.setEncoding("UTF-8");
-        characterEncodingFilter.setForceEncoding(true);
-
-        return new Filter[] {characterEncodingFilter};
-    }
-    }*/
 
 }

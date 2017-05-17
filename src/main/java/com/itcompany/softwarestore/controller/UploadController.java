@@ -38,7 +38,7 @@ public class UploadController {
                                  @RequestParam(value = "categoryName", required = false) String categoryName,
                                  @RequestParam(value = "file") MultipartFile file) {
 
-        LOGGER.info("Running download file '{}'", file.getName());
+        LOGGER.info("Running download file '{}'", file.getOriginalFilename());
         long startTime = System.currentTimeMillis();
         ModelAndView mav = new ModelAndView("pages/uploadStatus");
         String msg = null;
