@@ -17,7 +17,11 @@
         <sec:authorize access="isAuthenticated()">
             <div class="navigation-div">
                 <ul class="main-menu">
-                    <li><a id="upload-link" href="/view/upload">Upload</a></li>
+
+                    <sec:authorize access="hasRole('ROLE_DEVELOPER')">
+                        <li><a id="upload-link" href="/view/upload">Upload</a></li>
+                    </sec:authorize>
+
                     <li><a id="all-software-link" href="/view/index">Home</a></li>
 
                     <sec:authorize access="isAuthenticated()">

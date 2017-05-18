@@ -4,6 +4,7 @@ import com.itcompany.softwarestore.dao.entity.Software;
 import com.itcompany.softwarestore.dao.repository.SoftwareRepository;
 import com.itcompany.softwarestore.model.dto.ZipArchiveInfo;
 import com.itcompany.softwarestore.service.DownloadService;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Optional;
 import java.util.StringJoiner;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -33,20 +36,24 @@ public class DownloadServiceImpl implements DownloadService {
     private final String SUFFIX = ".zip";
     private final String IMG_128_NAME = "128.png";
     private final String IMG_512_NAME = "512.png";
+    private final String DEFAULT_IMG_128_PATH = "/images/default/no_image_available_128.png";
+    private final String DEFAULT_IMG_512_PATH = "/images/default/no_image_available_512.png";
 
     @Override
     public ZipArchiveInfo createZipArchive(Long softwareId) {
         Software software = repository.findOne(softwareId);
 
-        try(ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                ZipOutputStream out = new ZipOutputStream(byteArrayOutputStream)) {
+        try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+             ZipOutputStream out = new ZipOutputStream(byteArrayOutputStream)) {
 
             out.putNextEntry(new ZipEntry(IMG_128_NAME));
-            out.write(software.getPictureContent128());
+            byte[] imgContent128 = Optional.ofNullable(software.getPictureContent128()).orElse(getDefaultImgByteArray(DEFAULT_IMG_128_PATH));
+            out.write(imgContent128);
             out.closeEntry();
 
             out.putNextEntry(new ZipEntry(IMG_512_NAME));
-            out.write(software.getPictureContent512());
+            byte[] imgContent512 = Optional.ofNullable(software.getPictureContent512()).orElse(getDefaultImgByteArray(DEFAULT_IMG_512_PATH));
+            out.write(imgContent512);
             out.closeEntry();
 
             out.putNextEntry(new ZipEntry(software.getName() + ".txt"));
@@ -74,6 +81,16 @@ public class DownloadServiceImpl implements DownloadService {
         stringJoiner.add(PICTURE_128_FIELD + DELIMITER + IMG_128_NAME);
         stringJoiner.add(PICTURE_512_FIELD + DELIMITER + IMG_512_NAME);
         return stringJoiner.toString();
+    }
+
+    private byte[] getDefaultImgByteArray(String path) {
+        byte[] imgByteArray = null;
+        try(InputStream resourceAsStream = this.getClass().getResourceAsStream(path)) {
+            imgByteArray = IOUtils.toByteArray(resourceAsStream);
+        } catch (IOException e) {
+            LOGGER.error("Unable to reading file with default image");
+        }
+        return imgByteArray;
     }
 
 }

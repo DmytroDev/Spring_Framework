@@ -38,10 +38,6 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
         com.itcompany.softwarestore.dao.entity.User user = userRepositiry.findOne(username);
         List<GrantedAuthority> authorities =  buildUserAuthority(user.getUserRole());
 
-        // TODO: simply for check. Need remove it later
-        LOGGER.info("User: " + user);
-        System.out.println("authorities: " + authorities);
-
         return buildUserForAuthentication(user, authorities);
     }
 

@@ -35,18 +35,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                //.antMatchers("/view/upload").access("hasRole('ROLE_DEVELOPER')")
-
-/*                .antMatchers("/resources*//**", "*//**").permitAll()
-                .antMatchers("/", "/index", "/view*//**").permitAll()
-                .antMatchers("/download*//**", "/download/archive*//**").permitAll()
-                .antMatchers("/imgController128*//**", "/imgController512").permitAll()
-                .antMatchers("/catController*//**", "/view/upload*//**").permitAll()
-                .antMatchers("/view/details*//**", "/view/category*//**").permitAll()*/
-
-                .anyRequest().permitAll()
+                .antMatchers("/", "/index", "/view/login", "/resources/**", "/j_spring_security_check").permitAll()
+                .antMatchers("/imgController128/**", "/imgController512/**, /catController/**").authenticated()
+                .antMatchers("/view/**", "/download/**, ").authenticated()
+                .antMatchers("/view/upload").access("hasRole('ROLE_DEVELOPER')")
                 .and()
-
                 .formLogin()
                 .loginPage("/index")
                 .loginProcessingUrl("/j_spring_security_check")
@@ -55,7 +48,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .passwordParameter("j_password")
                 .permitAll()
                 .and()
-
                 .logout()
                 .logoutUrl("/view/logout")
                 .logoutSuccessUrl("/index")
