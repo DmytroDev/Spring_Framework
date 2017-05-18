@@ -7,12 +7,6 @@
     Welcome,
             <span>
                 <sec:authentication property="principal.username"/>
-<%--                <c:choose>
-                    <c:when test="${empty username}">guest!</c:when>
-                    <c:otherwise>${username}</c:otherwise>
-                    &lt;%&ndash; Try use constuction bellow bit later &ndash;%&gt;
-                    &lt;%&ndash;<sec:authentication property="principal.username"/>&ndash;%&gt;
-                </c:choose>--%>
             </span>
 </div>
 <div class="navigation-div">

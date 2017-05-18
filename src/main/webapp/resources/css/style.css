@@ -277,13 +277,11 @@ hr {
     flex-direction: column;
 }
 
-/* css for login form */
 .login-form {
     border: 3px solid #f1f1f1;
     margin: 1% 35% 1% 35%;
 }
 
-/* Center the avatar image inside this container */
 .imgcontainer {
     text-align: center;
     margin: 24px 0 12px 0;

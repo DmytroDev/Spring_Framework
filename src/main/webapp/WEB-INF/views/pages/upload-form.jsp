@@ -8,8 +8,6 @@
     </div>
     <div class="container">
         <form method="post" action="/view/upload" class="upload-form" id="upload-form" enctype="multipart/form-data">
-            <%--<form method="POST" action="uploadOneFile**?${_csrf.parameterName}=${_csrf.token}**" enctype="multipart/form-data">--%>
-
             <div class="form-group">
                 <label for="name">Application name</label>
                 <input type="text" name="name" class="form-control" id="name" placeholder="Name">
@@ -31,8 +29,6 @@
                 <input type="file" name="file" id="file">
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
-
-            <%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
 
         </form>
     </div>

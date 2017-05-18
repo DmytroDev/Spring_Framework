@@ -2,7 +2,6 @@ package com.itcompany.softwarestore.controller;
 
 import com.itcompany.softwarestore.dao.entity.Software;
 import com.itcompany.softwarestore.service.HomeService;
-import com.itcompany.softwarestore.service.LoginService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +31,6 @@ public class LoginController {
     @Autowired
     private HomeService homeService;
 
-    @Autowired
-    private LoginService loginService;
-
     @GetMapping("/view/login")
     public ModelAndView login(@RequestParam(value = "error", required = false) String error,
                               @RequestParam(value = "logout", required = false) String logout) {
@@ -53,8 +49,8 @@ public class LoginController {
 
     @GetMapping(value = "/view/updateUser/{username}")
     public ModelAndView updateUser(@PathVariable(value = "username", required = false) String username) {
-        ModelAndView view = new ModelAndView("fragments/header-top");
 
+        ModelAndView view = new ModelAndView("fragments/header-top");
         if (username == null || username.isEmpty()) {
             view.addObject("username", defaultName);
         } else {

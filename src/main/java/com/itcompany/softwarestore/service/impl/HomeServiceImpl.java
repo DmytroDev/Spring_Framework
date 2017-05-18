@@ -30,13 +30,6 @@ public class HomeServiceImpl implements HomeService {
 
 
     @Override
-    public List<Software> getAllSoftware() {
-        List<Software> softwareEntities = softwareRepository.findAll();
-        LOGGER.info("Information about the Software has been successfully extracted from the database. List size '{}'", softwareEntities.size());
-        return softwareEntities;
-    }
-
-    @Override
     public Software getSoftwareById(long id) {
         Software software = softwareRepository.findOne(id);
         LOGGER.info("Successfully got Software '{}'", software);

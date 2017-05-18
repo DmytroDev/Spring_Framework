@@ -11,8 +11,6 @@ import java.util.List;
  */
 public interface HomeService {
 
-    List<Software> getAllSoftware();
-
     Software getSoftwareById(long id);
 
     List<String> getAllCategoryNames();
