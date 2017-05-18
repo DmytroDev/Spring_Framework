@@ -20,6 +20,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
+ * Service that provides functionality for authorization of users.
+ *
  * @author Dmitriy Nadolenko
  * @version 1.0
  * @since 1.0
