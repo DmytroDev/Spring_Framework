@@ -11,6 +11,19 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
+ * JPA entity that is mapped to the table SOFTWARE. Stores the following information:
+ * <ul>
+ * <li>software id;</li>
+ * <li>software name;</li>
+ * <li>package name;</li>
+ * <li>content for images with size 128 x 128;</li>
+ * <li>content for images with size 512 x 512;</li>
+ * <li>software description;</li>
+ * <li>software category name;</li>
+ * <li>quantity of downloads;</li>
+ * <li>uploaded time;</li>
+ * </ul>
+ *
  * @author Dmitriy Nadolenko
  * @version 1.0
  * @since 1.0
@@ -20,7 +33,7 @@ import javax.persistence.Table;
 public class Software {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "APP_NAME", nullable = false)
@@ -124,12 +137,13 @@ public class Software {
 
     @Override
     public String toString() {
-        return "Software{" +
-                " name='" + name + '\'' +
-                ", appPackage='" + appPackage + '\'' +
-                ", category=" + category.getName() +
-                ", downloadsNumber=" + downloadsNumber +
-                ", timeUploaded=" + timeUploaded +
-                '}';
+        return "Software{"
+                + ", name='" + name + '\''
+                + ", appPackage='" + appPackage + '\''
+                + ", description='" + description + '\''
+                + ", category=" + category
+                + ", downloadsNumber=" + downloadsNumber
+                + ", timeUploaded=" + timeUploaded
+                + '}';
     }
 }

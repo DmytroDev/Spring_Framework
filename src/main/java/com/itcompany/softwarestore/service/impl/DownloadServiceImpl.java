@@ -25,19 +25,25 @@ import static com.itcompany.softwarestore.model.dto.TxtFileFields.PACKAGE_FIELD;
 import static com.itcompany.softwarestore.model.dto.TxtFileFields.PICTURE_128_FIELD;
 import static com.itcompany.softwarestore.model.dto.TxtFileFields.PICTURE_512_FIELD;
 
+/**
+ * {@link DownloadService} implementation.
+ *
+ * @author Dmitriy Nadolenko
+ * @version 1.0
+ * @since 1.0
+ */
 @Service
 public class DownloadServiceImpl implements DownloadService {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(DownloadServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DownloadServiceImpl.class);
+    private static final String SUFFIX = ".zip";
+    private static final String IMG_128_NAME = "128.png";
+    private static final String IMG_512_NAME = "512.png";
+    private static final String DEFAULT_IMG_PATH_128 = "/images/default/no_image_available_128.png";
+    private static final String DEFAULT_IMG_PATH_512 = "/images/default/no_image_available_512.png";
 
     @Autowired
     private SoftwareRepository repository;
-
-    private final String SUFFIX = ".zip";
-    private final String IMG_128_NAME = "128.png";
-    private final String IMG_512_NAME = "512.png";
-    private final String DEFAULT_IMG_128_PATH = "/images/default/no_image_available_128.png";
-    private final String DEFAULT_IMG_512_PATH = "/images/default/no_image_available_512.png";
 
     @Override
     public ZipArchiveInfo createZipArchive(Long softwareId) {
@@ -47,12 +53,16 @@ public class DownloadServiceImpl implements DownloadService {
              ZipOutputStream out = new ZipOutputStream(byteArrayOutputStream)) {
 
             out.putNextEntry(new ZipEntry(IMG_128_NAME));
-            byte[] imgContent128 = Optional.ofNullable(software.getPictureContent128()).orElse(getDefaultImgByteArray(DEFAULT_IMG_128_PATH));
+            byte[] imgContent128 = Optional.ofNullable(software.getPictureContent128())
+                    .orElse(getDefaultImgByteArray(DEFAULT_IMG_PATH_128));
+
             out.write(imgContent128);
             out.closeEntry();
 
             out.putNextEntry(new ZipEntry(IMG_512_NAME));
-            byte[] imgContent512 = Optional.ofNullable(software.getPictureContent512()).orElse(getDefaultImgByteArray(DEFAULT_IMG_512_PATH));
+            byte[] imgContent512 = Optional.ofNullable(software.getPictureContent512())
+                    .orElse(getDefaultImgByteArray(DEFAULT_IMG_PATH_512));
+
             out.write(imgContent512);
             out.closeEntry();
 
@@ -69,6 +79,7 @@ public class DownloadServiceImpl implements DownloadService {
         return null;
     }
 
+    @Override
     public void increaseDownloadNum(Long id) {
         repository.increaseDownloadNum(id);
         LOGGER.info("Download number was successfully increased for Software with id  '{}' ", id);
@@ -85,7 +96,7 @@ public class DownloadServiceImpl implements DownloadService {
 
     private byte[] getDefaultImgByteArray(String path) {
         byte[] imgByteArray = null;
-        try(InputStream resourceAsStream = this.getClass().getResourceAsStream(path)) {
+        try (InputStream resourceAsStream = this.getClass().getResourceAsStream(path)) {
             imgByteArray = IOUtils.toByteArray(resourceAsStream);
         } catch (IOException e) {
             LOGGER.error("Unable to reading file with default image");

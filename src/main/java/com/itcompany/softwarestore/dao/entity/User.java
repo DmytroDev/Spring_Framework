@@ -10,6 +10,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * JPA entity that is mapped to the table USERS. Stores the following information:
+ * <ul>
+ * <li>username;</li>
+ * <li>password;</li>
+ * <li>enabled;</li>
+ * <li>user roles;</li>
+ * </ul>
+ *
  * @author Dmitriy Nadolenko
  * @version 1.0
  * @since 1.0
@@ -22,22 +30,6 @@ public class User {
     private String password;
     private boolean enabled;
     private Set<UserRole> userRole = new HashSet<>(0);
-
-    public User() {
-    }
-
-    public User(String username, String password, boolean enabled) {
-        this.username = username;
-        this.password = password;
-        this.enabled = enabled;
-    }
-
-    public User(String username, String password, boolean enabled, Set<UserRole> userRole) {
-        this.username = username;
-        this.password = password;
-        this.enabled = enabled;
-        this.userRole = userRole;
-    }
 
     @Id
     @Column(name = "USERNAME", unique = true, nullable = false, length = 45)
@@ -78,11 +70,11 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", enabled=" + enabled +
-                ", userRole=" + userRole +
-                '}';
+        return "User{"
+                + "username='" + username + '\''
+                + ", password='" + password + '\''
+                + ", enabled=" + enabled
+                + ", userRole=" + userRole
+                + '}';
     }
 }

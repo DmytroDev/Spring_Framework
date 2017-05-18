@@ -6,6 +6,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
+ * JPA entity that is mapped to the table CATEGORY. Stores the following information:
+ * <ul>
+ * <li>category name;</li>
+ * <li>category description;</li>
+ * </ul>
+ *
  * @author Dmitriy Nadolenko
  * @version 1.0
  * @since 1.0
@@ -39,21 +45,23 @@ public class Category {
 
     @Override
     public String toString() {
-        return "Category{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+        return "Category{"
+                + "name='" + name + '\''
+                + ", description='" + description + '\''
+                + '}';
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Category that = (Category) o;
 
         return name.equals(that.name);
-
     }
 
     @Override

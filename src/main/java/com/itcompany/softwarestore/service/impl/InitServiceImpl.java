@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
+ * {@link InitService} implementation.
+ *
  * @author Dmitriy Nadolenko
  * @version 1.0
  * @since 1.0
@@ -25,13 +27,17 @@ public class InitServiceImpl implements InitService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(InitServiceImpl.class);
     private static final String MASK = "**/*.png";
+    private static final int PICTURE_SIZE_128 = 128;
+    private static final int PICTURE_SIZE_512 = 512;
 
     @Autowired
     private SoftwareRepository softwareRepository;
 
+    @Override
     public void scanFilesAndSaveToDB(String directoryPath, int pictureSize) {
         List<String> files = scanFolder(directoryPath + MASK);
-        files.stream().forEach(fileName -> saveImageToDB(directoryPath + fileName, Long.valueOf(fileName.substring(0, fileName.indexOf("."))), pictureSize));
+        files.stream().forEach(fileName ->
+                saveImageToDB(directoryPath + fileName, Long.valueOf(fileName.substring(0, fileName.indexOf("."))), pictureSize));
         LOGGER.info("Saving images from '{}' to Database completed", directoryPath);
     }
 
@@ -51,11 +57,14 @@ public class InitServiceImpl implements InitService {
 
     private void saveImageToDB(String fileName, Long rowId, int pictureSize) {
         byte[] content = readData(fileName);
-        if (pictureSize == 128) {
+        if (pictureSize == PICTURE_SIZE_128) {
             softwareRepository.updatePictureContent128(content, rowId);
-        } else if (pictureSize == 512) {
+        } else if (pictureSize == PICTURE_SIZE_512) {
             softwareRepository.updatePictureContent512(content, rowId);
-        } else throw new IllegalStateException("Unsupported picture size. Size: " + pictureSize);
+        } else {
+            LOGGER.error("Unsupported picture size. Size: '{}' ", pictureSize);
+            throw new IllegalStateException("Unsupported picture size. Size: " + pictureSize);
+        }
     }
 
     private byte[] readData(String fileName) {

@@ -2,8 +2,6 @@ package com.itcompany.softwarestore.controller;
 
 import com.itcompany.softwarestore.dao.entity.Software;
 import com.itcompany.softwarestore.service.HomeService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -12,12 +10,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
 /**
+ * REST controller to handle Http request for login-page.
+ *
  * @author Dmitriy Nadolenko
  * @version 1.0
  * @since 1.0
@@ -25,40 +24,34 @@ import java.util.List;
 @Controller
 public class LoginController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
-    private final String defaultName = "guest";
+    private static final String DEFAULT_NAME = "guest";
 
     @Autowired
     private HomeService homeService;
 
-    @GetMapping("/view/login")
-    public ModelAndView login(@RequestParam(value = "error", required = false) String error,
-                              @RequestParam(value = "logout", required = false) String logout) {
-        ModelAndView model = new ModelAndView();
-        if (error != null) {
-            model.addObject("error", "Invalid username or password!");
-            model.setViewName("pages/login");
-        } else if (logout != null) {
-            model.addObject("msg", "You've been logged out successfully.");
-            model.setViewName("/pages/login");
-        } else {
-            model.setViewName("pages/all-software");
-        }
-        return model;
-    }
-
+    /**
+     * REST endpoint for update user name in page-header.
+     *
+     * @param username user name
+     * @return {@link ModelAndView}
+     */
     @GetMapping(value = "/view/updateUser/{username}")
     public ModelAndView updateUser(@PathVariable(value = "username", required = false) String username) {
 
         ModelAndView view = new ModelAndView("fragments/header-top");
         if (username == null || username.isEmpty()) {
-            view.addObject("username", defaultName);
+            view.addObject("username", DEFAULT_NAME);
         } else {
             view.addObject("username", username);
         }
         return view;
     }
 
+    /**
+     * REST endpoint for logout user.
+     *
+     * @return {@link ModelAndView}
+     */
     @GetMapping(value = "/view/logout")
     public ModelAndView doLogout() {
         ModelAndView view = new ModelAndView("pages/login");
@@ -68,7 +61,11 @@ public class LoginController {
         return view;
     }
 
-    //for 403 access denied page
+    /**
+     * REST endpoint for processing situation when access denied for current user.
+     *
+     * @return {@link ModelAndView}
+     */
     @GetMapping(value = "/view/403")
     public ModelAndView accesssDenied() {
         ModelAndView view = new ModelAndView("pages/403");

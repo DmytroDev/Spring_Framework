@@ -13,25 +13,24 @@ import javax.persistence.UniqueConstraint;
 import static javax.persistence.GenerationType.IDENTITY;
 
 /**
+ * JPA entity that is mapped to the table USER_ROLES. Stores the following information:
+ * <ul>
+ * <li>role id;</li>
+ * <li>user;</li>
+ * <li>role name;</li>
+ * </ul>
+ *
  * @author Dmitriy Nadolenko
  * @version 1.0
  * @since 1.0
  */
 @Entity
 @Table(name = "USER_ROLES", uniqueConstraints = @UniqueConstraint(columnNames = {"ROLE", "USERNAME"}))
-public class UserRole{
+public class UserRole {
 
     private Integer userRoleId;
     private User user;
     private String role;
-
-    public UserRole() {
-    }
-
-    public UserRole(User user, String role) {
-        this.user = user;
-        this.role = role;
-    }
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -65,10 +64,10 @@ public class UserRole{
 
     @Override
     public String toString() {
-        return "UserRole{" +
-                "userRoleId=" + userRoleId +
-                ", user=" + user.getUsername() +
-                ", role='" + role + '\'' +
-                '}';
+        return "UserRole{"
+                + "userRoleId=" + userRoleId
+                + ", user=" + user.getUsername()
+                + ", role='" + role + '\''
+                + '}';
     }
 }

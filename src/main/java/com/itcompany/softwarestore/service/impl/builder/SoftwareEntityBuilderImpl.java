@@ -6,6 +6,13 @@ import com.itcompany.softwarestore.model.dto.FileInfo;
 import com.itcompany.softwarestore.service.SoftwareEntityBuilder;
 import org.springframework.stereotype.Service;
 
+/**
+ * {@link SoftwareEntityBuilder} implementation.
+ *
+ * @author Dmitriy Nadolenko
+ * @version 1.0
+ * @since 1.0
+ */
 @Service
 public class SoftwareEntityBuilderImpl implements SoftwareEntityBuilder {
 

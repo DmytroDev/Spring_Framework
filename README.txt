@@ -1,12 +1,10 @@
 How to build and deploy:
-1/ Install nodeJS
-2/ Run "npm i"
-
-n/ initial URL -  http://localhost:8080/index
-use as credentials:
-login: admin
-password: admin
-
+1/ Build app as maven project. mvn clead install
+2/ Run app on application server (for example with Apache Tomcat)
+- use initial URL -  http://localhost:8080/index
+- use as credentials:
+for ROLE_DEVELOPER: {login : admin, password : admin}
+for ROLE_USER: {login : user, password : user}
 
 
 Programming and Markup Languages:
@@ -25,11 +23,6 @@ SVC Tools:
 Git
 
 Building Tools:
-Maven, Gulp.js
+Maven
 
-
-
-H2 url masks:
-embedded (local) connection(URL)
-jdbc:h2:~/SOFTWARESTORE
 

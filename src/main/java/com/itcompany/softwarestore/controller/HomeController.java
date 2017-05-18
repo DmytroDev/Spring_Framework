@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 /**
- * HomeController.
+ * REST controller to handle Http request for receiving data for initial page.
  *
  * @author Dmitriy Nadolenko
  * @version 1.0
@@ -29,9 +29,10 @@ public class HomeController {
     private HomeService homeService;
 
     /**
-     * Index page.
+     * REST endpoint for redirect after authorization to home page.
      *
-     * @return model and view
+     * @param error error message in case wrong authorization
+     * @return {@link ModelAndView}
      */
     @GetMapping(value = {"/", "/index"})
     public ModelAndView home(@RequestParam(value = "error", required = false) String error) {
@@ -48,6 +49,12 @@ public class HomeController {
         return view;
     }
 
+    /**
+     * REST endpoint for getting image (size 128 x 128) by software id.
+     *
+     * @param id software id
+     * @return {@link ResponseEntity} image as byte array.
+     */
     @GetMapping(value = "/imgController128/getImg{id}", produces = MediaType.IMAGE_PNG_VALUE)
     public ResponseEntity<byte[]> getImage128(@PathVariable long id) {
         Software software = homeService.getSoftwareById(id);
@@ -57,6 +64,12 @@ public class HomeController {
         return new ResponseEntity<>(image128, headers, HttpStatus.CREATED);
     }
 
+    /**
+     * REST endpoint for getting image (size 512 x 512) by software id.
+     *
+     * @param id software id
+     * @return {@link ResponseEntity} image as byte array.
+     */
     @GetMapping(value = "/imgController512/getImg{id}", produces = MediaType.IMAGE_PNG_VALUE)
     public ResponseEntity<byte[]> getImage512(@PathVariable long id) {
         Software software = homeService.getSoftwareById(id);
@@ -66,6 +79,11 @@ public class HomeController {
         return new ResponseEntity<>(image512, headers, HttpStatus.CREATED);
     }
 
+    /**
+     * REST endpoint for getting list with all software names.
+     *
+     * @return {@link ResponseEntity} software name list.
+     */
     @GetMapping(value = "/catController/getAllNames")
     public ResponseEntity<List<String>> getAllCategoryNames() {
         List<String> names = homeService.getAllCategoryNames();
@@ -74,6 +92,11 @@ public class HomeController {
         return new ResponseEntity<>(names, headers, HttpStatus.CREATED);
     }
 
+    /**
+     * REST endpoint for redirect to all-software page.
+     *
+     * @return {@link ModelAndView}
+     */
     @GetMapping(value = "/view/index")
     public ModelAndView toAllSoftwarePage() {
         ModelAndView view = new ModelAndView("pages/all-software");

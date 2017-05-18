@@ -25,6 +25,8 @@ import java.util.zip.ZipInputStream;
 
 
 /**
+ * {@link UploadService} implementation.
+ *
  * @author Dmitriy Nadolenko
  * @version 1.0
  * @since 1.0
@@ -74,6 +76,7 @@ public class UploadServiceImpl implements UploadService {
         return fileInfo;
     }
 
+    @Override
     public void saveSoftware(FileInfo fileInfo, long startTime) {
         Software software = softwareEntityBuilder.build(fileInfo, startTime);
         softwareRepository.saveAndFlush(software);

@@ -18,6 +18,8 @@ import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
 
 /**
+ * REST controller to handle Http request for download files.
+ *
  * @author Dmitriy Nadolenko
  * @version 1.0
  * @since 1.0
@@ -30,7 +32,14 @@ public class DownloadController {
     @Autowired
     private DownloadService downloadService;
 
-    @GetMapping(value= "/download/archive/{softwareId}")
+    /**
+     * REST endpoint to download software by id.
+     *
+     * @param softwareId software id
+     * @return {@link ResponseEntity}
+     * @throws FileNotFoundException thrown if file which should be download not found
+     */
+    @GetMapping(value = "/download/archive/{softwareId}")
     public ResponseEntity<InputStreamResource> doDownload(@PathVariable long softwareId) throws FileNotFoundException {
         LOGGER.info("Start download software. Id = '{}'", softwareId);
         ZipArchiveInfo zipArchiveInfo = downloadService.createZipArchive(softwareId);

@@ -10,6 +10,8 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 /**
+ * Scans and saves into database images when application has started up.
+ *
  * @author Dmitriy Nadolenko
  * @version 1.0
  * @since 1.0
@@ -30,6 +32,9 @@ public class DatabaseInitializer {
     private final int pictureSize128 = 128;
     private final int pictureSize512 = 512;
 
+    /**
+     * Scans and saves into database images when application has started up.
+     */
     @EventListener(ContextRefreshedEvent.class)
     public void populate() {
         LOGGER.info("Started populate data into database ...");

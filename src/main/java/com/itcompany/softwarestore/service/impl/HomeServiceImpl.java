@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
+ * {@link HomeService} implementation.
+ *
  * @author Dmitriy Nadolenko
  * @version 1.0
  * @since 1.0
@@ -20,7 +22,7 @@ import java.util.List;
 @Service
 public class HomeServiceImpl implements HomeService {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(HomeServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(HomeServiceImpl.class);
 
     @Autowired
     private SoftwareRepository softwareRepository;

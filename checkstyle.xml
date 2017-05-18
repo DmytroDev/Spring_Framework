@@ -120,6 +120,7 @@
         <module name="InnerAssignment"/>
         <module name="MagicNumber">
             <property name="ignoreHashCodeMethod" value="true"/>
+            <property name="ignoreAnnotation" value="true" />
         </module>
         <module name="MissingSwitchDefault"/>
         <module name="SimplifyBooleanExpression"/>

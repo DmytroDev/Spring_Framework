@@ -13,6 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
+ * REST controller to handle Http request for upload files.
+ *
  * @author Dmitriy Nadolenko
  * @version 1.0
  * @since 1.0
@@ -25,12 +27,26 @@ public class UploadController {
     @Autowired
     private UploadService uploadService;
 
-
+    /**
+     * REST endpoint for redirection to upload page.
+     *
+     * @return upload page.
+     */
     @GetMapping("/view/upload")
     public String redirectToUploadPage() {
         return "pages/upload-form";
     }
 
+    /**
+     * REST endpoint for upload software.
+     *
+     * @param name software name
+     * @param description software description
+     * @param packageName package name
+     * @param categoryName category name
+     * @param file {@link MultipartFile} ZIP-archive
+     * @return {@link ModelAndView}
+     */
     @PostMapping("/view/upload")
     public ModelAndView doUpload(@RequestParam(value = "name") String name,
                                  @RequestParam(value = "description", required = false) String description,
@@ -54,6 +70,11 @@ public class UploadController {
         return mav;
     }
 
+    /**
+     * REST endpoint for redirection to upload-status page.
+     *
+     * @return upload-status page.
+     */
     @GetMapping("/view/uploadStatus")
     public String uploadStatus() {
         return "pages/uploadStatus";

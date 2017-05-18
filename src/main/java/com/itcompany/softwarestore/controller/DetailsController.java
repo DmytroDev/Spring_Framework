@@ -11,6 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 /**
+ * REST controller to handle Http request for receiving data for details-page.
+ *
  * @author Dmitriy Nadolenko
  * @version 1.0
  * @since 1.0
@@ -21,6 +23,12 @@ public class DetailsController {
     @Autowired
     private HomeService homeService;
 
+    /**
+     * REST endpoint to get software id and details-page as ModelAndView.
+     *
+     * @param id software id
+     * @return {@link ModelAndView}
+     */
     @GetMapping("/view/details/{id}")
     public ModelAndView getDetails(@PathVariable long id) {
         ModelAndView mav = new ModelAndView("pages/details-page");
@@ -29,6 +37,12 @@ public class DetailsController {
         return mav;
     }
 
+    /**
+     * REST endpoint to get all software's for concrete category and software-by-category as ModelAndView.
+     *
+     * @param categoryName software category
+     * @return {@link ModelAndView}
+     */
     @GetMapping(value = "/view/category/{categoryName}")
     public ModelAndView getSoftwareByCategory(@PathVariable String categoryName) {
         ModelAndView mav = new ModelAndView("fragments/software-by-category");
