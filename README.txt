@@ -1,10 +1,10 @@
 How to build and deploy:
-1/ Build app as maven project. mvn clead install
+1/ Build app as maven project. mvn clean install
 2/ Run app on application server (for example with Apache Tomcat)
 - use initial URL -  http://localhost:8080/index
 - use as credentials:
-for ROLE_DEVELOPER: {login : admin, password : admin}
-for ROLE_USER: {login : user, password : user}
+for ROLE_DEVELOPER: {login : admin,  password : admin}
+for ROLE_USER: {login : user,  password : user}
 
 
 Programming and Markup Languages:
