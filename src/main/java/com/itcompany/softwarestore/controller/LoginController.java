@@ -9,7 +9,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -24,28 +23,8 @@ import java.util.List;
 @Controller
 public class LoginController {
 
-    private static final String DEFAULT_NAME = "guest";
-
     @Autowired
     private HomeService homeService;
-
-    /**
-     * REST endpoint for update user name in page-header.
-     *
-     * @param username user name
-     * @return {@link ModelAndView}
-     */
-    @GetMapping(value = "/view/updateUser/{username}")
-    public ModelAndView updateUser(@PathVariable(value = "username", required = false) String username) {
-
-        ModelAndView view = new ModelAndView("fragments/header-top");
-        if (username == null || username.isEmpty()) {
-            view.addObject("username", DEFAULT_NAME);
-        } else {
-            view.addObject("username", username);
-        }
-        return view;
-    }
 
     /**
      * REST endpoint for logout user.

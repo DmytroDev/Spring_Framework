@@ -23,7 +23,9 @@ import java.util.List;
  * @since 1.0
  */
 @Controller
-public class HomeController {
+public class LandingController {
+
+    private static final String DEFAULT_NAME = "guest";
 
     @Autowired
     private HomeService homeService;
@@ -89,6 +91,24 @@ public class HomeController {
         ModelAndView view = new ModelAndView("pages/all-software");
         List<String> categories = homeService.getAllCategoryNames();
         view.addObject("categories", categories);
+        return view;
+    }
+
+    /**
+     * REST endpoint for update user name in page-header.
+     *
+     * @param username user name
+     * @return {@link ModelAndView}
+     */
+    @GetMapping(value = "/view/updateUser/{username}")
+    public ModelAndView updateUser(@PathVariable(value = "username", required = false) String username) {
+
+        ModelAndView view = new ModelAndView("fragments/header-top");
+        if (username == null || username.isEmpty()) {
+            view.addObject("username", DEFAULT_NAME);
+        } else {
+            view.addObject("username", username);
+        }
         return view;
     }
 
