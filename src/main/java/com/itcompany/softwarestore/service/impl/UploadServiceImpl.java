@@ -45,12 +45,12 @@ public class UploadServiceImpl implements UploadService {
     @Override
     public FileInfo parseZipFile(String packageName, String description, MultipartFile multipartFile, String categoryName) {
         LOGGER.info("Start parsing ZIP-file '{}' ...", multipartFile.getOriginalFilename());
-        FileInfo fileInfo = null;
+        FileInfo fileInfo = new FileInfo();
 
         try (ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(multipartFile.getBytes());
              ZipInputStream zipInputStream = new ZipInputStream(byteArrayInputStream)) {
             ZipEntry zipEntry;
-            Map<String, byte[]> imgContentMap = new HashMap();
+            Map<String, byte[]> imgContentMap = new HashMap<>();
 
             while ((zipEntry = zipInputStream.getNextEntry()) != null) {
                 if (zipEntry.getName().endsWith(TxtFileFields.TXT_FILE_SUFFIX)) {
@@ -65,9 +65,9 @@ public class UploadServiceImpl implements UploadService {
             fileInfo.setPkgName(packageName);
             fileInfo.setDescription(description);
             fileInfo.setCategory(categoryName);
-            LOGGER.info("'{}' successfully parsed", multipartFile.getOriginalFilename());
+            LOGGER.info("'{}' successfully parsed.", multipartFile.getOriginalFilename());
         } catch (IOException e) {
-            LOGGER.error("Unable to read ZIP-file '{}'", multipartFile.getOriginalFilename());
+            LOGGER.error("Unable to read ZIP-file '{}'.", multipartFile.getOriginalFilename());
         }
         fileInfo.setPkgName(packageName);
         fileInfo.setDescription(description);
@@ -80,7 +80,7 @@ public class UploadServiceImpl implements UploadService {
     public void saveSoftware(FileInfo fileInfo, long startTime) {
         Software software = softwareEntityBuilder.build(fileInfo, startTime);
         softwareRepository.saveAndFlush(software);
-        LOGGER.info("Software '{}' successfully saved into database", fileInfo.getFileName());
+        LOGGER.info("Software '{}' successfully saved into database.", fileInfo.getFileName());
     }
 
     private FileInfo getInfoFromTxtFile(final ZipEntry entry, InputStream is) throws IOException {
@@ -103,10 +103,10 @@ public class UploadServiceImpl implements UploadService {
                     fileInfo.setImg512FileName(row[1].trim());
                     break;
                 default:
-                    LOGGER.warn("Invalid row '{}' into file '{}'", line, entry.getName());
+                    LOGGER.warn("Invalid row '{}' into file '{}'.", line, entry.getName());
             }
         }
-        LOGGER.info("Information from '{}' successfully extracted", entry.getName());
+        LOGGER.info("Information from '{}' successfully extracted.", entry.getName());
         return fileInfo;
     }
 

@@ -55,7 +55,7 @@ public class HomeController {
      * @param id software id
      * @return {@link ResponseEntity} image as byte array.
      */
-    @GetMapping(value = "/imgController128/getImg{id}", produces = MediaType.IMAGE_PNG_VALUE)
+    @GetMapping(value = "/imgController128/getImg/{id}", produces = MediaType.IMAGE_PNG_VALUE)
     public ResponseEntity<byte[]> getImage128(@PathVariable long id) {
         Software software = homeService.getSoftwareById(id);
         byte[] image128 = software.getPictureContent128();
@@ -70,26 +70,13 @@ public class HomeController {
      * @param id software id
      * @return {@link ResponseEntity} image as byte array.
      */
-    @GetMapping(value = "/imgController512/getImg{id}", produces = MediaType.IMAGE_PNG_VALUE)
+    @GetMapping(value = "/imgController512/getImg/{id}", produces = MediaType.IMAGE_PNG_VALUE)
     public ResponseEntity<byte[]> getImage512(@PathVariable long id) {
         Software software = homeService.getSoftwareById(id);
         byte[] image512 = software.getPictureContent512();
         final HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_PNG);
         return new ResponseEntity<>(image512, headers, HttpStatus.CREATED);
-    }
-
-    /**
-     * REST endpoint for getting list with all software names.
-     *
-     * @return {@link ResponseEntity} software name list.
-     */
-    @GetMapping(value = "/catController/getAllNames")
-    public ResponseEntity<List<String>> getAllCategoryNames() {
-        List<String> names = homeService.getAllCategoryNames();
-        final HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.TEXT_HTML);
-        return new ResponseEntity<>(names, headers, HttpStatus.CREATED);
     }
 
     /**

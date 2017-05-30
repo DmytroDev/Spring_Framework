@@ -72,7 +72,6 @@ public class DatabaseConfiguration {
     @Value("${db.entitymanager.packages.to.scan}")
     private String packagesToScan;
 
-    // DataSource bean
     @Bean
     public DataSource dataSource() {
         final DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -84,7 +83,6 @@ public class DatabaseConfiguration {
         return dataSource;
     }
 
-    // EntityManager/SessionFactory bean
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
@@ -96,7 +94,6 @@ public class DatabaseConfiguration {
         return entityManagerFactoryBean;
     }
 
-    // TransactionManager bean
     @Bean
     public JpaTransactionManager transactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();

@@ -34,14 +34,14 @@ public class HomeServiceImpl implements HomeService {
     @Override
     public Software getSoftwareById(long id) {
         Software software = softwareRepository.findOne(id);
-        LOGGER.info("Successfully got Software '{}'", software);
+        LOGGER.info("Successfully got Software '{}'.", software);
         return software;
     }
 
     @Override
     public List<String> getAllCategoryNames() {
         List<String> categoryNames = categoryRepository.getAllCategories();
-        LOGGER.info("All Category names has been successfully extracted from the database. List size '{}'", categoryNames.size());
+        LOGGER.info("All Category names has been successfully extracted from the database. List size '{}'.", categoryNames.size());
         return categoryNames;
     }
 
@@ -49,7 +49,7 @@ public class HomeServiceImpl implements HomeService {
     public List<Software> getTop10SoftwareByDesc() {
         List<Software> softwareEntities = softwareRepository.findTop5ByOrderByDownloadsNumberDesc();
         softwareEntities.addAll(softwareRepository.findTop5ByOrderByTimeUploadedDesc());
-        LOGGER.info("Successfully got Top 10 Software '{}'", softwareEntities);
+        LOGGER.info("Successfully got Top 10 Software '{}'.", softwareEntities);
         return softwareEntities;
     }
 
@@ -59,7 +59,7 @@ public class HomeServiceImpl implements HomeService {
         category.setName(categoryName);
 
         List<Software> softwareEntities = softwareRepository.findByCategory(category);
-        LOGGER.info("Successfully got Software's by name '{}'", softwareEntities);
+        LOGGER.info("Successfully got Software's by name '{}'.", softwareEntities);
         return softwareEntities;
     }
 

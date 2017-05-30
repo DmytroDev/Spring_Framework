@@ -40,6 +40,6 @@ public class DatabaseInitializer {
         LOGGER.info("Started populate data into database ...");
         initService.scanFilesAndSaveToDB(file128Location, pictureSize128);
         initService.scanFilesAndSaveToDB(file512Location, pictureSize512);
-        LOGGER.info("Finished populate data into database");
+        LOGGER.info("Finished populate data into database.");
     }
 }

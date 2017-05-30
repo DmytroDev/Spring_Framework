@@ -54,7 +54,7 @@ public class UploadController {
                                  @RequestParam(value = "categoryName", required = false) String categoryName,
                                  @RequestParam(value = "file") MultipartFile file) {
 
-        LOGGER.info("Running download file '{}'", file.getOriginalFilename());
+        LOGGER.info("Running download file '{}'.", file.getOriginalFilename());
         long startTime = System.currentTimeMillis();
         ModelAndView mav = new ModelAndView("pages/uploadStatus");
         String msg = null;
@@ -65,7 +65,7 @@ public class UploadController {
             uploadService.saveSoftware(fileInfo, startTime);
             msg = "You successfully uploaded file: " + file.getOriginalFilename();
         }
-        LOGGER.info("File '{}' successfully uploaded", name);
+        LOGGER.info("File '{}' successfully uploaded.", name);
         mav.addObject("msg", msg);
         return mav;
     }

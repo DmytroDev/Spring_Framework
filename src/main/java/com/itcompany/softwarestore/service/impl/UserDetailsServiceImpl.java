@@ -1,7 +1,7 @@
 package com.itcompany.softwarestore.service.impl;
 
 import com.itcompany.softwarestore.dao.entity.UserRole;
-import com.itcompany.softwarestore.dao.repository.UserRepositiry;
+import com.itcompany.softwarestore.dao.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,17 +27,17 @@ import java.util.stream.Collectors;
  * @since 1.0
  */
 @Service("userDetailsService")
-public class CustomUserDetailsServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CustomUserDetailsServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
 
     @Autowired
-    private UserRepositiry userRepositiry;
+    private UserRepository userRepository;
 
     @Transactional(readOnly = true)
     @Override
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-        com.itcompany.softwarestore.dao.entity.User user = userRepositiry.findOne(username);
+        com.itcompany.softwarestore.dao.entity.User user = userRepository.findOne(username);
         List<GrantedAuthority> authorities =  buildUserAuthority(user.getUserRole());
 
         return buildUserForAuthentication(user, authorities);

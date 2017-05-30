@@ -70,11 +70,11 @@ public class DownloadServiceImpl implements DownloadService {
             String txtFileContent = writeContentToTxtFile(software);
             out.write(txtFileContent.getBytes());
             out.closeEntry();
-            LOGGER.info("ZIP archive was successfully created for software with id '{}'", softwareId);
+            LOGGER.info("ZIP archive was successfully created for software with id '{}'.", softwareId);
 
             return new ZipArchiveInfo(software.getName() + SUFFIX, byteArrayOutputStream);
         } catch (IOException ex) {
-            LOGGER.error("Unable create ZIP archive for software with id '{}'", softwareId);
+            LOGGER.error("Unable create ZIP archive for software with id '{}'.", softwareId);
         }
         return null;
     }
@@ -82,7 +82,7 @@ public class DownloadServiceImpl implements DownloadService {
     @Override
     public void increaseDownloadNum(Long id) {
         repository.increaseDownloadNum(id);
-        LOGGER.info("Download number was successfully increased for Software with id  '{}' ", id);
+        LOGGER.info("Download number was successfully increased for Software with id  '{}'.", id);
     }
 
     private String writeContentToTxtFile(Software software) throws IOException {
@@ -99,7 +99,7 @@ public class DownloadServiceImpl implements DownloadService {
         try (InputStream resourceAsStream = this.getClass().getResourceAsStream(path)) {
             imgByteArray = IOUtils.toByteArray(resourceAsStream);
         } catch (IOException e) {
-            LOGGER.error("Unable to reading file with default image");
+            LOGGER.error("Unable to reading file with default image.");
         }
         return imgByteArray;
     }

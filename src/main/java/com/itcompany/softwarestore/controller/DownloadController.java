@@ -41,7 +41,7 @@ public class DownloadController {
      */
     @GetMapping(value = "/download/archive/{softwareId}")
     public ResponseEntity<InputStreamResource> doDownload(@PathVariable long softwareId) throws FileNotFoundException {
-        LOGGER.info("Start download software. Id = '{}'", softwareId);
+        LOGGER.info("Start download software. Id = '{}'.", softwareId);
         ZipArchiveInfo zipArchiveInfo = downloadService.createZipArchive(softwareId);
         byte[] file = zipArchiveInfo.getOutputStream().toByteArray();
 
@@ -51,7 +51,7 @@ public class DownloadController {
         header.setContentLength(file.length);
         InputStreamResource body = new InputStreamResource(new ByteArrayInputStream(file));
         downloadService.increaseDownloadNum(softwareId);
-        LOGGER.info("Archive with '{}' successfully downloaded", zipArchiveInfo.getFileName());
+        LOGGER.info("Archive with '{}' successfully downloaded.", zipArchiveInfo.getFileName());
 
         return new ResponseEntity<>(body, header, HttpStatus.OK);
     }

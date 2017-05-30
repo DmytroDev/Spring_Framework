@@ -40,7 +40,7 @@
                 <c:if test="${!empty softwareList}">
                     <c:forEach items="${softwareList}" var="software">
                         <a id="ribbon-img-link" href="/view/details/${software.id}">
-                            <img src="/imgController128/getImg${software.id}"
+                            <img src="/imgController128/getImg/${software.id}"
                                  onerror="this.src='../../../resources/images/no_image_available.png'"/>
                         </a>
                     </c:forEach>

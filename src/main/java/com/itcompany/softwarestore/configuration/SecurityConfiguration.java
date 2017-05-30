@@ -36,7 +36,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/", "/index", "/view/login", "/resources/**", "/j_spring_security_check").permitAll()
-                .antMatchers("/imgController128/**", "/imgController512/**, /catController/**").authenticated()
+                .antMatchers("/imgController128/**", "/imgController512/**, /categoryController/**").authenticated()
                 .antMatchers("/view/**", "/download/**, ").authenticated()
                 .antMatchers("/view/upload").access("hasRole('ROLE_DEVELOPER')")
                 .and()

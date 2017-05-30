@@ -1,6 +1,6 @@
 package com.itcompany.softwarestore.configuration;
 
-import com.itcompany.softwarestore.service.impl.CustomUserDetailsServiceImpl;
+import com.itcompany.softwarestore.service.impl.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -45,7 +45,6 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
         return viewResolver;
     }
 
-    // Bean name must be "multipartResolver", by default Spring uses method name as bean name.
     @Bean
     public MultipartResolver multipartResolver() {
         return new StandardServletMultipartResolver();
@@ -53,7 +52,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
 
     @Bean
     public UserDetailsService getUserDetailsService(){
-        return new CustomUserDetailsServiceImpl();
+        return new UserDetailsServiceImpl();
     }
 
 }
