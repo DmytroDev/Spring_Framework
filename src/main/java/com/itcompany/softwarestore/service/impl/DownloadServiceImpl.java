@@ -48,6 +48,7 @@ public class DownloadServiceImpl implements DownloadService {
     @Override
     public ZipArchiveInfo createZipArchive(Long softwareId) {
         Software software = repository.findOne(softwareId);
+        ZipArchiveInfo zipArchive = null;
 
         try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
              ZipOutputStream out = new ZipOutputStream(byteArrayOutputStream)) {
@@ -72,11 +73,11 @@ public class DownloadServiceImpl implements DownloadService {
             out.closeEntry();
             LOGGER.info("ZIP archive was successfully created for software with id '{}'.", softwareId);
 
-            return new ZipArchiveInfo(software.getName() + SUFFIX, byteArrayOutputStream);
+            zipArchive = new ZipArchiveInfo(software.getName() + SUFFIX, byteArrayOutputStream);
         } catch (IOException ex) {
             LOGGER.error("Unable create ZIP archive for software with id '{}'.", softwareId);
         }
-        return null;
+        return zipArchive;
     }
 
     @Override

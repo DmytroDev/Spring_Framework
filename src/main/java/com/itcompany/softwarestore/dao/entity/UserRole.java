@@ -70,4 +70,32 @@ public class UserRole {
                 + ", role='" + role + '\''
                 + '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        UserRole userRole = (UserRole) o;
+
+        if (!userRoleId.equals(userRole.userRoleId)) {
+            return false;
+        }
+        if (!user.equals(userRole.user)) {
+            return false;
+        }
+        return role.equals(userRole.role);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = userRoleId.hashCode();
+        result = 31 * result + user.hashCode();
+        result = 31 * result + role.hashCode();
+        return result;
+    }
 }

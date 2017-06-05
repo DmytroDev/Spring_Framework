@@ -13,7 +13,7 @@ import java.io.File;
  * @since 1.0
  */
 @Configuration
-public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer{
+public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     private int maxUploadSizeInMb = 5 * 1024 * 1024; // 5 MB
 
@@ -41,5 +41,4 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
                         maxUploadSizeInMb, maxUploadSizeInMb * 2, maxUploadSizeInMb / 2);
         registration.setMultipartConfig(multipartConfigElement);
     }
-
 }
