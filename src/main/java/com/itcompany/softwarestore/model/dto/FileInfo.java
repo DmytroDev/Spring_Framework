@@ -9,6 +9,7 @@ public class FileInfo {
     private byte[] img512Content;
     private String description;
     private String category;
+    private Long uploadTime;
 
     public String getFileName() {
         return fileName;
@@ -72,5 +73,13 @@ public class FileInfo {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public Long getUploadTime() {
+        return uploadTime;
+    }
+
+    public void setUploadTime(Long uploadTime) {
+        this.uploadTime = uploadTime;
     }
 }

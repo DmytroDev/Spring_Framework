@@ -16,8 +16,7 @@ public interface SoftwareEntityBuilder {
      * Builds {@link Software} for further saving into database.
      *
      * @param fileInfo {@link FileInfo}
-     * @param startTime time when started operation of upload file.
      * @return {@link Software}
      */
-    Software build(FileInfo fileInfo, long startTime);
+    Software build(FileInfo fileInfo);
 }

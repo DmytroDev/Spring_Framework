@@ -4,6 +4,7 @@ import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ClassPathResource;
 
@@ -13,6 +14,7 @@ import org.springframework.core.io.ClassPathResource;
  * @since 1.0
  */
 @Configuration
+@EnableAspectJAutoProxy
 @ComponentScan({"com.itcompany.softwarestore"})
 @Import({SecurityConfiguration.class})
 public class RootConfiguration {

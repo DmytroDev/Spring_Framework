@@ -27,7 +27,6 @@ public interface UploadService {
      * Saves {@link FileInfo} into database.
      *
      * @param fileInfo {@link FileInfo}
-     * @param startTime time when operation saving started
      */
-    void saveSoftware(FileInfo fileInfo, long startTime);
+    void saveSoftware(FileInfo fileInfo);
 }

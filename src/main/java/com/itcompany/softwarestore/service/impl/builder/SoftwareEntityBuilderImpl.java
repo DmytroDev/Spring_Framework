@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 public class SoftwareEntityBuilderImpl implements SoftwareEntityBuilder {
 
     @Override
-    public Software build(FileInfo fileInfo, long startTime) {
+    public Software build(FileInfo fileInfo) {
         Software software = new Software();
         software.setName(fileInfo.getFileName());
         software.setAppPackage(fileInfo.getPkgName());
@@ -29,7 +29,7 @@ public class SoftwareEntityBuilderImpl implements SoftwareEntityBuilder {
         category.setName(fileInfo.getCategory());
         software.setCategory(category);
         software.setDownloadsNumber(0);
-        software.setTimeUploaded(System.currentTimeMillis() - startTime);
+        software.setTimeUploaded(fileInfo.getUploadTime());
 
         return software;
     }

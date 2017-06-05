@@ -77,8 +77,8 @@ public class UploadServiceImpl implements UploadService {
     }
 
     @Override
-    public void saveSoftware(FileInfo fileInfo, long startTime) {
-        Software software = softwareEntityBuilder.build(fileInfo, startTime);
+    public void saveSoftware(FileInfo fileInfo) {
+        Software software = softwareEntityBuilder.build(fileInfo);
         softwareRepository.saveAndFlush(software);
         LOGGER.info("Software '{}' successfully saved into database.", fileInfo.getFileName());
     }

@@ -21,7 +21,7 @@ import java.util.List;
  * @since 1.0
  */
 @Controller
-public class LoginController {
+public class LogoutController {
 
     @Autowired
     private HomeService homeService;

@@ -4,6 +4,7 @@ import com.itcompany.softwarestore.service.impl.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.multipart.MultipartResolver;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.view.JstlView;
  */
 @Configuration
 @EnableWebMvc
+@EnableAspectJAutoProxy
 @ComponentScan(basePackages = "com.itcompany.softwarestore.controller")
 @Import({SecurityConfiguration.class})
 public class WebConfiguration extends WebMvcConfigurerAdapter {
