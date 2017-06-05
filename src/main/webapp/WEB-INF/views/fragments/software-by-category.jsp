@@ -9,8 +9,8 @@
 
                 <li class="media">
                     <div class="media-left">
-                        <a id="details-link" href="/view/details/${software.id}">
-                            <img class="media-object" src="/imgController128/getImg/${software.id}" onerror="this.src='../../../resources/images/no_image_available.png'">
+                        <a id="details-link" href="${pageContext.request.contextPath}/view/details/${software.id}">
+                            <img class="media-object" src="${pageContext.request.contextPath}/imgController128/getImg/${software.id}" onerror="this.src='${pageContext.request.contextPath}/resources/images/no_image_available.png'">
                         </a>
                     </div>
                     <div class="media-body">

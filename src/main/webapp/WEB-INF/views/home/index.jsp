@@ -9,8 +9,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SoftwareStore</title>
-    <link href="../../../resources/vendor/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../../../resources/css/style.css">
+    <link href="${pageContext.request.contextPath}/resources/vendor/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css">
 
     <%-- tags for Spring Security--%>
     <meta name="_csrf" content="${_csrf.token}"/>
@@ -32,8 +32,8 @@
 <c:import url="../fragments/footer.jsp"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="../../../resources/vendor/js/bootstrap.min.js"></script>
-<script src="../../../resources/js/main.js"></script>
+<script src="${pageContext.request.contextPath}/resources/vendor/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 
 </body>
 </html>

@@ -1,5 +1,7 @@
 $(function () {
-    
+
+    const appPrefix = "/softwarestore";
+
     $(document).on("click", "a#category-active-link, a#category-link", function () {
         event.preventDefault();
         $.ajax({
@@ -20,7 +22,9 @@ $(function () {
     });
 
     $(document).on("click", "input#back-to-index-page-btn, #back-to-index-from-details-btn", function () {
-        $.get("/view/index", function (data) {
+        event.preventDefault();
+        console.log(this);
+        $.get(appPrefix + "/view/index", function (data) {
             console.log(this);
             $("#content").html(data);
         });
@@ -35,7 +39,7 @@ $(function () {
             enctype: 'multipart/form-data',
             processData: false,
             contentType: false,
-            url: "/view/upload",
+            url: appPrefix + "/view/upload",
             data: formData,
             success: function (result) {
                 $("#content").html(result);

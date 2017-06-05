@@ -15,7 +15,7 @@
           action="<c:url value='/j_spring_security_check'/>" method='POST'>
 
         <div class="imgcontainer">
-            <img src="../../../resources/images/img_avatar2.png" alt="Avatar" class="avatar">
+            <img src="${pageContext.request.contextPath}/resources/images/img_avatar2.png" alt="Avatar" class="avatar">
         </div>
         <div class="login-container">
             <label><b>Username</b></label>

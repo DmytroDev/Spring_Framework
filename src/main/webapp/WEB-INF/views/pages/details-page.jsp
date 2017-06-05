@@ -5,12 +5,12 @@
     <div class="details-page-div">
         <div class="element-title-img">
             <p class="software-title">${software.name}</p>
-            <img class="media-object" src="/imgController512/getImg/${software.id}" onerror="this.src='../../../resources/images/no_image_available.png'">
+            <img class="media-object" src="${pageContext.request.contextPath}/imgController512/getImg/${software.id}" onerror="this.src='${pageContext.request.contextPath}/resources/images/no_image_available.png'">
         </div>
         <div class="element-description">
             <p>${software.description}</p>
             <button id="download-btn" class="download-btn">
-                <a id="download-archive-link" class="download-btn-href" href="/download/archive/${software.id}">Download application</a>
+                <a id="download-archive-link" class="download-btn-href" href="${pageContext.request.contextPath}/download/archive/${software.id}">Download application</a>
             </button>
             <button id="back-to-index-from-details-btn" class="back-to-index-from-details-btn">Back</button>
         </div>

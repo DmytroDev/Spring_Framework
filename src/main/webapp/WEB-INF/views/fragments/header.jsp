@@ -19,13 +19,13 @@
                 <ul class="main-menu">
 
                     <sec:authorize access="hasRole('ROLE_DEVELOPER')">
-                        <li><a id="upload-link" href="/view/upload">Upload</a></li>
+                        <li><a id="upload-link" href="${pageContext.request.contextPath}/view/upload">Upload</a></li>
                     </sec:authorize>
 
-                    <li><a id="all-software-link" href="/view/index">Home</a></li>
+                    <li><a id="all-software-link" href="${pageContext.request.contextPath}/view/index">Home</a></li>
 
                     <sec:authorize access="isAuthenticated()">
-                        <li><a id="logout-link" href="/view/logout">Logout</a></li>
+                        <li><a id="logout-link" href="${pageContext.request.contextPath}/view/logout">Logout</a></li>
                     </sec:authorize>
                 </ul>
             </div>
@@ -39,9 +39,9 @@
             <div class="header-ribbon">
                 <c:if test="${!empty softwareList}">
                     <c:forEach items="${softwareList}" var="software">
-                        <a id="ribbon-img-link" href="/view/details/${software.id}">
-                            <img src="/imgController128/getImg/${software.id}"
-                                 onerror="this.src='../../../resources/images/no_image_available.png'"/>
+                        <a id="ribbon-img-link" href="${pageContext.request.contextPath}/view/details/${software.id}">
+                            <img src="${pageContext.request.contextPath}/imgController128/getImg/${software.id}"
+                                 onerror="this.src='${pageContext.request.contextPath}/resources/images/no_image_available.png'"/>
                         </a>
                     </c:forEach>
                 </c:if>
