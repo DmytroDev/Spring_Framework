@@ -1,5 +1,6 @@
 How to deploy app:
-Run app on application server (for example with Apache Tomcat)
+1/ Build app as maven project. mvn clean package
+2/ Run app on application server (for example with Apache Tomcat)
 - use initial URL -  http://localhost:8080/index
 - use as credentials:
 for ROLE_DEVELOPER: {login : admin,  password : admin}
