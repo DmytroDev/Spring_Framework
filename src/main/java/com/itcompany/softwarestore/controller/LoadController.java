@@ -73,12 +73,13 @@ public class LoadController {
         String msg = null;
         if (file.isEmpty()) {
             msg = "Please select a not empty file to upload";
+            LOGGER.warn("Upload file is empty");
         } else {
             FileInfo fileInfo = uploadService.parseZipFile(packageName, description, file, categoryName);
             uploadService.saveSoftware(fileInfo);
             msg = "You successfully uploaded file: " + file.getOriginalFilename();
+            LOGGER.info("File '{}' successfully uploaded.", name);
         }
-        LOGGER.info("File '{}' successfully uploaded.", name);
         mav.addObject("msg", msg);
         return mav;
     }

@@ -211,7 +211,7 @@ hr {
     cursor: pointer; /* change cursor to hand */
 }
 
-.download-btn-href {
+.download-btn-href, .back-to-index-from-details-href, .back-to-index-page-href {
     text-decoration: none;
     color: white;
     font-size: 16px;

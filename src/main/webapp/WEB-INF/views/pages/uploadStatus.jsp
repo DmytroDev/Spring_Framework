@@ -6,7 +6,9 @@
         <h1 class="upload-status-title">Upload Status:</h1>
         <h2 class="upload-status-msg">${msg}</h2>
         <div class="back-to-index-div">
-            <input id="back-to-index-page-btn" class="back-to-index-page-btn" type="button" value="Back">
+            <button id="back-to-index-page-btn" class="back-to-index-page-btn">
+                <a id="back-to-index-page-link" class="back-to-index-page-href" href="${pageContext.request.contextPath}/view/index">Back</a>
+            </button>
         </div>
     </div>
 </div>
