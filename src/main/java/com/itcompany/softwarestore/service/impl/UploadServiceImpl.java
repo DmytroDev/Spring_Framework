@@ -1,6 +1,7 @@
 package com.itcompany.softwarestore.service.impl;
 
 import com.itcompany.softwarestore.dao.entity.Software;
+import com.itcompany.softwarestore.dao.repository.CategoryRepository;
 import com.itcompany.softwarestore.dao.repository.SoftwareRepository;
 import com.itcompany.softwarestore.model.dto.FileInfo;
 import com.itcompany.softwarestore.model.dto.TxtFileFields;
@@ -40,10 +41,15 @@ public class UploadServiceImpl implements UploadService {
     private SoftwareRepository softwareRepository;
 
     @Autowired
+    private CategoryRepository categoryRepository;
+
+    @Autowired
     private SoftwareEntityBuilder softwareEntityBuilder;
 
     @Override
-    public FileInfo parseZipFile(String packageName, String description, MultipartFile multipartFile, String categoryName) {
+    public FileInfo parseZipFile(String packageName, String description, MultipartFile multipartFile, String categoryName)
+            throws IllegalArgumentException {
+        validateCategory(categoryName);
         LOGGER.info("Start parsing ZIP-file '{}' ...", multipartFile.getOriginalFilename());
         FileInfo fileInfo = new FileInfo();
 
@@ -110,4 +116,10 @@ public class UploadServiceImpl implements UploadService {
         return fileInfo;
     }
 
+    private void validateCategory(String category) throws IllegalArgumentException {
+        if (!categoryRepository.getAllCategories().contains(category)) {
+            LOGGER.error("Invalid category name: '{}'", category);
+            throw new IllegalArgumentException();
+        }
+    }
 }
